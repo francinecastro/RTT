@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Orientation to Radiation Therapy | RT Study 2.0</title>
+<title>Fran RT | Orientation</title>
 <style>
 :root {
   --p1:#eb96b7; --p2:#eea6c2; --p3:#f1b6cd; --p4:#f4c5d7; --p5:#f6d0df;
@@ -123,12 +123,153 @@ select {
   padding:10px; border-radius:12px; border:2px solid #f7c7dc; background:white; color:var(--ink); font-weight:700;
 }
 .footer-space { height:30px; }
+
+.status-row {
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  margin:12px 0;
+}
+.status-btn {
+  border:2px solid transparent;
+  color:var(--ink);
+  box-shadow:none;
+}
+.status-btn.know {
+  background:#e8f7ef;
+  border-color:#8ec5a4;
+  color:#2f6b48;
+}
+.status-btn.learning {
+  background:#efe7ff;
+  border-color:#b9a4e6;
+  color:#6a4ea3;
+}
+.status-btn.review {
+  background:#ffe8ef;
+  border-color:#eb96b7;
+  color:#b24874;
+}
+.status-btn.favorite {
+  background:#fff6fa;
+  border-color:#eb96b7;
+  color:#b24874;
+}
+.flash-tools {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin:12px 0;
+}
+.flash-tools button {
+  background:var(--lav);
+  color:#5d3f6a;
+  border:1px solid #d9c8ff;
+  padding:9px 12px;
+  font-size:.9rem;
+}
+.stat-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:10px;
+  margin:12px 0;
+}
+.stat-card {
+  background:#fff6fa;
+  border:1px solid #f7c7dc;
+  border-radius:16px;
+  padding:12px;
+  text-align:center;
+}
+.stat-num {
+  font-size:1.45rem;
+  font-weight:900;
+  color:#9b4f7a;
+}
+.stat-label {
+  font-size:.82rem;
+  color:var(--muted);
+  font-weight:800;
+}
+.flash-badge {
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:.75rem;
+  font-weight:900;
+  margin:4px;
+}
+.badge-know { background:#e8f7ef; color:#2f6b48; border:1px solid #8ec5a4; }
+.badge-learning { background:#efe7ff; color:#6a4ea3; border:1px solid #b9a4e6; }
+.badge-review { background:#ffe8ef; color:#b24874; border:1px solid #eb96b7; }
+.badge-fav { background:#fff6fa; color:#b24874; border:1px solid #eb96b7; }
+.correction-box {
+  margin-top:12px;
+  padding:14px;
+  border-radius:16px;
+  background:#fff6fa;
+  border:2px solid #f7c7dc;
+}
+.correction-box .right {
+  color:#2f6b48;
+  font-weight:900;
+}
+.correction-box .wrongtxt {
+  color:#b24874;
+  font-weight:900;
+}
+
+
+.quiz-menu {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.quiz-action {
+  background:#fff6fa;
+  border:2px solid #f7c7dc;
+  border-radius:20px;
+  padding:14px;
+  box-shadow:0 6px 16px rgba(160,110,150,.10);
+}
+.quiz-action button {
+  width:100%;
+}
+.quiz-action p {
+  margin:8px 0 0;
+  font-size:.82rem;
+  color:var(--muted);
+  line-height:1.35;
+}
+.mustknow-badge {
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:.74rem;
+  font-weight:900;
+  margin:4px;
+  background:linear-gradient(135deg,#eb96b7,#f4c5d7);
+  color:white;
+  letter-spacing:.02em;
+}
+.professor-box {
+  background:#fff6fa;
+  border-left:6px solid #eb96b7;
+  border-radius:16px;
+  padding:14px;
+  margin:12px 0;
+}
+
 </style>
 </head>
 <body>
 <header>
-  <h1>Orientation to Radiation Therapy</h1>
-  <div class="subtitle">RT Study App 2.0 · Clean Rebuild</div>
+  <h1>Fran RT</h1>
+  <div class="subtitle">Radiation Therapy Study Hub · Orientation</div>
 </header>
 
 <div class="container">
@@ -170,13 +311,27 @@ select {
   <div class="card">
     <h2>Week 7 Midterm Review</h2>
     <p class="small">Built from your uploaded Midterm Exam Review and Midterm Flashcards.</p>
+    <div class="professor-box"><b>Professor Must Know:</b> Cell cycle G2/M, benign vs malignant, TNM, screening sensitivity/specificity, ethics principles, legal terms, blood values, dose table side effects, pain, and transfers.</div>
     <div class="tabs">
       <button id="tab-study" onclick="showMidtermTab('study')">Study Guide</button>
       <button id="tab-flashcards" onclick="showMidtermTab('flashcards')">Flashcards</button>
-      <button id="tab-practice" onclick="startQuiz('practice')">Practice Quiz</button>
-      <button id="tab-exam" onclick="startQuiz('exam')">Mock Midterm</button>
       <button id="tab-missed" onclick="showMidtermTab('missed')">Missed Questions</button>
       <button id="tab-last" onclick="showMidtermTab('last')">Last-Hour Review</button>
+    </div>
+
+    <div class="quiz-menu">
+      <div class="quiz-action">
+        <button id="tab-practice" onclick="startQuiz('practice')">Practice Quiz</button>
+        <p>Learn mode. Instant feedback after each question. Best for daily studying.</p>
+      </div>
+      <div class="quiz-action">
+        <button id="tab-mustknow" onclick="startQuiz('mustknow')">Professor Must Know Quiz</button>
+        <p>Only the topics marked “know this,” “know all,” or strongly emphasized in lecture/handwritten notes.</p>
+      </div>
+      <div class="quiz-action">
+        <button id="tab-exam" onclick="startQuiz('exam')">Exam Mode</button>
+        <p>Mock test. Random questions. Use this after studying to check your grade.</p>
+      </div>
     </div>
   </div>
 
@@ -241,10 +396,37 @@ select {
 
   <div id="flashcards" class="midtab card hidden">
     <h2>Flashcards</h2>
-    <label><b>Section:</b></label>
-    <select id="sectionSelect" onchange="setSection(this.value)"></select>
+    <div class="flash-tools">
+      <label><b>Section:</b></label>
+      <select id="sectionSelect" onchange="setSection(this.value)"></select>
+      <select id="statusFilter" onchange="setStatusFilter(this.value)">
+        <option value="all">All Cards</option>
+        <option value="know">Know It</option>
+        <option value="learning">Still Learning</option>
+        <option value="review">Review Again</option>
+        <option value="favorite">Favorites</option>
+      </select>
+      <button onclick="shuffleCurrentCards()">Shuffle Cards</button>
+      <button onclick="resetCardProgress()">Reset Progress</button>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="statKnow">0</div><div class="stat-label">Know It</div></div>
+      <div class="stat-card"><div class="stat-num" id="statLearning">0</div><div class="stat-label">Still Learning</div></div>
+      <div class="stat-card"><div class="stat-num" id="statReview">0</div><div class="stat-label">Review Again</div></div>
+      <div class="stat-card"><div class="stat-num" id="statFavorite">0</div><div class="stat-label">Favorites</div></div>
+    </div>
+
     <div class="flashcard" id="flashcard" onclick="flipCard()">Tap to start</div>
     <p id="flashCount" class="small"></p>
+
+    <div class="status-row">
+      <button class="status-btn know" onclick="markCardStatus('know')">✓ Know It</button>
+      <button class="status-btn learning" onclick="markCardStatus('learning')">◐ Still Learning</button>
+      <button class="status-btn review" onclick="markCardStatus('review')">✕ Review Again</button>
+      <button class="status-btn favorite" onclick="toggleFavorite()">♡ Favorite</button>
+    </div>
+
     <div class="nav-row">
       <button class="secondary" onclick="prevCard()">← Back</button>
       <button onclick="flipCard()">Flip</button>
@@ -286,13 +468,27 @@ select {
   <div class="card">
     <h2>Week 8–9: Detection & Diagnosis</h2>
     <p class="small">Built from Chapter 5 Part 1, Chapter 5 Part 2, Chapter 15 Vitals, and your Week 9 review questions.</p>
+    <div class="professor-box"><b>Professor Must Know:</b> signs vs symptoms, medical record, physical exam techniques, vital signs, sensitivity/specificity, cancer screening, CT vs MRI vs PET, exfoliative cytology, biopsy types, CBC, and TNM staging.</div>
     <div class="tabs">
       <button id="w89-tab-study" onclick="showWeek89Tab('w89-study')">Study Guide</button>
       <button id="w89-tab-flashcards" onclick="showWeek89Tab('w89-flashcards')">Flashcards</button>
-      <button id="w89-tab-practice" onclick="startWeek89Quiz('practice')">Practice Quiz</button>
-      <button id="w89-tab-exam" onclick="startWeek89Quiz('exam')">Mock Exam</button>
       <button id="w89-tab-missed" onclick="showWeek89Tab('w89-missed')">Missed Questions</button>
       <button id="w89-tab-last" onclick="showWeek89Tab('w89-last')">Last-Hour Review</button>
+    </div>
+
+    <div class="quiz-menu">
+      <div class="quiz-action">
+        <button id="w89-tab-practice" onclick="startWeek89Quiz('practice')">Practice Quiz</button>
+        <p>Learn mode. Instant correction after every question. Use this while studying Chapter 5.</p>
+      </div>
+      <div class="quiz-action">
+        <button id="w89-tab-mustknow" onclick="startWeek89Quiz('mustknow')">Professor Must Know Quiz</button>
+        <p>High-yield quiz from lecture notes, handwritten “know this” topics, and assignment questions.</p>
+      </div>
+      <div class="quiz-action">
+        <button id="w89-tab-exam" onclick="startWeek89Quiz('exam')">Exam Mode</button>
+        <p>Mock exam. Random questions. Best after flashcards and practice quiz.</p>
+      </div>
     </div>
   </div>
 
@@ -446,10 +642,37 @@ select {
 
   <div id="w89-flashcards" class="w89tab card hidden">
     <h2>Week 8–9 Flashcards</h2>
-    <label><b>Section:</b></label>
-    <select id="w89SectionSelect" onchange="setWeek89Section(this.value)"></select>
+    <div class="flash-tools">
+      <label><b>Section:</b></label>
+      <select id="w89SectionSelect" onchange="setWeek89Section(this.value)"></select>
+      <select id="w89StatusFilter" onchange="setWeek89StatusFilter(this.value)">
+        <option value="all">All Cards</option>
+        <option value="know">Know It</option>
+        <option value="learning">Still Learning</option>
+        <option value="review">Review Again</option>
+        <option value="favorite">Favorites</option>
+      </select>
+      <button onclick="shuffleWeek89Cards()">Shuffle Cards</button>
+      <button onclick="resetWeek89Progress()">Reset Progress</button>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="w89StatKnow">0</div><div class="stat-label">Know It</div></div>
+      <div class="stat-card"><div class="stat-num" id="w89StatLearning">0</div><div class="stat-label">Still Learning</div></div>
+      <div class="stat-card"><div class="stat-num" id="w89StatReview">0</div><div class="stat-label">Review Again</div></div>
+      <div class="stat-card"><div class="stat-num" id="w89StatFavorite">0</div><div class="stat-label">Favorites</div></div>
+    </div>
+
     <div class="flashcard" id="w89Flashcard" onclick="flipWeek89Card()">Tap to start</div>
     <p id="w89FlashCount" class="small"></p>
+
+    <div class="status-row">
+      <button class="status-btn know" onclick="markWeek89CardStatus('know')">✓ Know It</button>
+      <button class="status-btn learning" onclick="markWeek89CardStatus('learning')">◐ Still Learning</button>
+      <button class="status-btn review" onclick="markWeek89CardStatus('review')">✕ Review Again</button>
+      <button class="status-btn favorite" onclick="toggleWeek89Favorite()">♡ Favorite</button>
+    </div>
+
     <div class="nav-row">
       <button class="secondary" onclick="prevWeek89Card()">← Back</button>
       <button onclick="flipWeek89Card()">Flip</button>
@@ -493,30 +716,30 @@ const ALL_CARDS = [
 // ══════════════════════════════════════════
 // CHAPTER 1 — CANCER OVERVIEW
 // ══════════════════════════════════════════
-{sec:"Ch.1 Cell Cycle", q:"What is the cell cycle?", a:"All events between cell divisions. 5 phases: G0, G1, S, G2, M."},
-{sec:"Ch.1 Cell Cycle", q:"G0 phase — what happens?", a:"Resting phase. Cells function normally but NOT preparing to divide."},
-{sec:"Ch.1 Cell Cycle", q:"G1 phase — what happens?", a:"First growth. Cell makes RNA and proteins, commits to DNA replication."},
-{sec:"Ch.1 Cell Cycle", q:"S phase — what happens?", a:"DNA SYNTHESIS. DNA is replicated so each daughter cell gets a full copy."},
-{sec:"Ch.1 Cell Cycle", q:"G2 phase — what happens?", a:"Second growth. Cell makes enzymes and proteins needed for division."},
-{sec:"Ch.1 Cell Cycle", q:"M phase — what happens?", a:"Mitosis. Cell divides into 2 identical daughter cells."},
-{sec:"Ch.1 Cell Cycle", q:"Which two phases are MOST radiosensitive?", a:"G2 and M."},
-{sec:"Ch.1 Cell Cycle", q:"Correct order of cell cycle phases?", a:"G1 → S → G2 → M (G0 is the resting exit)"},
-{sec:"Ch.1 Cell Cycle", q:"Memory trick for cell cycle order?", a:'"Good Students Get Moving" = G1, S, G2, M'},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"What is the cell cycle?", a:"All events between cell divisions. 5 phases: G0, G1, S, G2, M."},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"G0 phase — what happens?", a:"Resting phase. Cells function normally but NOT preparing to divide."},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"G1 phase — what happens?", a:"First growth. Cell makes RNA and proteins, commits to DNA replication."},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"S phase — what happens?", a:"DNA SYNTHESIS. DNA is replicated so each daughter cell gets a full copy."},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"G2 phase — what happens?", a:"Second growth. Cell makes enzymes and proteins needed for division."},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"M phase — what happens?", a:"Mitosis. Cell divides into 2 identical daughter cells."},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"Which two phases are MOST radiosensitive?", a:"G2 and M."},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"Correct order of cell cycle phases?", a:"G1 → S → G2 → M (G0 is the resting exit)"},
+{sec:"Ch.1 Cell Cycle", highYield:true, q:"Memory trick for cell cycle order?", a:'"Good Students Get Moving" = G1, S, G2, M'},
 
 // TABLE 1.1 — PROFESSOR SAID "KNOW THIS FOR MIDTERM"
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Local spread — BENIGN?", a:"Expanding and pushing (does NOT invade)."},
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Local spread — MALIGNANT?", a:"Infiltrative and invasive."},
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Distant spread — BENIGN?", a:"Rare."},
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Distant spread — MALIGNANT?", a:"Metastasizes early or late by lymphatics, blood, or seeding."},
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Differentiation — BENIGN?", a:"Well differentiated."},
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Differentiation — MALIGNANT?", a:"Well differentiated to undifferentiated."},
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Effect on host — BENIGN?", a:"Little (depends on treatment and location)."},
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Effect on host — MALIGNANT?", a:"Life threatening."},
-{sec:"Ch.1 Table 1.1", q:"Table 1.1: Doubling time — MALIGNANT?", a:"Normal to accelerated."},
-{sec:"Ch.1 Table 1.1", q:"Benign tumors end in -oma. Exception?", a:"Melanoma — ends in -oma but is MALIGNANT."},
-{sec:"Ch.1 Table 1.1", q:"Malignant tumors form a pseudocapsule. What's the key fact?", a:"Tumor cells extend BEYOND the pseudocapsule."},
-{sec:"Ch.1 Table 1.1", q:"What is an anaplastic cell?", a:"Changed so much it doesn't look like the original cell. Lost normal function."},
-{sec:"Ch.1 Table 1.1", q:"Degree of differentiation indicates what?", a:"How aggressive and malignant the tumor is."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Local spread — BENIGN?", a:"Expanding and pushing (does NOT invade)."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Local spread — MALIGNANT?", a:"Infiltrative and invasive."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Distant spread — BENIGN?", a:"Rare."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Distant spread — MALIGNANT?", a:"Metastasizes early or late by lymphatics, blood, or seeding."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Differentiation — BENIGN?", a:"Well differentiated."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Differentiation — MALIGNANT?", a:"Well differentiated to undifferentiated."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Effect on host — BENIGN?", a:"Little (depends on treatment and location)."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Effect on host — MALIGNANT?", a:"Life threatening."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Table 1.1: Doubling time — MALIGNANT?", a:"Normal to accelerated."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Benign tumors end in -oma. Exception?", a:"Melanoma — ends in -oma but is MALIGNANT."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Malignant tumors form a pseudocapsule. What's the key fact?", a:"Tumor cells extend BEYOND the pseudocapsule."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"What is an anaplastic cell?", a:"Changed so much it doesn't look like the original cell. Lost normal function."},
+{sec:"Ch.1 Table 1.1", highYield:true, q:"Degree of differentiation indicates what?", a:"How aggressive and malignant the tumor is."},
 
 // TUMOR TYPES
 {sec:"Ch.1 Tumor Types", q:"Sarcomas come from what cells?", a:"Mesenchymal (connective tissue) cells: bone, cartilage, muscle, fat."},
@@ -527,156 +750,156 @@ const ALL_CARDS = [
 {sec:"Ch.1 Tumor Types", q:"Memory trick: Carcinoma vs. Sarcoma?", a:"Carcinoma = Covers (epithelial). Sarcoma = Structural/connective tissue."},
 
 // TABLE 1.3 — PROFESSOR SAID "KNOW THIS (ALL)"
-{sec:"Ch.1 Table 1.3", q:"Oral cavity histology?", a:"Squamous cell carcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Pharynx histology?", a:"Squamous cell carcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Lung histology?", a:"Squamous cell carcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Breast histology?", a:"Infiltrating ductal carcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Colon and rectum histology?", a:"Adenocarcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Anus histology?", a:"Squamous cell carcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Cervix histology?", a:"Squamous cell carcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Endometrium histology?", a:"Adenocarcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Prostate histology?", a:"Adenocarcinoma."},
-{sec:"Ch.1 Table 1.3", q:"Brain histology?", a:"Astrocytoma."},
-{sec:"Ch.1 Table 1.3", q:"Memory trick: Which sites are squamous cell?", a:"Surfaces that touch AIR or FOOD: oral cavity, pharynx, lung, anus, cervix."},
-{sec:"Ch.1 Table 1.3", q:"Memory trick: Which sites are adenocarcinoma?", a:"Glands that SECRETE: colon/rectum, endometrium, prostate."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Oral cavity histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Pharynx histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Lung histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Breast histology?", a:"Infiltrating ductal carcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Colon and rectum histology?", a:"Adenocarcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Anus histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Cervix histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Endometrium histology?", a:"Adenocarcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Prostate histology?", a:"Adenocarcinoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Brain histology?", a:"Astrocytoma."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Memory trick: Which sites are squamous cell?", a:"Surfaces that touch AIR or FOOD: oral cavity, pharynx, lung, anus, cervix."},
+{sec:"Ch.1 Table 1.3", highYield:true, q:"Memory trick: Which sites are adenocarcinoma?", a:"Glands that SECRETE: colon/rectum, endometrium, prostate."},
 
 // TABLE 1.6 — PROFESSOR SAID "ALL THIS IS IN THE MIDTERM"
-{sec:"Ch.1 Table 1.6", q:"Table 1.6: Lung → common mets?", a:"Liver, adrenal glands, bone, and brain."},
-{sec:"Ch.1 Table 1.6", q:"Table 1.6: Breast → common mets?", a:"Lungs, bone, and brain."},
-{sec:"Ch.1 Table 1.6", q:"Table 1.6: Stomach → common mets?", a:"Liver."},
-{sec:"Ch.1 Table 1.6", q:"Table 1.6: Anus → common mets?", a:"Liver and lungs."},
-{sec:"Ch.1 Table 1.6", q:"Table 1.6: Bladder → common mets?", a:"Lungs, bone, and liver."},
-{sec:"Ch.1 Table 1.6", q:"Table 1.6: Prostate → common mets?", a:"Bone, liver, and lungs."},
-{sec:"Ch.1 Table 1.6", q:"Table 1.6: Uterine cervix → common mets?", a:"Lungs, bone, and liver."},
+{sec:"Ch.1 Table 1.6", highYield:true, q:"Table 1.6: Lung → common mets?", a:"Liver, adrenal glands, bone, and brain."},
+{sec:"Ch.1 Table 1.6", highYield:true, q:"Table 1.6: Breast → common mets?", a:"Lungs, bone, and brain."},
+{sec:"Ch.1 Table 1.6", highYield:true, q:"Table 1.6: Stomach → common mets?", a:"Liver."},
+{sec:"Ch.1 Table 1.6", highYield:true, q:"Table 1.6: Anus → common mets?", a:"Liver and lungs."},
+{sec:"Ch.1 Table 1.6", highYield:true, q:"Table 1.6: Bladder → common mets?", a:"Lungs, bone, and liver."},
+{sec:"Ch.1 Table 1.6", highYield:true, q:"Table 1.6: Prostate → common mets?", a:"Bone, liver, and lungs."},
+{sec:"Ch.1 Table 1.6", highYield:true, q:"Table 1.6: Uterine cervix → common mets?", a:"Lungs, bone, and liver."},
 
 // ETIOLOGY / EPIDEMIOLOGY / STAGING
-{sec:"Ch.1 Etiology & Staging", q:"Etiology = ?", a:"Study of the CAUSE of disease."},
-{sec:"Ch.1 Etiology & Staging", q:"Etiologic factors examples?", a:"Cigarette smoke, HPV, alcohol, sun exposure, diet, obesity."},
-{sec:"Ch.1 Etiology & Staging", q:"Epidemiology = ?", a:"Study of disease INCIDENCE (how often and where it occurs)."},
-{sec:"Ch.1 Etiology & Staging", q:"SEER database tracks cancer by?", a:"Age, sex, race, and geographic location."},
-{sec:"Ch.1 Etiology & Staging", q:"Cancer screening goal?", a:"Early detection → better prognosis/treatment."},
-{sec:"Ch.1 Etiology & Staging", q:"Sensitivity = ?", a:"Ability to give a TRUE-POSITIVE result."},
-{sec:"Ch.1 Etiology & Staging", q:"Specificity = ?", a:"Ability to give a TRUE-NEGATIVE result."},
-{sec:"Ch.1 Etiology & Staging", q:"False negative = ?", a:"Cancer IS present but test shows NO cancer."},
-{sec:"Ch.1 Etiology & Staging", q:"False positive = ?", a:"No cancer present but test INDICATES a tumor."},
-{sec:"Ch.1 Etiology & Staging", q:"Clinical staging is done when?", a:"BEFORE any major treatment (physical exam + imaging + biopsy)."},
-{sec:"Ch.1 Etiology & Staging", q:"Pathologic staging is more accurate because?", a:"Uses surgical findings — doctors see tumor directly."},
-{sec:"Ch.1 Etiology & Staging", q:"Post-therapy staging is done when?", a:"AFTER the first treatment — shows how well cancer responded."},
-{sec:"Ch.1 Etiology & Staging", q:"Restaging is done when?", a:"Cancer COMES BACK (recurs)."},
-{sec:"Ch.1 Etiology & Staging", q:"TNM: N1 means?", a:"Cancer in NEARBY/REGIONAL lymph nodes."},
-{sec:"Ch.1 Etiology & Staging", q:"TNM: M1 means?", a:"Cancer spread to DISTANT organs."},
-{sec:"Ch.1 Etiology & Staging", q:"TNM: N0 means?", a:"No cancer in lymph nodes."},
-{sec:"Ch.1 Etiology & Staging", q:"Tumor grade measures?", a:"Aggressiveness based on degree of DIFFERENTIATION."},
-{sec:"Ch.1 Etiology & Staging", q:"4 differentiation categories (least → most aggressive)?", a:"Well → Moderately well → Poorly → Undifferentiated/Anaplastic."},
-{sec:"Ch.1 Etiology & Staging", q:"Tumor board = ?", a:"Group of medical professionals making decisions about patient care at board meetings."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Etiology = ?", a:"Study of the CAUSE of disease."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Etiologic factors examples?", a:"Cigarette smoke, HPV, alcohol, sun exposure, diet, obesity."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Epidemiology = ?", a:"Study of disease INCIDENCE (how often and where it occurs)."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"SEER database tracks cancer by?", a:"Age, sex, race, and geographic location."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Cancer screening goal?", a:"Early detection → better prognosis/treatment."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Sensitivity = ?", a:"Ability to give a TRUE-POSITIVE result."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Specificity = ?", a:"Ability to give a TRUE-NEGATIVE result."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"False negative = ?", a:"Cancer IS present but test shows NO cancer."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"False positive = ?", a:"No cancer present but test INDICATES a tumor."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Clinical staging is done when?", a:"BEFORE any major treatment (physical exam + imaging + biopsy)."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Pathologic staging is more accurate because?", a:"Uses surgical findings — doctors see tumor directly."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Post-therapy staging is done when?", a:"AFTER the first treatment — shows how well cancer responded."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Restaging is done when?", a:"Cancer COMES BACK (recurs)."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"TNM: N1 means?", a:"Cancer in NEARBY/REGIONAL lymph nodes."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"TNM: M1 means?", a:"Cancer spread to DISTANT organs."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"TNM: N0 means?", a:"No cancer in lymph nodes."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Tumor grade measures?", a:"Aggressiveness based on degree of DIFFERENTIATION."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"4 differentiation categories (least → most aggressive)?", a:"Well → Moderately well → Poorly → Undifferentiated/Anaplastic."},
+{sec:"Ch.1 Etiology & Staging", highYield:true, q:"Tumor board = ?", a:"Group of medical professionals making decisions about patient care at board meetings."},
 
 // TREATMENT
-{sec:"Ch.1 Treatment", q:"Palliation = ?", a:"NONcurative treatment to relieve pain and suffering."},
-{sec:"Ch.1 Treatment", q:"Goal of radiation therapy?", a:"Deliver maximum dose to kill cancer while SPARING normal tissue."},
-{sec:"Ch.1 Treatment", q:"Therapeutic ratio = ?", a:"Delivering radiation while protecting healthy tissue."},
-{sec:"Ch.1 Treatment", q:"Fine needle aspiration vs. core needle biopsy?", a:"Fine needle = cells only (no architecture). Core needle = better tissue architecture."},
-{sec:"Ch.1 Treatment", q:"Neoadjuvant therapy = ?", a:"Therapy given BEFORE surgery to increase chance of complete removal."},
-{sec:"Ch.1 Treatment", q:"Adjuvant therapy = ?", a:"Radiation used IN CONJUNCTION with chemo and/or surgery."},
-{sec:"Ch.1 Treatment", q:"Exophytic tumor = ?", a:"Grows OUTWARD from the surface."},
-{sec:"Ch.1 Treatment", q:"Dissemination = ?", a:"Tumor SPREAD."},
-{sec:"Ch.1 Treatment", q:"Brachytherapy = ? (nickname)", a:"Short-distance therapy. Radioactive sources placed inside/near tumor."},
-{sec:"Ch.1 Treatment", q:"Brachytherapy sources (4)?", a:"Cesium-137, Iridium-192 (most common), Palladium-103, Iodine-125."},
-{sec:"Ch.1 Treatment", q:"Why is chemo different from radiation and surgery?", a:"Systemic — travels through the ENTIRE body."},
-{sec:"Ch.1 Treatment", q:"Intrathecal route = used for?", a:"Into CSF space — used with LEUKEMIA."},
-{sec:"Ch.1 Treatment", q:"Intracavitary = ?", a:"Inserting device into a patient's CAVITY (e.g., bladder)."},
-{sec:"Ch.1 Treatment", q:"Port-a-cath = ?", a:"Central line for IV chemotherapy delivery."},
-{sec:"Ch.1 Treatment", q:"Alkylating agents examples?", a:"Carboplatin, Cisplatin."},
-{sec:"Ch.1 Treatment", q:"Antimetabolite example?", a:"5-FU."},
-{sec:"Ch.1 Treatment", q:"Hormonal agents examples?", a:"Lupron, Tamoxifen (prostate/breast cancer)."},
-{sec:"Ch.1 Treatment", q:"Adriamycin is associated with what toxicity?", a:"Cardiac toxicity."},
-{sec:"Ch.1 Treatment", q:"Blenomicin is associated with?", a:"Pulmonary toxicity — treatment progresses too early."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Palliation = ?", a:"NONcurative treatment to relieve pain and suffering."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Goal of radiation therapy?", a:"Deliver maximum dose to kill cancer while SPARING normal tissue."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Therapeutic ratio = ?", a:"Delivering radiation while protecting healthy tissue."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Fine needle aspiration vs. core needle biopsy?", a:"Fine needle = cells only (no architecture). Core needle = better tissue architecture."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Neoadjuvant therapy = ?", a:"Therapy given BEFORE surgery to increase chance of complete removal."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Adjuvant therapy = ?", a:"Radiation used IN CONJUNCTION with chemo and/or surgery."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Exophytic tumor = ?", a:"Grows OUTWARD from the surface."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Dissemination = ?", a:"Tumor SPREAD."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Brachytherapy = ? (nickname)", a:"Short-distance therapy. Radioactive sources placed inside/near tumor."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Brachytherapy sources (4)?", a:"Cesium-137, Iridium-192 (most common), Palladium-103, Iodine-125."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Why is chemo different from radiation and surgery?", a:"Systemic — travels through the ENTIRE body."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Intrathecal route = used for?", a:"Into CSF space — used with LEUKEMIA."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Intracavitary = ?", a:"Inserting device into a patient's CAVITY (e.g., bladder)."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Port-a-cath = ?", a:"Central line for IV chemotherapy delivery."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Alkylating agents examples?", a:"Carboplatin, Cisplatin."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Antimetabolite example?", a:"5-FU."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Hormonal agents examples?", a:"Lupron, Tamoxifen (prostate/breast cancer)."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Adriamycin is associated with what toxicity?", a:"Cardiac toxicity."},
+{sec:"Ch.1 Treatment", highYield:true, q:"Blenomicin is associated with?", a:"Pulmonary toxicity — treatment progresses too early."},
 
 // CLINICAL TRIALS
-{sec:"Ch.1 Clinical Trials", q:"Retrospective study = ?", a:"Studies data from the PAST."},
-{sec:"Ch.1 Clinical Trials", q:"Prospective study = ?", a:"Planned BEFORE treatment begins with eligibility criteria."},
-{sec:"Ch.1 Clinical Trials", q:"Phase I clinical trial purpose?", a:"Determine MAXIMUM TOLERATED DOSE and toxicity."},
-{sec:"Ch.1 Clinical Trials", q:"Phase II clinical trial purpose?", a:"Determine if treatment is EFFECTIVE enough to continue study."},
-{sec:"Ch.1 Clinical Trials", q:"Phase III clinical trial purpose?", a:"COMPARE experimental vs. standard treatment (randomized sample)."},
-{sec:"Ch.1 Clinical Trials", q:"Phase IV clinical trial purpose?", a:"After FDA approval — monitor LONG-TERM survival and side effects."},
-{sec:"Ch.1 Clinical Trials", q:"Phase IV is associated with?", a:"FDA APPROVAL and post-market long-term follow-up."},
+{sec:"Ch.1 Clinical Trials", highYield:true, q:"Retrospective study = ?", a:"Studies data from the PAST."},
+{sec:"Ch.1 Clinical Trials", highYield:true, q:"Prospective study = ?", a:"Planned BEFORE treatment begins with eligibility criteria."},
+{sec:"Ch.1 Clinical Trials", highYield:true, q:"Phase I clinical trial purpose?", a:"Determine MAXIMUM TOLERATED DOSE and toxicity."},
+{sec:"Ch.1 Clinical Trials", highYield:true, q:"Phase II clinical trial purpose?", a:"Determine if treatment is EFFECTIVE enough to continue study."},
+{sec:"Ch.1 Clinical Trials", highYield:true, q:"Phase III clinical trial purpose?", a:"COMPARE experimental vs. standard treatment (randomized sample)."},
+{sec:"Ch.1 Clinical Trials", highYield:true, q:"Phase IV clinical trial purpose?", a:"After FDA approval — monitor LONG-TERM survival and side effects."},
+{sec:"Ch.1 Clinical Trials", highYield:true, q:"Phase IV is associated with?", a:"FDA APPROVAL and post-market long-term follow-up."},
 
 // ONCOLOGY TEAM
-{sec:"Ch.1 Oncology Team", q:"Radiation oncologist role?", a:"Overall responsibility for patient care — the PHYSICIAN. Sees patient ONCE/WEEK during treatment."},
-{sec:"Ch.1 Oncology Team", q:"Dosimetrist role?", a:"DESIGNS the treatment plan using most effective techniques."},
-{sec:"Ch.1 Oncology Team", q:"Medical physicist role?", a:"QA on ALL radiation therapy EQUIPMENT — calibration, safety, testing."},
-{sec:"Ch.1 Oncology Team", q:"Radiation therapist role?", a:"Delivers treatment EVERY DAY. Monitors patient reaction and side effects."},
-{sec:"Ch.1 Oncology Team", q:"Simulation is done using?", a:"CT scanner — in treatment position. Immobilization devices made."},
-{sec:"Ch.1 Oncology Team", q:"Who sees patient every day vs. once a week?", a:"RTT = every day. Radiation oncologist = once a week."},
+{sec:"Ch.1 Oncology Team", highYield:true, q:"Radiation oncologist role?", a:"Overall responsibility for patient care — the PHYSICIAN. Sees patient ONCE/WEEK during treatment."},
+{sec:"Ch.1 Oncology Team", highYield:true, q:"Dosimetrist role?", a:"DESIGNS the treatment plan using most effective techniques."},
+{sec:"Ch.1 Oncology Team", highYield:true, q:"Medical physicist role?", a:"QA on ALL radiation therapy EQUIPMENT — calibration, safety, testing."},
+{sec:"Ch.1 Oncology Team", highYield:true, q:"Radiation therapist role?", a:"Delivers treatment EVERY DAY. Monitors patient reaction and side effects."},
+{sec:"Ch.1 Oncology Team", highYield:true, q:"Simulation is done using?", a:"CT scanner — in treatment position. Immobilization devices made."},
+{sec:"Ch.1 Oncology Team", highYield:true, q:"Who sees patient every day vs. once a week?", a:"RTT = every day. Radiation oncologist = once a week."},
 
 // ══════════════════════════════════════════
 // CHAPTER 2 — ETHICS & LAW
 // ══════════════════════════════════════════
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"ARRT does what?", a:"Credentialing + certification + produces RULES OF ETHICS. Gives board exam."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"ASRT does what?", a:"Professional society. Journals, education, research grants, ADVOCACY."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Ethics is based on?", a:"VALUES."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"4 sources of values?", a:"Culture, experience, religion, science."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"7 bioethical principles?", a:"Autonomy, beneficence, confidentiality, justice, nonmaleficence, role fidelity, veracity."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Autonomy = ?", a:"Patient's RIGHT to make their own decisions, free of interference."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Beneficence = ?", a:"DOING GOOD — acting in the patient's best interest."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Confidentiality = ?", a:"Patient info is PRIVATE. Can be breached only if patient is in danger."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Justice = ?", a:"FAIRNESS and equal treatment for ALL — regardless of age, gender, status."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Nonmaleficence = ?", a:"DO NO HARM — avoid harmful actions to patients."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Role fidelity = ?", a:"Be FAITHFUL to your role — don't overstep scope of practice."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Veracity = ?", a:"TRUTHFULNESS in healthcare."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"3 ethical theory groups?", a:"Teleology, Deontology, Virtue ethics."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Teleology (consequentialism) focuses on?", a:"CONSEQUENCES of the action — end result matters most."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Utilitarianism belongs to which theory group?", a:"TELEOLOGY."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Deontology (nonconsequentialism) uses?", a:"Formal RULES of right and wrong — duty, regardless of outcome."},
-{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Virtue ethics uses?", a:"Practical WISDOM — character of the person making the decision."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"ARRT does what?", a:"Credentialing + certification + produces RULES OF ETHICS. Gives board exam."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"ASRT does what?", a:"Professional society. Journals, education, research grants, ADVOCACY."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Ethics is based on?", a:"VALUES."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"4 sources of values?", a:"Culture, experience, religion, science."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"7 bioethical principles?", a:"Autonomy, beneficence, confidentiality, justice, nonmaleficence, role fidelity, veracity."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Autonomy = ?", a:"Patient's RIGHT to make their own decisions, free of interference."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Beneficence = ?", a:"DOING GOOD — acting in the patient's best interest."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Confidentiality = ?", a:"Patient info is PRIVATE. Can be breached only if patient is in danger."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Justice = ?", a:"FAIRNESS and equal treatment for ALL — regardless of age, gender, status."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Nonmaleficence = ?", a:"DO NO HARM — avoid harmful actions to patients."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Role fidelity = ?", a:"Be FAITHFUL to your role — don't overstep scope of practice."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Veracity = ?", a:"TRUTHFULNESS in healthcare."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"3 ethical theory groups?", a:"Teleology, Deontology, Virtue ethics."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Teleology (consequentialism) focuses on?", a:"CONSEQUENCES of the action — end result matters most."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Utilitarianism belongs to which theory group?", a:"TELEOLOGY."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Deontology (nonconsequentialism) uses?", a:"Formal RULES of right and wrong — duty, regardless of outcome."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", highYield:true, q:"Virtue ethics uses?", a:"Practical WISDOM — character of the person making the decision."},
 
 // PATIENT-PROVIDER MODELS
-{sec:"Ch.2 Models & Grief", q:"Engineering model = ?", a:"Focuses on facts/disease ONLY — ignores patient as a person. Cold."},
-{sec:"Ch.2 Models & Grief", q:"Priestly model = ?", a:"Provider makes ALL decisions for patient. Tells patient what to do."},
-{sec:"Ch.2 Models & Grief", q:"Collegial model = ?", a:"Patient and provider work TOGETHER — cooperation and trust."},
-{sec:"Ch.2 Models & Grief", q:"Contractual model = ?", a:"Based on agreements like INFORMED CONSENT. Patient ultimately decides."},
-{sec:"Ch.2 Models & Grief", q:"Covenant model = ?", a:"Trust based on TRADITION or past experiences."},
-{sec:"Ch.2 Models & Grief", q:"Informed consent = which model?", a:"CONTRACTUAL model."},
-{sec:"Ch.2 Models & Grief", q:"Grief cycle — 7 stages in order?", a:"Shock → Denial → Anger → Bargaining → Depression → Testing → Acceptance."},
-{sec:"Ch.2 Models & Grief", q:"Shock stage = ?", a:"Initial reaction to bad news."},
-{sec:"Ch.2 Models & Grief", q:"Denial stage = ?", a:"Pretending what is, isn't."},
-{sec:"Ch.2 Models & Grief", q:"Testing stage = ?", a:"Searching for realistic resolutions."},
-{sec:"Ch.2 Models & Grief", q:"Acceptance stage = ?", a:"Coping with situation and finding a way forward. LAST stage."},
-{sec:"Ch.2 Models & Grief", q:"Who identified the grief cycle?", a:"Dr. Elisabeth Kübler-Ross."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Engineering model = ?", a:"Focuses on facts/disease ONLY — ignores patient as a person. Cold."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Priestly model = ?", a:"Provider makes ALL decisions for patient. Tells patient what to do."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Collegial model = ?", a:"Patient and provider work TOGETHER — cooperation and trust."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Contractual model = ?", a:"Based on agreements like INFORMED CONSENT. Patient ultimately decides."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Covenant model = ?", a:"Trust based on TRADITION or past experiences."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Informed consent = which model?", a:"CONTRACTUAL model."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Grief cycle — 7 stages in order?", a:"Shock → Denial → Anger → Bargaining → Depression → Testing → Acceptance."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Shock stage = ?", a:"Initial reaction to bad news."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Denial stage = ?", a:"Pretending what is, isn't."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Testing stage = ?", a:"Searching for realistic resolutions."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Acceptance stage = ?", a:"Coping with situation and finding a way forward. LAST stage."},
+{sec:"Ch.2 Models & Grief", highYield:true, q:"Who identified the grief cycle?", a:"Dr. Elisabeth Kübler-Ross."},
 
 // LAW
-{sec:"Ch.2 Law & Doctrines", q:"HIPAA (1996) = ?", a:"Health Insurance Portability and Accountability Act. Protects patient health info."},
-{sec:"Ch.2 Law & Doctrines", q:"Living will = ?", a:"Patient's written direction about healthcare if they can no longer decide."},
-{sec:"Ch.2 Law & Doctrines", q:"Durable power of attorney = ?", a:"Names a PERSON to make healthcare decisions when patient can't."},
-{sec:"Ch.2 Law & Doctrines", q:"Why is informed consent needed?", a:"Makes sure patient UNDERSTANDS what is being done before agreeing."},
-{sec:"Ch.2 Law & Doctrines", q:"Tort law = ?", a:"PERSONAL INJURY law — wrongful act done to a person."},
-{sec:"Ch.2 Law & Doctrines", q:"Assault = ?", a:"THREAT of touching in an injurious way. No actual contact needed."},
-{sec:"Ch.2 Law & Doctrines", q:"Battery = ?", a:"ACTUAL harmful touching without consent."},
-{sec:"Ch.2 Law & Doctrines", q:"False imprisonment = ?", a:"Restraining/confining a patient without their consent."},
-{sec:"Ch.2 Law & Doctrines", q:"Libel = ?", a:"WRITTEN defamation."},
-{sec:"Ch.2 Law & Doctrines", q:"Slander = ?", a:"ORAL/spoken defamation. Slander = Speak."},
-{sec:"Ch.2 Law & Doctrines", q:"Doctrine of Personal Liability = ?", a:"You are liable for YOUR OWN negligent conduct."},
-{sec:"Ch.2 Law & Doctrines", q:"Doctrine of Respondeat Superior = ?", a:"EMPLOYER liable for employee's negligent acts done while following orders."},
-{sec:"Ch.2 Law & Doctrines", q:"Doctrine of Res Ipsa Loquitur = ?", a:"'The thing speaks for itself' — defendant must explain; negligence is obvious."},
-{sec:"Ch.2 Law & Doctrines", q:"Doctrine of Foreseeability = ?", a:"You could reasonably FORESEE your actions would cause injury to others."},
-{sec:"Ch.2 Law & Doctrines", q:"Risk management programs — what is NOT included?", a:"Malpractice insurance (that's separate)."},
-{sec:"Ch.2 Law & Doctrines", q:"Confidentiality exceptions include all EXCEPT?", a:"Automobile accident — NOT an exception (must be reported for public safety reasons, not confidentiality)."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"HIPAA (1996) = ?", a:"Health Insurance Portability and Accountability Act. Protects patient health info."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Living will = ?", a:"Patient's written direction about healthcare if they can no longer decide."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Durable power of attorney = ?", a:"Names a PERSON to make healthcare decisions when patient can't."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Why is informed consent needed?", a:"Makes sure patient UNDERSTANDS what is being done before agreeing."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Tort law = ?", a:"PERSONAL INJURY law — wrongful act done to a person."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Assault = ?", a:"THREAT of touching in an injurious way. No actual contact needed."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Battery = ?", a:"ACTUAL harmful touching without consent."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"False imprisonment = ?", a:"Restraining/confining a patient without their consent."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Libel = ?", a:"WRITTEN defamation."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Slander = ?", a:"ORAL/spoken defamation. Slander = Speak."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Doctrine of Personal Liability = ?", a:"You are liable for YOUR OWN negligent conduct."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Doctrine of Respondeat Superior = ?", a:"EMPLOYER liable for employee's negligent acts done while following orders."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Doctrine of Res Ipsa Loquitur = ?", a:"'The thing speaks for itself' — defendant must explain; negligence is obvious."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Doctrine of Foreseeability = ?", a:"You could reasonably FORESEE your actions would cause injury to others."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Risk management programs — what is NOT included?", a:"Malpractice insurance (that's separate)."},
+{sec:"Ch.2 Law & Doctrines", highYield:true, q:"Confidentiality exceptions include all EXCEPT?", a:"Automobile accident — NOT an exception (must be reported for public safety reasons, not confidentiality)."},
 
 // ══════════════════════════════════════════
 // CHAPTER 3 — PATIENT ASSESSMENT
 // ══════════════════════════════════════════
-{sec:"Ch.3 Communication", q:"Therapeutic relationship = ?", a:"Relationship between healthcare worker and patient to effect beneficial change."},
-{sec:"Ch.3 Communication", q:"Cognitive content = ?", a:"FACTS and WORDS in the message."},
-{sec:"Ch.3 Communication", q:"Affective content = ?", a:"Feelings, attitudes, and behaviors — verbal or nonverbal."},
-{sec:"Ch.3 Communication", q:"Reflective listening involves responding with?", a:"EMPATHY."},
-{sec:"Ch.3 Communication", q:"Empathy = ?", a:"Identifying with the feelings, thoughts, or experiences of another person."},
-{sec:"Ch.3 Communication", q:"Most common affective responses in cancer patients?", a:"Anxiety and depression."},
-{sec:"Ch.3 Communication", q:"10 verbal responses — list them?", a:"Minimal verbal, Reflecting, Paraphrasing, Probing, Clarifying, Interpreting, Checking out, Informing, Confronting, Summarizing."},
-{sec:"Ch.3 Communication", q:"Paraphrasing = ?", a:"Restating patient's message in YOUR OWN WORDS (content-based)."},
-{sec:"Ch.3 Communication", q:"Confronting = ?", a:"Pointing out a CONTRADICTION between what patient says and what you observe."},
-{sec:"Ch.3 Communication", q:"Informing = ?", a:"Providing FACTUAL information to patient."},
-{sec:"Ch.3 Communication", q:"Probing = ?", a:"Asking questions to get MORE information."},
-{sec:"Ch.3 Communication", q:"Which verbal response is NOT in the 10?", a:"Repeating — NOT one of the 10."},
-{sec:"Ch.3 Communication", q:"When you follow patient status critically — emotional, physical — this is called?", a:"Anxiety monitoring / affective assessment."},
+{sec:"Ch.3 Communication", highYield:true, q:"Therapeutic relationship = ?", a:"Relationship between healthcare worker and patient to effect beneficial change."},
+{sec:"Ch.3 Communication", highYield:true, q:"Cognitive content = ?", a:"FACTS and WORDS in the message."},
+{sec:"Ch.3 Communication", highYield:true, q:"Affective content = ?", a:"Feelings, attitudes, and behaviors — verbal or nonverbal."},
+{sec:"Ch.3 Communication", highYield:true, q:"Reflective listening involves responding with?", a:"EMPATHY."},
+{sec:"Ch.3 Communication", highYield:true, q:"Empathy = ?", a:"Identifying with the feelings, thoughts, or experiences of another person."},
+{sec:"Ch.3 Communication", highYield:true, q:"Most common affective responses in cancer patients?", a:"Anxiety and depression."},
+{sec:"Ch.3 Communication", highYield:true, q:"10 verbal responses — list them?", a:"Minimal verbal, Reflecting, Paraphrasing, Probing, Clarifying, Interpreting, Checking out, Informing, Confronting, Summarizing."},
+{sec:"Ch.3 Communication", highYield:true, q:"Paraphrasing = ?", a:"Restating patient's message in YOUR OWN WORDS (content-based)."},
+{sec:"Ch.3 Communication", highYield:true, q:"Confronting = ?", a:"Pointing out a CONTRADICTION between what patient says and what you observe."},
+{sec:"Ch.3 Communication", highYield:true, q:"Informing = ?", a:"Providing FACTUAL information to patient."},
+{sec:"Ch.3 Communication", highYield:true, q:"Probing = ?", a:"Asking questions to get MORE information."},
+{sec:"Ch.3 Communication", highYield:true, q:"Which verbal response is NOT in the 10?", a:"Repeating — NOT one of the 10."},
+{sec:"Ch.3 Communication", highYield:true, q:"When you follow patient status critically — emotional, physical — this is called?", a:"Anxiety monitoring / affective assessment."},
 
 // ASSESSMENT
 {sec:"Ch.3 Assessment", q:"General health assessment is done by?", a:"INTERVIEW — past and present health, self-report."},
@@ -690,52 +913,52 @@ const ALL_CARDS = [
 {sec:"Ch.3 Assessment", q:"Cancer rehabilitation = ?", a:"Dynamic process to enable patient to function at maximum level within disease limitations."},
 
 // BLOOD VALUES — TABLE 3.6
-{sec:"Ch.3 Blood Values", q:"HCT normal range — MEN?", a:"38.8–46.4%"},
-{sec:"Ch.3 Blood Values", q:"HCT normal range — WOMEN?", a:"35.4–44.4%"},
-{sec:"Ch.3 Blood Values", q:"HGB normal range — MEN?", a:"13.3–16.2 g/dL"},
-{sec:"Ch.3 Blood Values", q:"HGB normal range — WOMEN?", a:"12.0–15.8 g/dL"},
-{sec:"Ch.3 Blood Values", q:"RBC count — MEN?", a:"4.30–5.60 × 10⁶/mm³"},
-{sec:"Ch.3 Blood Values", q:"RBC count — WOMEN?", a:"4.00–5.20 × 10⁶/mm³"},
-{sec:"Ch.3 Blood Values", q:"Normal platelet range?", a:"165,000–415,000/mm³ (same for both sexes)."},
-{sec:"Ch.3 Blood Values", q:"Severely low platelets = less than?", a:"20,000/mm³"},
-{sec:"Ch.3 Blood Values", q:"Myelosuppression = ?", a:"Reduction in BONE MARROW function."},
-{sec:"Ch.3 Blood Values", q:"Anemia = ?", a:"Decrease in peripheral RED BLOOD CELL count."},
-{sec:"Ch.3 Blood Values", q:"Leukopenia = ?", a:"Decrease in WHITE BLOOD CELL count."},
-{sec:"Ch.3 Blood Values", q:"Thrombocytopenia = ?", a:"Reduction in circulating PLATELETS."},
-{sec:"Ch.3 Blood Values", q:"Pancytopenia = ?", a:"Reduction in ALL circulating blood cells."},
-{sec:"Ch.3 Blood Values", q:"Memory trick for blood count terms?", a:"Thrombo=clot=platelets. Leuko=white=WBC. Anemia=no blood=RBC. Pan=all."},
+{sec:"Ch.3 Blood Values", highYield:true, q:"HCT normal range — MEN?", a:"38.8–46.4%"},
+{sec:"Ch.3 Blood Values", highYield:true, q:"HCT normal range — WOMEN?", a:"35.4–44.4%"},
+{sec:"Ch.3 Blood Values", highYield:true, q:"HGB normal range — MEN?", a:"13.3–16.2 g/dL"},
+{sec:"Ch.3 Blood Values", highYield:true, q:"HGB normal range — WOMEN?", a:"12.0–15.8 g/dL"},
+{sec:"Ch.3 Blood Values", highYield:true, q:"RBC count — MEN?", a:"4.30–5.60 × 10⁶/mm³"},
+{sec:"Ch.3 Blood Values", highYield:true, q:"RBC count — WOMEN?", a:"4.00–5.20 × 10⁶/mm³"},
+{sec:"Ch.3 Blood Values", highYield:true, q:"Normal platelet range?", a:"165,000–415,000/mm³ (same for both sexes)."},
+{sec:"Ch.3 Blood Values", highYield:true, q:"Severely low platelets = less than?", a:"20,000/mm³"},
+{sec:"Ch.3 Blood Values", highYield:true, q:"Myelosuppression = ?", a:"Reduction in BONE MARROW function."},
+{sec:"Ch.3 Blood Values", highYield:true, q:"Anemia = ?", a:"Decrease in peripheral RED BLOOD CELL count."},
+{sec:"Ch.3 Blood Values", highYield:true, q:"Leukopenia = ?", a:"Decrease in WHITE BLOOD CELL count."},
+{sec:"Ch.3 Blood Values", highYield:true, q:"Thrombocytopenia = ?", a:"Reduction in circulating PLATELETS."},
+{sec:"Ch.3 Blood Values", highYield:true, q:"Pancytopenia = ?", a:"Reduction in ALL circulating blood cells."},
+{sec:"Ch.3 Blood Values", highYield:true, q:"Memory trick for blood count terms?", a:"Thrombo=clot=platelets. Leuko=white=WBC. Anemia=no blood=RBC. Pan=all."},
 
 // TABLE 3.2 SIDE EFFECTS — PROFESSOR SAID "KNOW IT ALL OF THEM"
-{sec:"Ch.3 Table 3.2 Doses", q:"Faint erythema appears at?", a:"1600 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Erythema (skin redness) appears at?", a:"2000–3000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Hair loss (epilation/alopecia) at?", a:"2000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Mouth changes (stomatitis, xerostomia, mucositis, taste) at?", a:"2000–3000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Pharyngitis at?", a:"2000–3000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Esophagitis (difficulty swallowing) at?", a:"2000–3000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Laryngitis at?", a:"4000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Nausea and vomiting at?", a:"1000–2000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Diarrhea/colic at?", a:"2000–5000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Cystitis at?", a:"3000–4000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Dry desquamation at?", a:"3000–4000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Moist desquamation at?", a:"4000–6000 cGy"},
-{sec:"Ch.3 Table 3.2 Doses", q:"Dose order memory trick?", a:"1000=nausea → 1600=faint red → 2000=hair loss → 2000-3000=mouth/throat → 4000=larynx → 4000-6000=moist skin"},
-{sec:"Ch.3 Table 3.2 Doses", q:"NONSPECIFIC side effects (no dose)?", a:"Skin pallor, weight loss, fatigue, sleep disturbance."},
-{sec:"Ch.3 Table 3.2 Doses", q:"Skin pallor is monitored by?", a:"Weekly complete blood counts (hemoglobin, WBC, platelets)."},
-{sec:"Ch.3 Table 3.2 Doses", q:"Neurologic changes → what to do?", a:"IMMEDIATE referral to radiation oncologist."},
-{sec:"Ch.3 Table 3.2 Doses", q:"Neurologic changes include?", a:"Headaches, vision changes, gait/mobility changes, temperament changes, mental status changes."},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Faint erythema appears at?", a:"1600 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Erythema (skin redness) appears at?", a:"2000–3000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Hair loss (epilation/alopecia) at?", a:"2000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Mouth changes (stomatitis, xerostomia, mucositis, taste) at?", a:"2000–3000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Pharyngitis at?", a:"2000–3000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Esophagitis (difficulty swallowing) at?", a:"2000–3000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Laryngitis at?", a:"4000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Nausea and vomiting at?", a:"1000–2000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Diarrhea/colic at?", a:"2000–5000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Cystitis at?", a:"3000–4000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Dry desquamation at?", a:"3000–4000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Moist desquamation at?", a:"4000–6000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Dose order memory trick?", a:"1000=nausea → 1600=faint red → 2000=hair loss → 2000-3000=mouth/throat → 4000=larynx → 4000-6000=moist skin"},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"NONSPECIFIC side effects (no dose)?", a:"Skin pallor, weight loss, fatigue, sleep disturbance."},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Skin pallor is monitored by?", a:"Weekly complete blood counts (hemoglobin, WBC, platelets)."},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Neurologic changes → what to do?", a:"IMMEDIATE referral to radiation oncologist."},
+{sec:"Ch.3 Table 3.2 Doses", highYield:true, q:"Neurologic changes include?", a:"Headaches, vision changes, gait/mobility changes, temperament changes, mental status changes."},
 
 // PAIN
-{sec:"Ch.3 Pain & Transfers", q:"Acute pain = ?", a:"New, SHORT-duration pain with well-defined onset."},
-{sec:"Ch.3 Pain & Transfers", q:"Chronic pain = ?", a:"Persistence of pain >3 months with less well-defined onset."},
-{sec:"Ch.3 Pain & Transfers", q:"6 dimensions of pain?", a:"Physiologic, Sensory, Affective, Sociocultural, Behavioral, Cognitive."},
-{sec:"Ch.3 Pain & Transfers", q:"Orthostatic hypotension = ?", a:"Sudden blood pressure DROP when moving from lying/sitting to STANDING."},
-{sec:"Ch.3 Pain & Transfers", q:"Transfer rule?", a:"Always transfer toward patient's STRONGER side."},
-{sec:"Ch.3 Pain & Transfers", q:"4 types of wheelchair transfers?", a:"Standby Assist, Assisted Standing Pivot, Two-Person Lift, Hydraulic Lift."},
-{sec:"Ch.3 Pain & Transfers", q:"Cart/stretcher transfer: wheelchair position?", a:"45-degree angle."},
-{sec:"Ch.3 Pain & Transfers", q:"When moving patient on a stretcher/cart, move them?", a:"TOWARD YOU."},
-{sec:"Ch.3 Pain & Transfers", q:"Palliative care goal?", a:"Treat pain/symptoms — patient still may have treatment options (radiation/chemo/meds)."},
-{sec:"Ch.3 Pain & Transfers", q:"End-of-life care = ?", a:"No more curative treatment — comfort ONLY."},
-{sec:"Ch.3 Pain & Transfers", q:"Hospice care = ?", a:"Comfort and quality of life in FINAL MONTHS — no curative treatment."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"Acute pain = ?", a:"New, SHORT-duration pain with well-defined onset."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"Chronic pain = ?", a:"Persistence of pain >3 months with less well-defined onset."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"6 dimensions of pain?", a:"Physiologic, Sensory, Affective, Sociocultural, Behavioral, Cognitive."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"Orthostatic hypotension = ?", a:"Sudden blood pressure DROP when moving from lying/sitting to STANDING."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"Transfer rule?", a:"Always transfer toward patient's STRONGER side."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"4 types of wheelchair transfers?", a:"Standby Assist, Assisted Standing Pivot, Two-Person Lift, Hydraulic Lift."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"Cart/stretcher transfer: wheelchair position?", a:"45-degree angle."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"When moving patient on a stretcher/cart, move them?", a:"TOWARD YOU."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"Palliative care goal?", a:"Treat pain/symptoms — patient still may have treatment options (radiation/chemo/meds)."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"End-of-life care = ?", a:"No more curative treatment — comfort ONLY."},
+{sec:"Ch.3 Pain & Transfers", highYield:true, q:"Hospice care = ?", a:"Comfort and quality of life in FINAL MONTHS — no curative treatment."},
 ];
 
 let activeSection = "All";
@@ -826,6 +1049,7 @@ function buildQuestions() {
     return {
       t: card.q,
       sec: card.sec,
+      highYield: !!card.highYield,
       o: options,
       a: options.indexOf(card.a),
       e: card.a
@@ -835,11 +1059,19 @@ function buildQuestions() {
 
 function startQuiz(mode) {
   const allQuestions = buildQuestions();
-  quizSet = mode === "exam" ? shuffle(allQuestions).slice(0, 50) : shuffle(allQuestions);
+  if (mode === "exam") {
+    quizSet = shuffle(allQuestions).slice(0, 50);
+    document.getElementById('quizTitle').textContent = "Exam Mode — 50 Questions";
+  } else if (mode === "mustknow") {
+    quizSet = shuffle(allQuestions.filter(q => q.highYield)).slice(0, 40);
+    document.getElementById('quizTitle').textContent = `Professor Must Know Quiz — ${quizSet.length} Questions`;
+  } else {
+    quizSet = shuffle(allQuestions);
+    document.getElementById('quizTitle').textContent = `Practice Quiz — ${quizSet.length} Questions`;
+  }
   qi = 0;
   answers = [];
   submitted = [];
-  document.getElementById('quizTitle').textContent = mode === "exam" ? "Mock Midterm — 50 Questions" : `Practice Quiz — ${quizSet.length} Questions`;
   showMidtermTab('quiz');
   renderQ();
 }
@@ -904,15 +1136,32 @@ function prevQuestion() {
 function finishQuiz() {
   let correct = 0;
   const weak = {};
+  const missedRows = [];
+  const rightRows = [];
   quizSet.forEach((q, i) => {
-    if (answers[i] === q.a) correct++;
-    else weak[q.sec] = (weak[q.sec] || 0) + 1;
+    const your = q.o[answers[i]];
+    const correctAnswer = q.o[q.a];
+    if (answers[i] === q.a) {
+      correct++;
+      rightRows.push(`<li><b>${q.sec}:</b> ${q.t}</li>`);
+    } else {
+      weak[q.sec] = (weak[q.sec] || 0) + 1;
+      missedRows.push(`<div class="quiz-box"><div class="small"><b>${q.sec}</b>${q.highYield ? ' · <span class="mustknow-badge">Professor Must Know</span>' : ''}</div><p><b>${q.t}</b></p><p><b>Your answer:</b> ${your || "No answer"}</p><p><b>Correct answer:</b> ${correctAnswer}</p><p><b>Quick correction:</b> ${q.e}</p></div>`);
+    }
   });
   const pct = Math.round(correct / quizSet.length * 100);
-  showMidtermTab('results');
-  document.getElementById('scoreBox').innerHTML = `<div class="note-box must"><h3>Your score: ${correct}/${quizSet.length} (${pct}%)</h3><p>${pct >= 85 ? "Strong work 💗 Keep reviewing missed questions." : "Review the weak spots below, then redo Practice Quiz."}</p></div>`;
   const weakList = Object.entries(weak).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  document.getElementById('reviewBox').innerHTML = `<h3>Weakest Spots</h3><ul>${weakList.map(([s,n]) => `<li><b>${s}</b>: ${n} missed</li>`).join('') || "<li>No weak spots. You crushed it.</li>"}</ul>`;
+  const grade = pct >= 90 ? "A" : pct >= 80 ? "B" : pct >= 70 ? "C" : pct >= 60 ? "D" : "Needs more review";
+  showMidtermTab('results');
+  document.getElementById('scoreBox').innerHTML = `<div class="note-box must"><h3>Your grade: ${pct}% · ${grade}</h3><p><b>${correct}/${quizSet.length}</b> correct · <b>${quizSet.length - correct}</b> missed</p><p>${pct >= 85 ? "Strong work. Keep reviewing missed questions and Professor Must Know cards." : "Focus on the review list below, then retake the Must Know Quiz."}</p></div>`;
+  document.getElementById('reviewBox').innerHTML = `
+    <h3>What to Review</h3>
+    <ul>${weakList.map(([s,n]) => `<li><b>${s}</b>: ${n} missed</li>`).join('') || "<li>No weak spots. You crushed it.</li>"}</ul>
+    <h3>Questions You Missed</h3>
+    ${missedRows.join('') || '<div class="note-box">No missed questions.</div>'}
+    <h3>Questions You Got Right</h3>
+    <ul>${rightRows.slice(0,25).join('') || '<li>None yet.</li>'}</ul>
+  `;
 }
 
 function saveMissed(q, selectedIndex) {
@@ -949,6 +1198,184 @@ function clearMissed() {
 }
 
 
+
+let statusFilter = "all";
+
+function getCardKey(card) {
+  return card.sec + "||" + card.q;
+}
+
+function getCardProgress() {
+  return JSON.parse(localStorage.getItem("orientationMidtermCardProgress") || "{}");
+}
+
+function saveCardProgress(progress) {
+  localStorage.setItem("orientationMidtermCardProgress", JSON.stringify(progress));
+}
+
+function getFilteredByStatus(cards) {
+  const progress = getCardProgress();
+  if (statusFilter === "all") return cards;
+  if (statusFilter === "favorite") return cards.filter(c => progress[getCardKey(c)]?.favorite);
+  return cards.filter(c => progress[getCardKey(c)]?.status === statusFilter);
+}
+
+function refreshStats() {
+  const progress = getCardProgress();
+  let know = 0, learning = 0, review = 0, favorite = 0;
+  ALL_CARDS.forEach(c => {
+    const item = progress[getCardKey(c)];
+    if (!item) return;
+    if (item.status === "know") know++;
+    if (item.status === "learning") learning++;
+    if (item.status === "review") review++;
+    if (item.favorite) favorite++;
+  });
+  const setText = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  };
+  setText("statKnow", know);
+  setText("statLearning", learning);
+  setText("statReview", review);
+  setText("statFavorite", favorite);
+}
+
+function setStatusFilter(filter) {
+  statusFilter = filter;
+  setSection(activeSection);
+}
+
+function setSection(sec) {
+  activeSection = sec;
+  let baseCards = ALL_CARDS.filter(c => sec === "All" || c.sec === sec);
+  filteredCards = getFilteredByStatus(baseCards);
+  fcIndex = 0;
+  flipped = false;
+  refreshStats();
+  renderCard();
+}
+
+function statusBadges(card) {
+  const progress = getCardProgress();
+  const item = progress[getCardKey(card)] || {};
+  let badges = card.highYield ? '<span class="mustknow-badge">Professor Must Know</span>' : "";
+  if (item.status === "know") badges += '<span class="flash-badge badge-know">✓ Know It</span>';
+  if (item.status === "learning") badges += '<span class="flash-badge badge-learning">◐ Still Learning</span>';
+  if (item.status === "review") badges += '<span class="flash-badge badge-review">✕ Review Again</span>';
+  if (item.favorite) badges += '<span class="flash-badge badge-fav">♥ Favorite</span>';
+  return badges;
+}
+
+function renderCard() {
+  refreshStats();
+  const box = document.getElementById('flashcard');
+  if (!filteredCards.length) {
+    box.innerHTML = "No cards found for this filter.";
+    const count = document.getElementById('flashCount');
+    if (count) count.textContent = "Try All Cards or another section.";
+    return;
+  }
+  const card = filteredCards[fcIndex];
+  box.innerHTML = flipped
+    ? `<div>${statusBadges(card)}<div class="small"><b>Answer</b> · ${card.sec}</div><br><span class="flash-answer">${card.a}</span></div>`
+    : `<div>${statusBadges(card)}<div class="small"><b>Question</b> · ${card.sec}</div><br><b>${card.q}</b><br><br><span class="small">Tap to flip</span></div>`;
+  document.getElementById('flashCount').textContent = `Card ${fcIndex + 1} of ${filteredCards.length}`;
+}
+
+function markCardStatus(status) {
+  if (!filteredCards.length) return;
+  const card = filteredCards[fcIndex];
+  const progress = getCardProgress();
+  const key = getCardKey(card);
+  progress[key] = progress[key] || {};
+  progress[key].status = status;
+  progress[key].updated = new Date().toISOString();
+  saveCardProgress(progress);
+  refreshStats();
+  nextCard();
+}
+
+function toggleFavorite() {
+  if (!filteredCards.length) return;
+  const card = filteredCards[fcIndex];
+  const progress = getCardProgress();
+  const key = getCardKey(card);
+  progress[key] = progress[key] || {};
+  progress[key].favorite = !progress[key].favorite;
+  saveCardProgress(progress);
+  refreshStats();
+  renderCard();
+}
+
+function shuffleCurrentCards() {
+  filteredCards = shuffle(filteredCards);
+  fcIndex = 0;
+  flipped = false;
+  renderCard();
+}
+
+function resetCardProgress() {
+  if (confirm("Reset Midterm flashcard progress?")) {
+    localStorage.removeItem("orientationMidtermCardProgress");
+    setSection(activeSection);
+  }
+}
+
+function nextCard() {
+  if (!filteredCards.length) return;
+  fcIndex = (fcIndex + 1) % filteredCards.length;
+  flipped = false;
+  renderCard();
+}
+
+function prevCard() {
+  if (!filteredCards.length) return;
+  fcIndex = (fcIndex - 1 + filteredCards.length) % filteredCards.length;
+  flipped = false;
+  renderCard();
+}
+
+function renderQ() {
+  const q = quizSet[qi];
+  document.getElementById('counter').textContent = `Question ${qi + 1} of ${quizSet.length} · ${q.sec}`;
+  document.getElementById('bar').style.width = ((qi + 1) / quizSet.length * 100) + "%";
+  document.getElementById('question').innerHTML = `<b>${q.t}</b>`;
+  const ops = document.getElementById('options');
+  ops.innerHTML = "";
+  q.o.forEach((op, i) => {
+    const b = document.createElement('button');
+    b.className = 'option';
+    b.textContent = op;
+    if (answers[qi] === i) b.classList.add('selected');
+    if (submitted[qi] && i === q.a) b.classList.add('correct');
+    if (submitted[qi] && answers[qi] === i && i !== q.a) b.classList.add('wrong');
+    b.onclick = () => {
+      if (!submitted[qi]) {
+        answers[qi] = i;
+        renderQ();
+      }
+    };
+    ops.appendChild(b);
+  });
+  const fb = document.getElementById('feedback');
+  if (submitted[qi]) {
+    fb.classList.remove('hidden');
+    const your = q.o[answers[qi]];
+    const correct = q.o[q.a];
+    fb.innerHTML = `
+      <div class="correction-box">
+        ${answers[qi] === q.a ? '<div class="right">✓ Correct</div>' : '<div class="wrongtxt">✕ Quick correction</div>'}
+        <p><b>Your answer:</b> ${your}</p>
+        <p><b>Correct answer:</b> ${correct}</p>
+        <p><b>Remember:</b> ${q.e}</p>
+      </div>
+    `;
+  } else {
+    fb.classList.add('hidden');
+  }
+}
+
 const WEEK89_CARDS = [
 {sec:"Detection Basics", q:"What does detection mean?", a:"Finding possible disease early, often before symptoms appear."},
 {sec:"Detection Basics", q:"What does diagnosis mean?", a:"Identification of a disease or condition."},
@@ -959,154 +1386,154 @@ const WEEK89_CARDS = [
 {sec:"Detection Basics", q:"What is relative survival rate?", a:"Survival of cancer patients compared with the general population."},
 {sec:"Detection Basics", q:"What database collects cancer statistics mentioned in the slides?", a:"SEER: Surveillance, Epidemiology, and End Results."},
 
-{sec:"Signs & Symptoms", q:"What is a sign?", a:"An objective finding observed by the examiner, such as a rash or lump."},
-{sec:"Signs & Symptoms", q:"What is a symptom?", a:"A subjective experience reported by the patient, such as pain or fatigue."},
-{sec:"Signs & Symptoms", q:"What is a syndrome?", a:"A group of related signs and symptoms from a common cause."},
-{sec:"Signs & Symptoms", q:"What is a paraneoplastic syndrome?", a:"Symptoms caused by substances or hormones produced by a tumor, occurring away from the tumor."},
-{sec:"Signs & Symptoms", q:"Is pain a sign or symptom?", a:"Symptom, because it is reported by the patient."},
-{sec:"Signs & Symptoms", q:"Is a lump found by the examiner a sign or symptom?", a:"Sign, because it is objectively observed."},
+{sec:"Signs & Symptoms", highYield:true, q:"What is a sign?", a:"An objective finding observed by the examiner, such as a rash or lump."},
+{sec:"Signs & Symptoms", highYield:true, q:"What is a symptom?", a:"A subjective experience reported by the patient, such as pain or fatigue."},
+{sec:"Signs & Symptoms", highYield:true, q:"What is a syndrome?", a:"A group of related signs and symptoms from a common cause."},
+{sec:"Signs & Symptoms", highYield:true, q:"What is a paraneoplastic syndrome?", a:"Symptoms caused by substances or hormones produced by a tumor, occurring away from the tumor."},
+{sec:"Signs & Symptoms", highYield:true, q:"Is pain a sign or symptom?", a:"Symptom, because it is reported by the patient."},
+{sec:"Signs & Symptoms", highYield:true, q:"Is a lump found by the examiner a sign or symptom?", a:"Sign, because it is objectively observed."},
 
-{sec:"Medical Record", q:"What is the purpose of the medical history?", a:"It gives a snapshot of prior medical problems and treatments."},
-{sec:"Medical Record", q:"Why is medical history important?", a:"It helps identify risk factors and supports diagnosis and treatment planning."},
-{sec:"Medical Record", q:"What does the medical record include?", a:"Medical history, labs, diagnostic tests, progress notes, consent forms, correspondence, and medical images."},
-{sec:"Medical Record", q:"Do patients own their medical record?", a:"No, but they may review or obtain copies."},
-{sec:"Medical Record", q:"What are demographic data?", a:"General patient profile information such as age, gender, race, and national origin when relevant."},
-{sec:"Medical Record", q:"Why do demographics matter?", a:"They help predict risk, guide screening, and support public health planning."},
-{sec:"Medical Record", q:"What is incidence?", a:"The number or probability of new cases developing during a period of time."},
-{sec:"Medical Record", q:"What is prevalence?", a:"Probability of disease in the population at a point in time."},
+{sec:"Medical Record", highYield:true, q:"What is the purpose of the medical history?", a:"It gives a snapshot of prior medical problems and treatments."},
+{sec:"Medical Record", highYield:true, q:"Why is medical history important?", a:"It helps identify risk factors and supports diagnosis and treatment planning."},
+{sec:"Medical Record", highYield:true, q:"What does the medical record include?", a:"Medical history, labs, diagnostic tests, progress notes, consent forms, correspondence, and medical images."},
+{sec:"Medical Record", highYield:true, q:"Do patients own their medical record?", a:"No, but they may review or obtain copies."},
+{sec:"Medical Record", highYield:true, q:"What are demographic data?", a:"General patient profile information such as age, gender, race, and national origin when relevant."},
+{sec:"Medical Record", highYield:true, q:"Why do demographics matter?", a:"They help predict risk, guide screening, and support public health planning."},
+{sec:"Medical Record", highYield:true, q:"What is incidence?", a:"The number or probability of new cases developing during a period of time."},
+{sec:"Medical Record", highYield:true, q:"What is prevalence?", a:"Probability of disease in the population at a point in time."},
 
-{sec:"Interview & Diagnosis", q:"What is subjective data?", a:"Patient-reported complaints, feelings, history, or symptoms."},
-{sec:"Interview & Diagnosis", q:"What is objective data?", a:"Observable or measurable findings such as vitals, lab values, imaging, or exam findings."},
-{sec:"Interview & Diagnosis", q:"What is the patient interview often considered?", a:"One of the physician's most powerful tools."},
-{sec:"Interview & Diagnosis", q:"What can interfere with a patient interview?", a:"Using technical jargon the patient does not understand."},
-{sec:"Interview & Diagnosis", q:"What starts the diagnostic process?", a:"Interview and physical examination."},
-{sec:"Interview & Diagnosis", q:"What supports diagnostic findings?", a:"Medical history, prior records, imaging, and lab tests."},
+{sec:"Interview & Diagnosis", highYield:true, q:"What is subjective data?", a:"Patient-reported complaints, feelings, history, or symptoms."},
+{sec:"Interview & Diagnosis", highYield:true, q:"What is objective data?", a:"Observable or measurable findings such as vitals, lab values, imaging, or exam findings."},
+{sec:"Interview & Diagnosis", highYield:true, q:"What is the patient interview often considered?", a:"One of the physician's most powerful tools."},
+{sec:"Interview & Diagnosis", highYield:true, q:"What can interfere with a patient interview?", a:"Using technical jargon the patient does not understand."},
+{sec:"Interview & Diagnosis", highYield:true, q:"What starts the diagnostic process?", a:"Interview and physical examination."},
+{sec:"Interview & Diagnosis", highYield:true, q:"What supports diagnostic findings?", a:"Medical history, prior records, imaging, and lab tests."},
 
-{sec:"Physical Exam", q:"What are the four classic techniques of physical examination?", a:"Inspection, palpation, percussion, and auscultation."},
-{sec:"Physical Exam", q:"Inspection means what?", a:"Using sight to observe."},
-{sec:"Physical Exam", q:"Palpation means what?", a:"Using touch to feel tissues and organs."},
-{sec:"Physical Exam", q:"Percussion means what?", a:"Tapping the body to evaluate underlying structures."},
-{sec:"Physical Exam", q:"Auscultation means what?", a:"Listening to sounds made by the body, such as heart and lungs."},
-{sec:"Physical Exam", q:"What is edema?", a:"Swelling of tissue caused by accumulation of excess fluid."},
+{sec:"Physical Exam", highYield:true, q:"What are the four classic techniques of physical examination?", a:"Inspection, palpation, percussion, and auscultation."},
+{sec:"Physical Exam", highYield:true, q:"Inspection means what?", a:"Using sight to observe."},
+{sec:"Physical Exam", highYield:true, q:"Palpation means what?", a:"Using touch to feel tissues and organs."},
+{sec:"Physical Exam", highYield:true, q:"Percussion means what?", a:"Tapping the body to evaluate underlying structures."},
+{sec:"Physical Exam", highYield:true, q:"Auscultation means what?", a:"Listening to sounds made by the body, such as heart and lungs."},
+{sec:"Physical Exam", highYield:true, q:"What is edema?", a:"Swelling of tissue caused by accumulation of excess fluid."},
 
-{sec:"Vital Signs", q:"Why are vital signs important?", a:"They help assess overall health and determine whether a patient is stable for treatment."},
-{sec:"Vital Signs", q:"What is homeostasis?", a:"The body's ability to maintain a stable internal environment."},
-{sec:"Vital Signs", q:"What can affect vital signs?", a:"Time of day, physical activity, age, emotional state, disease, and treatment effects."},
-{sec:"Vital Signs", q:"Which vital signs are emphasized in this chapter?", a:"Temperature, pulse, respirations, blood pressure, pain, and oxygen saturation."},
-{sec:"Vital Signs", q:"What is a pulse oximeter?", a:"A noninvasive device that measures oxygen saturation and pulse rate."},
+{sec:"Vital Signs", highYield:true, q:"Why are vital signs important?", a:"They help assess overall health and determine whether a patient is stable for treatment."},
+{sec:"Vital Signs", highYield:true, q:"What is homeostasis?", a:"The body's ability to maintain a stable internal environment."},
+{sec:"Vital Signs", highYield:true, q:"What can affect vital signs?", a:"Time of day, physical activity, age, emotional state, disease, and treatment effects."},
+{sec:"Vital Signs", highYield:true, q:"Which vital signs are emphasized in this chapter?", a:"Temperature, pulse, respirations, blood pressure, pain, and oxygen saturation."},
+{sec:"Vital Signs", highYield:true, q:"What is a pulse oximeter?", a:"A noninvasive device that measures oxygen saturation and pulse rate."},
 
-{sec:"Temperature", q:"What does body temperature measure?", a:"Core heat balance between heat produced and heat lost."},
-{sec:"Temperature", q:"Which temperature route is most common?", a:"Oral."},
-{sec:"Temperature", q:"Which temperature route is most accurate?", a:"Rectal."},
-{sec:"Temperature", q:"When is oral temperature not used?", a:"For irrational or unconscious patients."},
-{sec:"Temperature", q:"What does febrile mean?", a:"Having a fever."},
-{sec:"Temperature", q:"What does hypothermia mean?", a:"Body temperature below normal range."},
-{sec:"Temperature", q:"Normal oral body temperature range?", a:"Approximately 97.7–99.5°F."},
+{sec:"Temperature", highYield:true, q:"What does body temperature measure?", a:"Core heat balance between heat produced and heat lost."},
+{sec:"Temperature", highYield:true, q:"Which temperature route is most common?", a:"Oral."},
+{sec:"Temperature", highYield:true, q:"Which temperature route is most accurate?", a:"Rectal."},
+{sec:"Temperature", highYield:true, q:"When is oral temperature not used?", a:"For irrational or unconscious patients."},
+{sec:"Temperature", highYield:true, q:"What does febrile mean?", a:"Having a fever."},
+{sec:"Temperature", highYield:true, q:"What does hypothermia mean?", a:"Body temperature below normal range."},
+{sec:"Temperature", highYield:true, q:"Normal oral body temperature range?", a:"Approximately 97.7–99.5°F."},
 
-{sec:"Pulse", q:"What is pulse?", a:"Expansion and contraction of an artery as blood is pumped by the heart."},
-{sec:"Pulse", q:"Most common pulse site?", a:"Radial pulse at the wrist."},
-{sec:"Pulse", q:"Which pulse site is used in emergencies?", a:"Carotid pulse in the neck."},
-{sec:"Pulse", q:"Which pulse site is used for infants or cardiac patients?", a:"Apical pulse at the chest."},
-{sec:"Pulse", q:"What pulse factors are observed?", a:"Rate, rhythm, size, and tension."},
-{sec:"Pulse", q:"Is character a pulse factor?", a:"No. Character belongs with respiration assessment."},
+{sec:"Pulse", highYield:true, q:"What is pulse?", a:"Expansion and contraction of an artery as blood is pumped by the heart."},
+{sec:"Pulse", highYield:true, q:"Most common pulse site?", a:"Radial pulse at the wrist."},
+{sec:"Pulse", highYield:true, q:"Which pulse site is used in emergencies?", a:"Carotid pulse in the neck."},
+{sec:"Pulse", highYield:true, q:"Which pulse site is used for infants or cardiac patients?", a:"Apical pulse at the chest."},
+{sec:"Pulse", highYield:true, q:"What pulse factors are observed?", a:"Rate, rhythm, size, and tension."},
+{sec:"Pulse", highYield:true, q:"Is character a pulse factor?", a:"No. Character belongs with respiration assessment."},
 
-{sec:"Respirations", q:"What are respirations?", a:"Exchange of oxygen and carbon dioxide during breathing."},
-{sec:"Respirations", q:"What respiratory factors are observed?", a:"Rate, depth, rhythm, and character."},
-{sec:"Respirations", q:"Normal adult respiratory rate?", a:"About 12–20 breaths per minute."},
-{sec:"Respirations", q:"Major muscle of ventilation?", a:"Diaphragm."},
-{sec:"Respirations", q:"What is tachypnea?", a:"Respiratory rate greater than 20 breaths per minute."},
-{sec:"Respirations", q:"What is bradypnea?", a:"Decreased respiratory rate."},
-{sec:"Respirations", q:"What is dyspnea?", a:"Difficulty breathing."},
-{sec:"Respirations", q:"What is orthopnea?", a:"Shortness of breath when lying down, relieved by sitting or standing."},
-{sec:"Respirations", q:"What is apnea?", a:"Absence of breathing."},
+{sec:"Respirations", highYield:true, q:"What are respirations?", a:"Exchange of oxygen and carbon dioxide during breathing."},
+{sec:"Respirations", highYield:true, q:"What respiratory factors are observed?", a:"Rate, depth, rhythm, and character."},
+{sec:"Respirations", highYield:true, q:"Normal adult respiratory rate?", a:"About 12–20 breaths per minute."},
+{sec:"Respirations", highYield:true, q:"Major muscle of ventilation?", a:"Diaphragm."},
+{sec:"Respirations", highYield:true, q:"What is tachypnea?", a:"Respiratory rate greater than 20 breaths per minute."},
+{sec:"Respirations", highYield:true, q:"What is bradypnea?", a:"Decreased respiratory rate."},
+{sec:"Respirations", highYield:true, q:"What is dyspnea?", a:"Difficulty breathing."},
+{sec:"Respirations", highYield:true, q:"What is orthopnea?", a:"Shortness of breath when lying down, relieved by sitting or standing."},
+{sec:"Respirations", highYield:true, q:"What is apnea?", a:"Absence of breathing."},
 
-{sec:"Blood Pressure", q:"What is blood pressure?", a:"Force of blood against arterial walls as the heart pumps."},
-{sec:"Blood Pressure", q:"What is systolic pressure?", a:"Top number; pressure during heart contraction."},
-{sec:"Blood Pressure", q:"Systolic memory trick?", a:"S = Squeeze."},
-{sec:"Blood Pressure", q:"What is diastolic pressure?", a:"Bottom number; pressure during heart relaxation."},
-{sec:"Blood Pressure", q:"Diastolic memory trick?", a:"D = Dilate/relax."},
-{sec:"Blood Pressure", q:"Normal blood pressure is about what?", a:"Around 120/80 mmHg."},
-{sec:"Blood Pressure", q:"Most common site for blood pressure?", a:"Brachial artery at the antecubital fossa."},
-{sec:"Blood Pressure", q:"What is hypertension?", a:"Blood pressure higher than normal."},
-{sec:"Blood Pressure", q:"What is hypotension?", a:"Blood pressure lower than normal."},
-{sec:"Blood Pressure", q:"Why does hypotension matter?", a:"Organs may not receive enough oxygen-rich blood."},
+{sec:"Blood Pressure", highYield:true, q:"What is blood pressure?", a:"Force of blood against arterial walls as the heart pumps."},
+{sec:"Blood Pressure", highYield:true, q:"What is systolic pressure?", a:"Top number; pressure during heart contraction."},
+{sec:"Blood Pressure", highYield:true, q:"Systolic memory trick?", a:"S = Squeeze."},
+{sec:"Blood Pressure", highYield:true, q:"What is diastolic pressure?", a:"Bottom number; pressure during heart relaxation."},
+{sec:"Blood Pressure", highYield:true, q:"Diastolic memory trick?", a:"D = Dilate/relax."},
+{sec:"Blood Pressure", highYield:true, q:"Normal blood pressure is about what?", a:"Around 120/80 mmHg."},
+{sec:"Blood Pressure", highYield:true, q:"Most common site for blood pressure?", a:"Brachial artery at the antecubital fossa."},
+{sec:"Blood Pressure", highYield:true, q:"What is hypertension?", a:"Blood pressure higher than normal."},
+{sec:"Blood Pressure", highYield:true, q:"What is hypotension?", a:"Blood pressure lower than normal."},
+{sec:"Blood Pressure", highYield:true, q:"Why does hypotension matter?", a:"Organs may not receive enough oxygen-rich blood."},
 
-{sec:"Pain & Oxygen", q:"What is pain assessment?", a:"Subjective measurement of a patient's discomfort level."},
-{sec:"Pain & Oxygen", q:"Common pain scales?", a:"Numeric 0–10 scale and faces scale."},
-{sec:"Pain & Oxygen", q:"What is acute pain?", a:"Short-duration pain with a well-defined onset."},
-{sec:"Pain & Oxygen", q:"What is chronic pain?", a:"Pain that persists for more than 3 months."},
-{sec:"Pain & Oxygen", q:"How is oxygen classified?", a:"As a drug."},
-{sec:"Pain & Oxygen", q:"Who must prescribe oxygen?", a:"A physician."},
-{sec:"Pain & Oxygen", q:"What oxygen dose should be used?", a:"The lowest effective dose needed."},
-{sec:"Pain & Oxygen", q:"Excess oxygen can cause what?", a:"Absorptive atelectasis and oxygen toxicity."},
-{sec:"Pain & Oxygen", q:"Most common low-flow oxygen device?", a:"Nasal cannula."},
-{sec:"Pain & Oxygen", q:"Oxygen can be prescribed by what two measures?", a:"Flow rate in L/min or concentration/FiO₂."},
+{sec:"Pain & Oxygen", highYield:true, q:"What is pain assessment?", a:"Subjective measurement of a patient's discomfort level."},
+{sec:"Pain & Oxygen", highYield:true, q:"Common pain scales?", a:"Numeric 0–10 scale and faces scale."},
+{sec:"Pain & Oxygen", highYield:true, q:"What is acute pain?", a:"Short-duration pain with a well-defined onset."},
+{sec:"Pain & Oxygen", highYield:true, q:"What is chronic pain?", a:"Pain that persists for more than 3 months."},
+{sec:"Pain & Oxygen", highYield:true, q:"How is oxygen classified?", a:"As a drug."},
+{sec:"Pain & Oxygen", highYield:true, q:"Who must prescribe oxygen?", a:"A physician."},
+{sec:"Pain & Oxygen", highYield:true, q:"What oxygen dose should be used?", a:"The lowest effective dose needed."},
+{sec:"Pain & Oxygen", highYield:true, q:"Excess oxygen can cause what?", a:"Absorptive atelectasis and oxygen toxicity."},
+{sec:"Pain & Oxygen", highYield:true, q:"Most common low-flow oxygen device?", a:"Nasal cannula."},
+{sec:"Pain & Oxygen", highYield:true, q:"Oxygen can be prescribed by what two measures?", a:"Flow rate in L/min or concentration/FiO₂."},
 
-{sec:"Screening", q:"What is sensitivity?", a:"Ability of a test to identify true positives."},
-{sec:"Screening", q:"What is specificity?", a:"Ability of a test to identify true negatives."},
-{sec:"Screening", q:"High sensitivity positive result means what?", a:"The person probably has the disease."},
-{sec:"Screening", q:"High specificity negative result means what?", a:"The person probably does not have the disease."},
-{sec:"Screening", q:"Mass screening is based on what?", a:"Results obtained, cost-effectiveness, and risk to the patient."},
-{sec:"Screening", q:"Which answer is NOT a basis for mass screening?", a:"Geographic location."},
-{sec:"Screening", q:"Which ACS screening is NOT recommended in the assignment?", a:"CT scanning for brain cancer."},
+{sec:"Screening", highYield:true, q:"What is sensitivity?", a:"Ability of a test to identify true positives."},
+{sec:"Screening", highYield:true, q:"What is specificity?", a:"Ability of a test to identify true negatives."},
+{sec:"Screening", highYield:true, q:"High sensitivity positive result means what?", a:"The person probably has the disease."},
+{sec:"Screening", highYield:true, q:"High specificity negative result means what?", a:"The person probably does not have the disease."},
+{sec:"Screening", highYield:true, q:"Mass screening is based on what?", a:"Results obtained, cost-effectiveness, and risk to the patient."},
+{sec:"Screening", highYield:true, q:"Which answer is NOT a basis for mass screening?", a:"Geographic location."},
+{sec:"Screening", highYield:true, q:"Which ACS screening is NOT recommended in the assignment?", a:"CT scanning for brain cancer."},
 
-{sec:"Cancer Screening", q:"Most common cancer in women listed in the lecture?", a:"Breast cancer."},
-{sec:"Cancer Screening", q:"Most common cancer in men listed in the lecture?", a:"Prostate cancer."},
-{sec:"Cancer Screening", q:"Breast screening commonly uses what?", a:"Mammography."},
-{sec:"Cancer Screening", q:"What is sentinel lymph node biopsy?", a:"Finding the first lymph node that drains from a breast tumor."},
-{sec:"Cancer Screening", q:"What materials help identify sentinel lymph nodes?", a:"Blue dye or radioactive technetium-99m."},
-{sec:"Cancer Screening", q:"What is the leading cause of cancer-related death in the U.S.?", a:"Lung cancer."},
-{sec:"Cancer Screening", q:"What imaging helps screen high-risk lung patients?", a:"Low-dose CT."},
-{sec:"Cancer Screening", q:"Common prostate screening tests?", a:"Digital rectal examination and PSA blood test."},
-{sec:"Cancer Screening", q:"What virus is strongly linked to cervical cancer?", a:"Human papillomavirus, HPV."},
-{sec:"Cancer Screening", q:"Does HPV vaccination replace cervical screening?", a:"No. Screening should continue."},
+{sec:"Cancer Screening", highYield:true, q:"Most common cancer in women listed in the lecture?", a:"Breast cancer."},
+{sec:"Cancer Screening", highYield:true, q:"Most common cancer in men listed in the lecture?", a:"Prostate cancer."},
+{sec:"Cancer Screening", highYield:true, q:"Breast screening commonly uses what?", a:"Mammography."},
+{sec:"Cancer Screening", highYield:true, q:"What is sentinel lymph node biopsy?", a:"Finding the first lymph node that drains from a breast tumor."},
+{sec:"Cancer Screening", highYield:true, q:"What materials help identify sentinel lymph nodes?", a:"Blue dye or radioactive technetium-99m."},
+{sec:"Cancer Screening", highYield:true, q:"What is the leading cause of cancer-related death in the U.S.?", a:"Lung cancer."},
+{sec:"Cancer Screening", highYield:true, q:"What imaging helps screen high-risk lung patients?", a:"Low-dose CT."},
+{sec:"Cancer Screening", highYield:true, q:"Common prostate screening tests?", a:"Digital rectal examination and PSA blood test."},
+{sec:"Cancer Screening", highYield:true, q:"What virus is strongly linked to cervical cancer?", a:"Human papillomavirus, HPV."},
+{sec:"Cancer Screening", highYield:true, q:"Does HPV vaccination replace cervical screening?", a:"No. Screening should continue."},
 
-{sec:"Labs & Imaging", q:"Blood studies are concerned with what?", a:"Blood cells."},
-{sec:"Labs & Imaging", q:"Blood chemistry tests examine what?", a:"Chemicals in blood, such as glucose, electrolytes, and proteins."},
-{sec:"Labs & Imaging", q:"Microbiologic studies help detect what?", a:"Specific organisms that may cause infection."},
-{sec:"Labs & Imaging", q:"What lab test detects a drop in WBCs?", a:"Complete blood count."},
-{sec:"Labs & Imaging", q:"What is nuclear medicine imaging?", a:"Imaging that introduces a radiopharmaceutical into the patient."},
-{sec:"Labs & Imaging", q:"What does a radionuclide emit during radioactive decay?", a:"Gamma rays."},
-{sec:"Labs & Imaging", q:"Three nuclear medicine devices in the lecture?", a:"Gamma camera, rectilinear scanner, and PET scanner."},
-{sec:"Labs & Imaging", q:"What does PET use in oncology?", a:"Radioactive glucose."},
-{sec:"Labs & Imaging", q:"Why do cancer cells show on PET?", a:"They absorb glucose faster than normal tissue."},
+{sec:"Labs & Imaging", highYield:true, q:"Blood studies are concerned with what?", a:"Blood cells."},
+{sec:"Labs & Imaging", highYield:true, q:"Blood chemistry tests examine what?", a:"Chemicals in blood, such as glucose, electrolytes, and proteins."},
+{sec:"Labs & Imaging", highYield:true, q:"Microbiologic studies help detect what?", a:"Specific organisms that may cause infection."},
+{sec:"Labs & Imaging", highYield:true, q:"What lab test detects a drop in WBCs?", a:"Complete blood count."},
+{sec:"Labs & Imaging", highYield:true, q:"What is nuclear medicine imaging?", a:"Imaging that introduces a radiopharmaceutical into the patient."},
+{sec:"Labs & Imaging", highYield:true, q:"What does a radionuclide emit during radioactive decay?", a:"Gamma rays."},
+{sec:"Labs & Imaging", highYield:true, q:"Three nuclear medicine devices in the lecture?", a:"Gamma camera, rectilinear scanner, and PET scanner."},
+{sec:"Labs & Imaging", highYield:true, q:"What does PET use in oncology?", a:"Radioactive glucose."},
+{sec:"Labs & Imaging", highYield:true, q:"Why do cancer cells show on PET?", a:"They absorb glucose faster than normal tissue."},
 
-{sec:"Radiology Imaging", q:"Two types of routine radiographic studies?", a:"Contrast and non-contrast studies."},
-{sec:"Radiology Imaging", q:"What do contrast media help visualize?", a:"Radiolucent anatomy."},
-{sec:"Radiology Imaging", q:"Examples of contrast media?", a:"Barium and iodine."},
-{sec:"Radiology Imaging", q:"What does CT use?", a:"Digitized x-ray data reconstructed into cross-sectional images."},
-{sec:"Radiology Imaging", q:"What is CT good for?", a:"Cross-sectional anatomy, 3D planning, and bone structures."},
-{sec:"Radiology Imaging", q:"What does MRI use?", a:"Radiofrequency waves and a magnetic field."},
-{sec:"Radiology Imaging", q:"Does MRI use ionizing radiation?", a:"No."},
-{sec:"Radiology Imaging", q:"MRI is superior for what?", a:"Soft tissue imaging, brain, and spinal cord."},
-{sec:"Radiology Imaging", q:"MRI limitations?", a:"Expensive, contraindicated with certain metal/pacemakers, and may cause claustrophobia."},
-{sec:"Radiology Imaging", q:"Ultrasound uses what?", a:"High-frequency sound waves."},
-{sec:"Radiology Imaging", q:"Ultrasound cannot detect what in breast imaging?", a:"Microcalcifications."},
+{sec:"Radiology Imaging", highYield:true, q:"Two types of routine radiographic studies?", a:"Contrast and non-contrast studies."},
+{sec:"Radiology Imaging", highYield:true, q:"What do contrast media help visualize?", a:"Radiolucent anatomy."},
+{sec:"Radiology Imaging", highYield:true, q:"Examples of contrast media?", a:"Barium and iodine."},
+{sec:"Radiology Imaging", highYield:true, q:"What does CT use?", a:"Digitized x-ray data reconstructed into cross-sectional images."},
+{sec:"Radiology Imaging", highYield:true, q:"What is CT good for?", a:"Cross-sectional anatomy, 3D planning, and bone structures."},
+{sec:"Radiology Imaging", highYield:true, q:"What does MRI use?", a:"Radiofrequency waves and a magnetic field."},
+{sec:"Radiology Imaging", highYield:true, q:"Does MRI use ionizing radiation?", a:"No."},
+{sec:"Radiology Imaging", highYield:true, q:"MRI is superior for what?", a:"Soft tissue imaging, brain, and spinal cord."},
+{sec:"Radiology Imaging", highYield:true, q:"MRI limitations?", a:"Expensive, contraindicated with certain metal/pacemakers, and may cause claustrophobia."},
+{sec:"Radiology Imaging", highYield:true, q:"Ultrasound uses what?", a:"High-frequency sound waves."},
+{sec:"Radiology Imaging", highYield:true, q:"Ultrasound cannot detect what in breast imaging?", a:"Microcalcifications."},
 
-{sec:"Biopsy & Cytology", q:"Why is biopsy important?", a:"Histologic confirmation is essential for diagnosis."},
-{sec:"Biopsy & Cytology", q:"Fine needle aspiration collects what?", a:"Cells only, with little tissue architecture."},
-{sec:"Biopsy & Cytology", q:"Core needle biopsy provides what advantage?", a:"Better tissue architecture."},
-{sec:"Biopsy & Cytology", q:"Incisional biopsy removes what?", a:"Part of a tumor."},
-{sec:"Biopsy & Cytology", q:"Excisional biopsy removes what?", a:"The entire tumor."},
-{sec:"Biopsy & Cytology", q:"Clear or negative margin means what?", a:"No disease at the tissue edges."},
-{sec:"Biopsy & Cytology", q:"Positive margin means what?", a:"Cancer extends beyond the biopsy site or to the edge."},
-{sec:"Biopsy & Cytology", q:"What is exfoliative cytology?", a:"Examining cells that slough off naturally or are scraped off."},
-{sec:"Biopsy & Cytology", q:"Exfoliative cytology collects tissue through what?", a:"Scraping cells."},
-{sec:"Biopsy & Cytology", q:"Limitation of exfoliative cytology?", a:"It cannot distinguish invasive from noninvasive cancer."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Why is biopsy important?", a:"Histologic confirmation is essential for diagnosis."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Fine needle aspiration collects what?", a:"Cells only, with little tissue architecture."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Core needle biopsy provides what advantage?", a:"Better tissue architecture."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Incisional biopsy removes what?", a:"Part of a tumor."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Excisional biopsy removes what?", a:"The entire tumor."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Clear or negative margin means what?", a:"No disease at the tissue edges."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Positive margin means what?", a:"Cancer extends beyond the biopsy site or to the edge."},
+{sec:"Biopsy & Cytology", highYield:true, q:"What is exfoliative cytology?", a:"Examining cells that slough off naturally or are scraped off."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Exfoliative cytology collects tissue through what?", a:"Scraping cells."},
+{sec:"Biopsy & Cytology", highYield:true, q:"Limitation of exfoliative cytology?", a:"It cannot distinguish invasive from noninvasive cancer."},
 
-{sec:"Tumor Markers & Staging", q:"What are tumor markers?", a:"Substances released by tumors and detected in blood or body fluids."},
-{sec:"Tumor Markers & Staging", q:"Example of a tumor marker for prostate cancer?", a:"PSA."},
-{sec:"Tumor Markers & Staging", q:"When is cancer staging performed?", a:"After histologic diagnosis is confirmed."},
-{sec:"Tumor Markers & Staging", q:"Purpose of staging?", a:"Determine anatomic extent of disease and guide treatment/prognosis."},
-{sec:"Tumor Markers & Staging", q:"TNM: T means what?", a:"Tumor size and local extent of primary tumor."},
-{sec:"Tumor Markers & Staging", q:"TNM: N means what?", a:"Regional lymph node involvement."},
-{sec:"Tumor Markers & Staging", q:"TNM: M means what?", a:"Presence or absence of distant metastasis."},
-{sec:"Tumor Markers & Staging", q:"T1–T4 indicate what?", a:"Increasing tumor size or depth/extent."},
-{sec:"Tumor Markers & Staging", q:"N0–N3 indicate what?", a:"Degree of lymph node involvement."},
-{sec:"Tumor Markers & Staging", q:"M0 and M1 mean what?", a:"M0 = no distant metastasis; M1 = distant metastasis present."},
-{sec:"Tumor Markers & Staging", q:"What is histologic type?", a:"Cell origin, such as squamous cell carcinoma or adenocarcinoma."},
-{sec:"Tumor Markers & Staging", q:"What is histologic grade?", a:"How abnormal or aggressive tumor cells look under the microscope."},
-{sec:"Tumor Markers & Staging", q:"Three major spread patterns?", a:"Direct extension, lymphatic spread, and hematogenous spread."}
+{sec:"Tumor Markers & Staging", highYield:true, q:"What are tumor markers?", a:"Substances released by tumors and detected in blood or body fluids."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"Example of a tumor marker for prostate cancer?", a:"PSA."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"When is cancer staging performed?", a:"After histologic diagnosis is confirmed."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"Purpose of staging?", a:"Determine anatomic extent of disease and guide treatment/prognosis."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"TNM: T means what?", a:"Tumor size and local extent of primary tumor."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"TNM: N means what?", a:"Regional lymph node involvement."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"TNM: M means what?", a:"Presence or absence of distant metastasis."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"T1–T4 indicate what?", a:"Increasing tumor size or depth/extent."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"N0–N3 indicate what?", a:"Degree of lymph node involvement."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"M0 and M1 mean what?", a:"M0 = no distant metastasis; M1 = distant metastasis present."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"What is histologic type?", a:"Cell origin, such as squamous cell carcinoma or adenocarcinoma."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"What is histologic grade?", a:"How abnormal or aggressive tumor cells look under the microscope."},
+{sec:"Tumor Markers & Staging", highYield:true, q:"Three major spread patterns?", a:"Direct extension, lymphatic spread, and hematogenous spread."}
 ];
 
 let w89ActiveSection = "All";
@@ -1184,6 +1611,7 @@ function buildWeek89Questions() {
     return {
       t: card.q,
       sec: card.sec,
+      highYield: !!card.highYield,
       o: options,
       a: options.indexOf(card.a),
       e: card.a
@@ -1193,11 +1621,19 @@ function buildWeek89Questions() {
 
 function startWeek89Quiz(mode) {
   const allQuestions = buildWeek89Questions();
-  w89QuizSet = mode === "exam" ? shuffle(allQuestions).slice(0, 75) : shuffle(allQuestions);
+  if (mode === "exam") {
+    w89QuizSet = shuffle(allQuestions).slice(0, 75);
+    document.getElementById('w89QuizTitle').textContent = "Week 8–9 Exam Mode — 75 Questions";
+  } else if (mode === "mustknow") {
+    w89QuizSet = shuffle(allQuestions.filter(q => q.highYield)).slice(0, 45);
+    document.getElementById('w89QuizTitle').textContent = `Week 8–9 Professor Must Know Quiz — ${w89QuizSet.length} Questions`;
+  } else {
+    w89QuizSet = shuffle(allQuestions);
+    document.getElementById('w89QuizTitle').textContent = `Week 8–9 Practice Quiz — ${w89QuizSet.length} Questions`;
+  }
   w89Qi = 0;
   w89Answers = [];
   w89Submitted = [];
-  document.getElementById('w89QuizTitle').textContent = mode === "exam" ? "Week 8–9 Mock Exam — 75 Questions" : `Week 8–9 Practice Quiz — ${w89QuizSet.length} Questions`;
   showWeek89Tab('w89-quiz');
   renderWeek89Q();
 }
@@ -1262,15 +1698,32 @@ function prevWeek89Question() {
 function finishWeek89Quiz() {
   let correct = 0;
   const weak = {};
+  const missedRows = [];
+  const rightRows = [];
   w89QuizSet.forEach((q, i) => {
-    if (w89Answers[i] === q.a) correct++;
-    else weak[q.sec] = (weak[q.sec] || 0) + 1;
+    const your = q.o[w89Answers[i]];
+    const correctAnswer = q.o[q.a];
+    if (w89Answers[i] === q.a) {
+      correct++;
+      rightRows.push(`<li><b>${q.sec}:</b> ${q.t}</li>`);
+    } else {
+      weak[q.sec] = (weak[q.sec] || 0) + 1;
+      missedRows.push(`<div class="quiz-box"><div class="small"><b>${q.sec}</b>${q.highYield ? ' · <span class="mustknow-badge">Professor Must Know</span>' : ''}</div><p><b>${q.t}</b></p><p><b>Your answer:</b> ${your || "No answer"}</p><p><b>Correct answer:</b> ${correctAnswer}</p><p><b>Quick correction:</b> ${q.e}</p></div>`);
+    }
   });
   const pct = Math.round(correct / w89QuizSet.length * 100);
-  showWeek89Tab('w89-results');
-  document.getElementById('w89ScoreBox').innerHTML = `<div class="note-box must"><h3>Your score: ${correct}/${w89QuizSet.length} (${pct}%)</h3><p>${pct >= 85 ? "Strong work 💗 Keep reviewing missed questions." : "Review the weak spots below, then redo Practice Quiz."}</p></div>`;
   const weakList = Object.entries(weak).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  document.getElementById('w89ReviewBox').innerHTML = `<h3>Weakest Spots</h3><ul>${weakList.map(([s,n]) => `<li><b>${s}</b>: ${n} missed</li>`).join('') || "<li>No weak spots. You crushed it.</li>"}</ul>`;
+  const grade = pct >= 90 ? "A" : pct >= 80 ? "B" : pct >= 70 ? "C" : pct >= 60 ? "D" : "Needs more review";
+  showWeek89Tab('w89-results');
+  document.getElementById('w89ScoreBox').innerHTML = `<div class="note-box must"><h3>Your grade: ${pct}% · ${grade}</h3><p><b>${correct}/${w89QuizSet.length}</b> correct · <b>${w89QuizSet.length - correct}</b> missed</p><p>${pct >= 85 ? "Strong work. Keep reviewing missed questions and Professor Must Know cards." : "Focus on the review list below, then retake the Must Know Quiz."}</p></div>`;
+  document.getElementById('w89ReviewBox').innerHTML = `
+    <h3>What to Review</h3>
+    <ul>${weakList.map(([s,n]) => `<li><b>${s}</b>: ${n} missed</li>`).join('') || "<li>No weak spots. You crushed it.</li>"}</ul>
+    <h3>Questions You Missed</h3>
+    ${missedRows.join('') || '<div class="note-box">No missed questions.</div>'}
+    <h3>Questions You Got Right</h3>
+    <ul>${rightRows.slice(0,25).join('') || '<li>None yet.</li>'}</ul>
+  `;
 }
 
 function saveWeek89Missed(q, selectedIndex) {
@@ -1304,6 +1757,184 @@ function renderWeek89Missed() {
 function clearWeek89Missed() {
   localStorage.removeItem("orientationWeek89Missed");
   renderWeek89Missed();
+}
+
+
+let w89StatusFilter = "all";
+
+function getWeek89CardKey(card) {
+  return card.sec + "||" + card.q;
+}
+
+function getWeek89CardProgress() {
+  return JSON.parse(localStorage.getItem("orientationWeek89CardProgress") || "{}");
+}
+
+function saveWeek89CardProgress(progress) {
+  localStorage.setItem("orientationWeek89CardProgress", JSON.stringify(progress));
+}
+
+function getWeek89FilteredByStatus(cards) {
+  const progress = getWeek89CardProgress();
+  if (w89StatusFilter === "all") return cards;
+  if (w89StatusFilter === "favorite") return cards.filter(c => progress[getWeek89CardKey(c)]?.favorite);
+  return cards.filter(c => progress[getWeek89CardKey(c)]?.status === w89StatusFilter);
+}
+
+function refreshWeek89Stats() {
+  const progress = getWeek89CardProgress();
+  let know = 0, learning = 0, review = 0, favorite = 0;
+  WEEK89_CARDS.forEach(c => {
+    const item = progress[getWeek89CardKey(c)];
+    if (!item) return;
+    if (item.status === "know") know++;
+    if (item.status === "learning") learning++;
+    if (item.status === "review") review++;
+    if (item.favorite) favorite++;
+  });
+  const setText = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  };
+  setText("w89StatKnow", know);
+  setText("w89StatLearning", learning);
+  setText("w89StatReview", review);
+  setText("w89StatFavorite", favorite);
+}
+
+function setWeek89StatusFilter(filter) {
+  w89StatusFilter = filter;
+  setWeek89Section(w89ActiveSection);
+}
+
+function setWeek89Section(sec) {
+  w89ActiveSection = sec;
+  let baseCards = WEEK89_CARDS.filter(c => sec === "All" || c.sec === sec);
+  w89FilteredCards = getWeek89FilteredByStatus(baseCards);
+  w89FcIndex = 0;
+  w89Flipped = false;
+  refreshWeek89Stats();
+  renderWeek89Card();
+}
+
+function week89StatusBadges(card) {
+  const progress = getWeek89CardProgress();
+  const item = progress[getWeek89CardKey(card)] || {};
+  let badges = card.highYield ? '<span class="mustknow-badge">Professor Must Know</span>' : "";
+  if (item.status === "know") badges += '<span class="flash-badge badge-know">✓ Know It</span>';
+  if (item.status === "learning") badges += '<span class="flash-badge badge-learning">◐ Still Learning</span>';
+  if (item.status === "review") badges += '<span class="flash-badge badge-review">✕ Review Again</span>';
+  if (item.favorite) badges += '<span class="flash-badge badge-fav">♥ Favorite</span>';
+  return badges;
+}
+
+function renderWeek89Card() {
+  refreshWeek89Stats();
+  const box = document.getElementById('w89Flashcard');
+  if (!w89FilteredCards.length) {
+    box.innerHTML = "No cards found for this filter.";
+    const count = document.getElementById('w89FlashCount');
+    if (count) count.textContent = "Try All Cards or another section.";
+    return;
+  }
+  const card = w89FilteredCards[w89FcIndex];
+  box.innerHTML = w89Flipped
+    ? `<div>${week89StatusBadges(card)}<div class="small"><b>Answer</b> · ${card.sec}</div><br><span class="flash-answer">${card.a}</span></div>`
+    : `<div>${week89StatusBadges(card)}<div class="small"><b>Question</b> · ${card.sec}</div><br><b>${card.q}</b><br><br><span class="small">Tap to flip</span></div>`;
+  document.getElementById('w89FlashCount').textContent = `Card ${w89FcIndex + 1} of ${w89FilteredCards.length}`;
+}
+
+function markWeek89CardStatus(status) {
+  if (!w89FilteredCards.length) return;
+  const card = w89FilteredCards[w89FcIndex];
+  const progress = getWeek89CardProgress();
+  const key = getWeek89CardKey(card);
+  progress[key] = progress[key] || {};
+  progress[key].status = status;
+  progress[key].updated = new Date().toISOString();
+  saveWeek89CardProgress(progress);
+  refreshWeek89Stats();
+  nextWeek89Card();
+}
+
+function toggleWeek89Favorite() {
+  if (!w89FilteredCards.length) return;
+  const card = w89FilteredCards[w89FcIndex];
+  const progress = getWeek89CardProgress();
+  const key = getWeek89CardKey(card);
+  progress[key] = progress[key] || {};
+  progress[key].favorite = !progress[key].favorite;
+  saveWeek89CardProgress(progress);
+  refreshWeek89Stats();
+  renderWeek89Card();
+}
+
+function shuffleWeek89Cards() {
+  w89FilteredCards = shuffle(w89FilteredCards);
+  w89FcIndex = 0;
+  w89Flipped = false;
+  renderWeek89Card();
+}
+
+function resetWeek89Progress() {
+  if (confirm("Reset Week 8–9 flashcard progress?")) {
+    localStorage.removeItem("orientationWeek89CardProgress");
+    setWeek89Section(w89ActiveSection);
+  }
+}
+
+function nextWeek89Card() {
+  if (!w89FilteredCards.length) return;
+  w89FcIndex = (w89FcIndex + 1) % w89FilteredCards.length;
+  w89Flipped = false;
+  renderWeek89Card();
+}
+
+function prevWeek89Card() {
+  if (!w89FilteredCards.length) return;
+  w89FcIndex = (w89FcIndex - 1 + w89FilteredCards.length) % w89FilteredCards.length;
+  w89Flipped = false;
+  renderWeek89Card();
+}
+
+function renderWeek89Q() {
+  const q = w89QuizSet[w89Qi];
+  document.getElementById('w89Counter').textContent = `Question ${w89Qi + 1} of ${w89QuizSet.length} · ${q.sec}`;
+  document.getElementById('w89Bar').style.width = ((w89Qi + 1) / w89QuizSet.length * 100) + "%";
+  document.getElementById('w89Question').innerHTML = `<b>${q.t}</b>`;
+  const ops = document.getElementById('w89Options');
+  ops.innerHTML = "";
+  q.o.forEach((op, i) => {
+    const b = document.createElement('button');
+    b.className = 'option';
+    b.textContent = op;
+    if (w89Answers[w89Qi] === i) b.classList.add('selected');
+    if (w89Submitted[w89Qi] && i === q.a) b.classList.add('correct');
+    if (w89Submitted[w89Qi] && w89Answers[w89Qi] === i && i !== q.a) b.classList.add('wrong');
+    b.onclick = () => {
+      if (!w89Submitted[w89Qi]) {
+        w89Answers[w89Qi] = i;
+        renderWeek89Q();
+      }
+    };
+    ops.appendChild(b);
+  });
+  const fb = document.getElementById('w89Feedback');
+  if (w89Submitted[w89Qi]) {
+    fb.classList.remove('hidden');
+    const your = q.o[w89Answers[w89Qi]];
+    const correct = q.o[q.a];
+    fb.innerHTML = `
+      <div class="correction-box">
+        ${w89Answers[w89Qi] === q.a ? '<div class="right">✓ Correct</div>' : '<div class="wrongtxt">✕ Quick correction</div>'}
+        <p><b>Your answer:</b> ${your}</p>
+        <p><b>Correct answer:</b> ${correct}</p>
+        <p><b>Remember:</b> ${q.e}</p>
+      </div>
+    `;
+  } else {
+    fb.classList.add('hidden');
+  }
 }
 
 showPage('homePage');
