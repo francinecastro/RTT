@@ -1,692 +1,743 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Orientation to Radiation Therapy</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fff4f8, #f4edff);
-      color: #4b3f4e;
-    }
-
-    header {
-      padding: 24px;
-      text-align: center;
-      background: #ffd9e8;
-      border-bottom: 3px solid #f3b6d0;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 30px;
-      color: #5d3f6a;
-    }
-
-    .subtitle {
-      margin-top: 8px;
-      color: #7a647d;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 20px;
-    }
-
-    .week-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .week-card {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 6px 18px rgba(160, 110, 150, 0.18);
-      cursor: pointer;
-      transition: 0.2s;
-      border: 2px solid #f7c7dc;
-    }
-
-    .week-card:hover {
-      transform: translateY(-4px);
-      background: #fff8fb;
-    }
-
-    .week-card h2 {
-      color: #c45c8c;
-      margin-top: 0;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .panel {
-      background: white;
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: 0 6px 18px rgba(160, 110, 150, 0.18);
-      border: 2px solid #f7c7dc;
-    }
-
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    button {
-      border: none;
-      border-radius: 999px;
-      padding: 12px 18px;
-      background: #e7c7ff;
-      color: #4b2f5c;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #d9a8ff;
-    }
-
-    .back-btn {
-      background: #ffd1df;
-      margin-bottom: 20px;
-    }
-
-    .note-box, .flashcard, .quiz-box {
-      background: #fff6fa;
-      border-left: 5px solid #e58ab2;
-      border-radius: 14px;
-      padding: 16px;
-      margin: 14px 0;
-    }
-
-    .flashcard {
-      cursor: pointer;
-    }
-
-    .answer {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #7b3f90;
-    }
-
-    .option {
-      display: block;
-      margin: 10px 0;
-      padding: 12px;
-      background: #f8eaff;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-
-    .correct {
-      background: #d8f5d0;
-    }
-
-    .wrong {
-      background: #ffd6d6;
-    }
-
-    .score {
-      font-size: 20px;
-      font-weight: bold;
-      color: #9b4f7a;
-      margin-top: 15px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Orientation to Radiation Therapy | RT Study 2.0</title>
+<style>
+:root {
+  --p1:#eb96b7; --p2:#eea6c2; --p3:#f1b6cd; --p4:#f4c5d7; --p5:#f6d0df;
+  --lav:#efe7ff; --lav2:#f7f1ff; --ink:#4b3f4e; --muted:#7a647d;
+  --white:#ffffff; --good:#2f9e44; --bad:#d6336c; --warn:#9b4f7a;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:linear-gradient(135deg,#fff4f8,#f4edff);
+  color:var(--ink);
+}
+header {
+  padding:26px 18px;
+  text-align:center;
+  background:linear-gradient(135deg,var(--p5),var(--lav));
+  border-bottom:4px solid var(--p2);
+}
+h1 { margin:0; font-size:clamp(1.7rem,5vw,2.5rem); color:#5d3f6a; }
+.subtitle { margin-top:8px; color:var(--muted); font-weight:700; }
+.container { max-width:1100px; margin:0 auto; padding:18px; }
+.card {
+  background:rgba(255,255,255,.94);
+  border:2px solid #f7c7dc;
+  border-radius:22px;
+  padding:18px;
+  margin:16px 0;
+  box-shadow:0 8px 22px rgba(160,110,150,.16);
+}
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+.week-card {
+  cursor:pointer;
+  transition:.18s;
+  min-height:150px;
+}
+.week-card:hover { transform:translateY(-3px); background:#fff8fb; }
+.week-card.locked { opacity:.62; cursor:not-allowed; }
+.week-card h2 { color:#c45c8c; margin:.2rem 0 .5rem; }
+button {
+  border:0;
+  border-radius:999px;
+  padding:12px 16px;
+  background:var(--p1);
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  font-size:1rem;
+}
+button:hover { filter:brightness(.97); }
+button.secondary { background:#8d7aa8; }
+button.light { background:var(--p4); color:var(--ink); }
+button:disabled { opacity:.45; cursor:not-allowed; }
+.hidden { display:none !important; }
+.tabs { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0; }
+.tabs button.active { outline:3px solid #fff; box-shadow:0 0 0 3px var(--p1); }
+.note-box, .quiz-box, .flash-box {
+  background:#fff6fa;
+  border-left:6px solid var(--p1);
+  border-radius:16px;
+  padding:16px;
+  margin:12px 0;
+}
+.must { border-left-color:#9b4f7a; }
+.tag {
+  display:inline-block; margin:4px; padding:6px 10px;
+  border-radius:999px; background:var(--p5); font-weight:800; color:#6f3359;
+}
+.small { font-size:.92rem; opacity:.88; }
+.section-filter { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+.section-filter button { padding:8px 11px; font-size:.84rem; background:var(--lav); color:#5d3f6a; border:1px solid #d9c8ff; }
+.section-filter button.active { background:var(--p1); color:white; }
+.flashcard {
+  min-height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:1.15rem;
+  line-height:1.45;
+  cursor:pointer;
+  background:linear-gradient(135deg,#fff,#fff5f9);
+  border:2px solid #f7c7dc;
+  border-radius:20px;
+  padding:22px;
+  margin:16px 0 10px;
+}
+.flash-answer { color:#6d2a79; font-weight:800; }
+.nav-row { display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap; }
+.progress { height:13px; background:#f8d9e6; border-radius:999px; overflow:hidden; margin:12px 0; }
+.bar { height:100%; width:0%; background:var(--p1); transition:.25s; }
+.option {
+  display:block;
+  width:100%;
+  text-align:left;
+  margin:9px 0;
+  padding:13px;
+  background:white;
+  color:var(--ink);
+  border:2px solid #f0bfd3;
+  border-radius:14px;
+}
+.option.selected { background:var(--p5); border-color:var(--p1); }
+.option.correct { background:#d3f9d8; border-color:var(--good); }
+.option.wrong { background:#ffe3ec; border-color:var(--bad); }
+.feedback {
+  padding:13px;
+  border-radius:14px;
+  margin-top:12px;
+  background:#fff3f7;
+  border:1px solid #f7c7dc;
+}
+.table { width:100%; border-collapse:collapse; margin-top:10px; }
+.table th,.table td { border:1px solid #f4c5d7; padding:10px; text-align:left; vertical-align:top; }
+.table th { background:#f6d0df; }
+select {
+  padding:10px; border-radius:12px; border:2px solid #f7c7dc; background:white; color:var(--ink); font-weight:700;
+}
+.footer-space { height:30px; }
+</style>
 </head>
-
 <body>
-
 <header>
   <h1>Orientation to Radiation Therapy</h1>
-  <div class="subtitle">RT Study App 2.0</div>
+  <div class="subtitle">RT Study App 2.0 · Clean Rebuild</div>
 </header>
 
 <div class="container">
 
-  <div id="home">
-    <div class="week-grid" id="weekGrid"></div>
-  </div>
-
-  <div id="weekPage" class="hidden">
-    <button class="back-btn" onclick="goHome()">← Back to Weeks</button>
-
-    <div class="panel">
-      <h2 id="weekTitle"></h2>
-      <p id="weekTopic"></p>
-
-      <div class="tabs">
-        <button onclick="showTab('notes')">Notes</button>
-        <button onclick="showTab('flashcards')">Flashcards</button>
-        <button onclick="showTab('quiz')">Practice Quiz</button>
-        <button onclick="showTab('missed')">Missed Questions</button>
-      </div>
-
-      <div id="notes"></div>
-      <div id="flashcards" class="hidden"></div>
-      <div id="quiz" class="hidden"></div>
-      <div id="missed" class="hidden"></div>
+<section id="homePage" class="page">
+  <div class="card">
+    <h2>💗 Orientation Dashboard</h2>
+    <p>This is the new clean Orientation page. Right now it includes your <b>Week 7 Midterm Review</b>. We will add Week 1, Week 2, Week 3, and the rest one at a time.</p>
+    <div>
+      <span class="tag">Study Guide</span>
+      <span class="tag">Flashcards</span>
+      <span class="tag">Practice Quiz</span>
+      <span class="tag">Mock Midterm</span>
+      <span class="tag">Missed Questions</span>
     </div>
   </div>
 
+  <div class="grid">
+    <div class="card week-card locked"><h2>Week 1</h2><p>Coming next.</p></div>
+    <div class="card week-card locked"><h2>Week 2</h2><p>Coming next.</p></div>
+    <div class="card week-card locked"><h2>Week 3</h2><p>Coming next.</p></div>
+    <div class="card week-card locked"><h2>Week 4</h2><p>Coming next.</p></div>
+    <div class="card week-card locked"><h2>Week 5</h2><p>Coming next.</p></div>
+    <div class="card week-card locked"><h2>Week 6</h2><p>Coming next.</p></div>
+    <div class="card week-card" onclick="openMidterm()"><h2>Week 7 Midterm</h2><p>Ch. 1 Cancer Overview · Ch. 2 Ethics · Ch. 3 Patient Assessment</p><p><b>Open Study Tools →</b></p></div>
+    <div class="card week-card locked"><h2>Week 8</h2><p>Coming next.</p></div>
+    <div class="card week-card locked"><h2>Week 9</h2><p>Coming next.</p></div>
+  </div>
+</section>
+
+<section id="midtermPage" class="page hidden">
+  <button class="secondary" onclick="showPage('homePage')">← Back to Orientation Dashboard</button>
+
+  <div class="card">
+    <h2>Week 7 Midterm Review</h2>
+    <p class="small">Built from your uploaded Midterm Exam Review and Midterm Flashcards.</p>
+    <div class="tabs">
+      <button id="tab-study" onclick="showMidtermTab('study')">Study Guide</button>
+      <button id="tab-flashcards" onclick="showMidtermTab('flashcards')">Flashcards</button>
+      <button id="tab-practice" onclick="startQuiz('practice')">Practice Quiz</button>
+      <button id="tab-exam" onclick="startQuiz('exam')">Mock Midterm</button>
+      <button id="tab-missed" onclick="showMidtermTab('missed')">Missed Questions</button>
+      <button id="tab-last" onclick="showMidtermTab('last')">Last-Hour Review</button>
+    </div>
+  </div>
+
+  <div id="study" class="midtab card">
+    <h2>Study Guide</h2>
+    <div class="note-box must">
+      <h3>Chapter 1 — Cancer Overview</h3>
+      <ul>
+        <li><b>Cell cycle:</b> G0, G1, S, G2, M. G2 and M are most radiosensitive.</li>
+        <li><b>Benign tumors:</b> well differentiated, noninvasive, do not metastasize, often encapsulated, slow-growing, pushing.</li>
+        <li><b>Malignant tumors:</b> invasive, infiltrative, may metastasize, abnormal cells, may extend beyond pseudocapsule.</li>
+        <li><b>Anaplastic:</b> undifferentiated cells that no longer look or function like the original tissue.</li>
+        <li><b>Sarcoma:</b> mesenchymal/connective tissue origin. <b>Carcinoma:</b> epithelial tissue origin.</li>
+        <li><b>Screening:</b> sensitivity = true positive; specificity = true negative.</li>
+        <li><b>TNM:</b> T = tumor size/extent, N = lymph nodes, M = metastasis.</li>
+        <li><b>Biopsy:</b> only way to know for certain if tissue is cancerous.</li>
+        <li><b>Neoadjuvant:</b> before surgery. <b>Adjuvant:</b> with or after another treatment.</li>
+        <li><b>Brachytherapy:</b> short-distance therapy using radioactive sources.</li>
+      </ul>
+    </div>
+    <div class="note-box must">
+      <h3>Chapter 2 — Ethics & Law</h3>
+      <ul>
+        <li><b>ASRT:</b> professional society. <b>ARRT:</b> credentialing/certification body.</li>
+        <li><b>Seven principles:</b> autonomy, beneficence, confidentiality, justice, nonmaleficence, role fidelity, veracity.</li>
+        <li><b>HIPAA:</b> Health Insurance Portability and Accountability Act.</li>
+        <li><b>Teleology:</b> consequences. <b>Deontology:</b> rules/duty. <b>Virtue ethics:</b> character and practical wisdom.</li>
+        <li><b>Grief cycle:</b> shock, denial, anger, bargaining, depression, testing, acceptance.</li>
+        <li><b>Assault:</b> threat. <b>Battery:</b> touching without consent. <b>False imprisonment:</b> preventing a patient from leaving.</li>
+        <li><b>Libel:</b> written defamation. <b>Slander:</b> spoken defamation.</li>
+      </ul>
+    </div>
+    <div class="note-box must">
+      <h3>Chapter 3 — Patient Assessment</h3>
+      <ul>
+        <li><b>Therapeutic relationship:</b> healthcare worker and patient working together for beneficial change.</li>
+        <li><b>Cognitive content:</b> facts and words. <b>Affective content:</b> feelings, attitudes, behaviors.</li>
+        <li><b>Reflective listening:</b> responding with empathy.</li>
+        <li><b>Cachexia:</b> muscle loss with or without fat loss.</li>
+        <li><b>Myelosuppression:</b> reduced bone marrow function.</li>
+        <li><b>Anemia:</b> low RBCs. <b>Leukopenia:</b> low WBCs. <b>Thrombocytopenia:</b> low platelets. <b>Pancytopenia:</b> all blood cells reduced.</li>
+        <li><b>Orthostatic hypotension:</b> sudden BP drop when standing.</li>
+        <li><b>Transfer rule:</b> transfer toward the patient’s stronger side.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="last" class="midtab card hidden">
+    <h2>Last-Hour Review</h2>
+    <table class="table">
+      <tr><th>Topic</th><th>Must Know</th></tr>
+      <tr><td>Cell Cycle</td><td>G2 and M are most sensitive to radiation.</td></tr>
+      <tr><td>Benign vs Malignant</td><td>Benign pushes and does not spread. Malignant invades and metastasizes.</td></tr>
+      <tr><td>TNM</td><td>T tumor. N nodes. M metastasis.</td></tr>
+      <tr><td>Biopsy</td><td>Only certain way to know whether tissue is cancerous.</td></tr>
+      <tr><td>Ethics</td><td>Know all 7 bioethical principles.</td></tr>
+      <tr><td>Legal</td><td>Assault = threat. Battery = touch. False imprisonment = cannot leave.</td></tr>
+      <tr><td>Blood</td><td>Myelosuppression can cause anemia, leukopenia, thrombocytopenia, pancytopenia.</td></tr>
+      <tr><td>Transfers</td><td>Transfer toward the stronger side.</td></tr>
+    </table>
+  </div>
+
+  <div id="flashcards" class="midtab card hidden">
+    <h2>Flashcards</h2>
+    <label><b>Section:</b></label>
+    <select id="sectionSelect" onchange="setSection(this.value)"></select>
+    <div class="flashcard" id="flashcard" onclick="flipCard()">Tap to start</div>
+    <p id="flashCount" class="small"></p>
+    <div class="nav-row">
+      <button class="secondary" onclick="prevCard()">← Back</button>
+      <button onclick="flipCard()">Flip</button>
+      <button class="secondary" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+
+  <div id="quiz" class="midtab card hidden">
+    <h2 id="quizTitle">Quiz</h2>
+    <div class="progress"><div id="bar" class="bar"></div></div>
+    <p id="counter" class="small"></p>
+    <div id="question" class="quiz-box"></div>
+    <div id="options"></div>
+    <div id="feedback" class="feedback hidden"></div>
+    <div class="nav-row">
+      <button class="secondary" onclick="prevQuestion()">Previous</button>
+      <button onclick="submitAnswer()">Submit</button>
+      <button class="secondary" onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
+
+  <div id="missed" class="midtab card hidden">
+    <h2>Missed Questions</h2>
+    <button class="light" onclick="clearMissed()">Clear Missed Questions</button>
+    <div id="missedList"></div>
+  </div>
+
+  <div id="results" class="midtab card hidden">
+    <h2>Results</h2>
+    <div id="scoreBox"></div>
+    <div id="reviewBox"></div>
+    <button onclick="showMidtermTab('study')">Back to Study Guide</button>
+  </div>
+</section>
+<div class="footer-space"></div>
 </div>
 
 <script>
-const orientationWeeks = [
-  {
-    week: 1,
-    title: "Week 1",
-    topic: "Introduction to Radiation Therapy",
-    notes: [
-      "Radiation therapy uses radiation to treat cancer.",
-      "The goal is to damage cancer cells while protecting healthy tissue.",
-      "Radiation therapists work closely with patients every day.",
-      "A LINAC is the machine commonly used to deliver external beam radiation."
-    ],
-    flashcards: [
-      {
-        q: "What is radiation therapy?",
-        a: "A cancer treatment that uses radiation to damage cancer cells."
-      },
-      {
-        q: "What does LINAC stand for?",
-        a: "Linear accelerator."
-      },
-      {
-        q: "What is the main goal of radiation therapy?",
-        a: "Treat the tumor while protecting normal tissue."
-      }
-    ],
-    quiz: [
-      {
-        q: "What machine is commonly used for external beam radiation therapy?",
-        options: ["MRI", "LINAC", "Ultrasound", "PET scanner"],
-        answer: "LINAC"
-      },
-      {
-        q: "What is the main goal of radiation therapy?",
-        options: [
-          "Only remove the tumor surgically",
-          "Damage cancer cells while protecting healthy tissue",
-          "Replace chemotherapy",
-          "Diagnose all cancers"
-        ],
-        answer: "Damage cancer cells while protecting healthy tissue"
-      }
-    ]
-  },
+const ALL_CARDS = [
+// ══════════════════════════════════════════
+// CHAPTER 1 — CANCER OVERVIEW
+// ══════════════════════════════════════════
+{sec:"Ch.1 Cell Cycle", q:"What is the cell cycle?", a:"All events between cell divisions. 5 phases: G0, G1, S, G2, M."},
+{sec:"Ch.1 Cell Cycle", q:"G0 phase — what happens?", a:"Resting phase. Cells function normally but NOT preparing to divide."},
+{sec:"Ch.1 Cell Cycle", q:"G1 phase — what happens?", a:"First growth. Cell makes RNA and proteins, commits to DNA replication."},
+{sec:"Ch.1 Cell Cycle", q:"S phase — what happens?", a:"DNA SYNTHESIS. DNA is replicated so each daughter cell gets a full copy."},
+{sec:"Ch.1 Cell Cycle", q:"G2 phase — what happens?", a:"Second growth. Cell makes enzymes and proteins needed for division."},
+{sec:"Ch.1 Cell Cycle", q:"M phase — what happens?", a:"Mitosis. Cell divides into 2 identical daughter cells."},
+{sec:"Ch.1 Cell Cycle", q:"Which two phases are MOST radiosensitive?", a:"G2 and M."},
+{sec:"Ch.1 Cell Cycle", q:"Correct order of cell cycle phases?", a:"G1 → S → G2 → M (G0 is the resting exit)"},
+{sec:"Ch.1 Cell Cycle", q:"Memory trick for cell cycle order?", a:'"Good Students Get Moving" = G1, S, G2, M'},
 
-  {
-    week: 2,
-    title: "Week 2",
-    topic: "Cancer Basics and Treatment Team",
-    notes: [
-      "Cancer is uncontrolled cell growth.",
-      "Benign tumors do not spread to other body areas.",
-      "Malignant tumors can invade and spread.",
-      "Radiation oncology is a team-based field."
-    ],
-    flashcards: [
-      {
-        q: "What does malignant mean?",
-        a: "Cancerous and able to invade or spread."
-      },
-      {
-        q: "What does benign mean?",
-        a: "Not cancerous and does not spread."
-      }
-    ],
-    quiz: [
-      {
-        q: "Which word means cancerous?",
-        options: ["Benign", "Malignant", "Normal", "Stable"],
-        answer: "Malignant"
-      }
-    ]
-  },
+// TABLE 1.1 — PROFESSOR SAID "KNOW THIS FOR MIDTERM"
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Local spread — BENIGN?", a:"Expanding and pushing (does NOT invade)."},
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Local spread — MALIGNANT?", a:"Infiltrative and invasive."},
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Distant spread — BENIGN?", a:"Rare."},
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Distant spread — MALIGNANT?", a:"Metastasizes early or late by lymphatics, blood, or seeding."},
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Differentiation — BENIGN?", a:"Well differentiated."},
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Differentiation — MALIGNANT?", a:"Well differentiated to undifferentiated."},
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Effect on host — BENIGN?", a:"Little (depends on treatment and location)."},
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Effect on host — MALIGNANT?", a:"Life threatening."},
+{sec:"Ch.1 Table 1.1", q:"Table 1.1: Doubling time — MALIGNANT?", a:"Normal to accelerated."},
+{sec:"Ch.1 Table 1.1", q:"Benign tumors end in -oma. Exception?", a:"Melanoma — ends in -oma but is MALIGNANT."},
+{sec:"Ch.1 Table 1.1", q:"Malignant tumors form a pseudocapsule. What's the key fact?", a:"Tumor cells extend BEYOND the pseudocapsule."},
+{sec:"Ch.1 Table 1.1", q:"What is an anaplastic cell?", a:"Changed so much it doesn't look like the original cell. Lost normal function."},
+{sec:"Ch.1 Table 1.1", q:"Degree of differentiation indicates what?", a:"How aggressive and malignant the tumor is."},
 
-  {
-    week: 3,
-    title: "Week 3",
-    topic: "Ethics and Patient Care",
-    notes: [
-      "Ethics means doing what is right for the patient.",
-      "Patient privacy must be protected.",
-      "Respect, honesty, and safety are very important.",
-      "Therapists must communicate clearly and kindly."
-    ],
-    flashcards: [
-      {
-        q: "What does ethics mean in healthcare?",
-        a: "Doing what is right and safe for the patient."
-      },
-      {
-        q: "Why is privacy important?",
-        a: "Because patient information must be protected."
-      }
-    ],
-    quiz: [
-      {
-        q: "Which action protects patient privacy?",
-        options: [
-          "Talking about patients in public",
-          "Sharing photos",
-          "Keeping patient information confidential",
-          "Posting patient details online"
-        ],
-        answer: "Keeping patient information confidential"
-      }
-    ]
-  },
+// TUMOR TYPES
+{sec:"Ch.1 Tumor Types", q:"Sarcomas come from what cells?", a:"Mesenchymal (connective tissue) cells: bone, cartilage, muscle, fat."},
+{sec:"Ch.1 Tumor Types", q:"Carcinomas come from what cells?", a:"Epithelial cells — cover body surfaces and line organs."},
+{sec:"Ch.1 Tumor Types", q:"Leukemias are cancers of?", a:"Blood cells (also mesenchymal origin)."},
+{sec:"Ch.1 Tumor Types", q:"Lymphomas are cancers of?", a:"Lymphatic system (also mesenchymal origin)."},
+{sec:"Ch.1 Tumor Types", q:"Epithelial glandular cells → which histology?", a:"Adenocarcinoma."},
+{sec:"Ch.1 Tumor Types", q:"Memory trick: Carcinoma vs. Sarcoma?", a:"Carcinoma = Covers (epithelial). Sarcoma = Structural/connective tissue."},
 
-  {
-    week: 4,
-    title: "Week 4",
-    topic: "Professionalism",
-    notes: [
-      "Professionalism means acting responsibly at school, clinic, and work.",
-      "Being on time matters.",
-      "Good communication builds trust.",
-      "Patients should feel safe and respected."
-    ],
-    flashcards: [
-      {
-        q: "What does professionalism mean?",
-        a: "Acting responsibly, respectfully, and safely."
-      }
-    ],
-    quiz: [
-      {
-        q: "Which is an example of professionalism?",
-        options: [
-          "Ignoring patient questions",
-          "Being late often",
-          "Respectful communication",
-          "Using rude language"
-        ],
-        answer: "Respectful communication"
-      }
-    ]
-  },
+// TABLE 1.3 — PROFESSOR SAID "KNOW THIS (ALL)"
+{sec:"Ch.1 Table 1.3", q:"Oral cavity histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Pharynx histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Lung histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Breast histology?", a:"Infiltrating ductal carcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Colon and rectum histology?", a:"Adenocarcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Anus histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Cervix histology?", a:"Squamous cell carcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Endometrium histology?", a:"Adenocarcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Prostate histology?", a:"Adenocarcinoma."},
+{sec:"Ch.1 Table 1.3", q:"Brain histology?", a:"Astrocytoma."},
+{sec:"Ch.1 Table 1.3", q:"Memory trick: Which sites are squamous cell?", a:"Surfaces that touch AIR or FOOD: oral cavity, pharynx, lung, anus, cervix."},
+{sec:"Ch.1 Table 1.3", q:"Memory trick: Which sites are adenocarcinoma?", a:"Glands that SECRETE: colon/rectum, endometrium, prostate."},
 
-  {
-    week: 5,
-    title: "Week 5",
-    topic: "Patient Assessment",
-    notes: [
-      "Patient assessment means checking the patient before, during, and after treatment.",
-      "Therapists observe pain, skin changes, mobility, and emotional needs.",
-      "Changes should be reported to the correct team member.",
-      "Safety is always first."
-    ],
-    flashcards: [
-      {
-        q: "What is patient assessment?",
-        a: "Checking the patient’s condition and needs."
-      },
-      {
-        q: "What should a therapist do if something changes?",
-        a: "Report it to the correct healthcare team member."
-      }
-    ],
-    quiz: [
-      {
-        q: "What is the purpose of patient assessment?",
-        options: [
-          "To ignore symptoms",
-          "To check patient condition and safety",
-          "To replace the doctor",
-          "To diagnose cancer alone"
-        ],
-        answer: "To check patient condition and safety"
-      }
-    ]
-  },
+// TABLE 1.6 — PROFESSOR SAID "ALL THIS IS IN THE MIDTERM"
+{sec:"Ch.1 Table 1.6", q:"Table 1.6: Lung → common mets?", a:"Liver, adrenal glands, bone, and brain."},
+{sec:"Ch.1 Table 1.6", q:"Table 1.6: Breast → common mets?", a:"Lungs, bone, and brain."},
+{sec:"Ch.1 Table 1.6", q:"Table 1.6: Stomach → common mets?", a:"Liver."},
+{sec:"Ch.1 Table 1.6", q:"Table 1.6: Anus → common mets?", a:"Liver and lungs."},
+{sec:"Ch.1 Table 1.6", q:"Table 1.6: Bladder → common mets?", a:"Lungs, bone, and liver."},
+{sec:"Ch.1 Table 1.6", q:"Table 1.6: Prostate → common mets?", a:"Bone, liver, and lungs."},
+{sec:"Ch.1 Table 1.6", q:"Table 1.6: Uterine cervix → common mets?", a:"Lungs, bone, and liver."},
 
-  {
-    week: 6,
-    title: "Week 6",
-    topic: "Biomechanics and Ergonomics",
-    notes: [
-      "Biomechanics is how the body moves.",
-      "Ergonomics helps prevent injury while working.",
-      "Proper body mechanics protect the therapist and patient.",
-      "Good posture helps prevent back and shoulder injury."
-    ],
-    flashcards: [
-      {
-        q: "What is ergonomics?",
-        a: "Setting up work safely to prevent injury."
-      },
-      {
-        q: "Why does body mechanics matter?",
-        a: "It protects the therapist and patient from injury."
-      }
-    ],
-    quiz: [
-      {
-        q: "What is the main goal of ergonomics?",
-        options: [
-          "To make work unsafe",
-          "To prevent injury",
-          "To increase radiation dose",
-          "To diagnose disease"
-        ],
-        answer: "To prevent injury"
-      }
-    ]
-  },
+// ETIOLOGY / EPIDEMIOLOGY / STAGING
+{sec:"Ch.1 Etiology & Staging", q:"Etiology = ?", a:"Study of the CAUSE of disease."},
+{sec:"Ch.1 Etiology & Staging", q:"Etiologic factors examples?", a:"Cigarette smoke, HPV, alcohol, sun exposure, diet, obesity."},
+{sec:"Ch.1 Etiology & Staging", q:"Epidemiology = ?", a:"Study of disease INCIDENCE (how often and where it occurs)."},
+{sec:"Ch.1 Etiology & Staging", q:"SEER database tracks cancer by?", a:"Age, sex, race, and geographic location."},
+{sec:"Ch.1 Etiology & Staging", q:"Cancer screening goal?", a:"Early detection → better prognosis/treatment."},
+{sec:"Ch.1 Etiology & Staging", q:"Sensitivity = ?", a:"Ability to give a TRUE-POSITIVE result."},
+{sec:"Ch.1 Etiology & Staging", q:"Specificity = ?", a:"Ability to give a TRUE-NEGATIVE result."},
+{sec:"Ch.1 Etiology & Staging", q:"False negative = ?", a:"Cancer IS present but test shows NO cancer."},
+{sec:"Ch.1 Etiology & Staging", q:"False positive = ?", a:"No cancer present but test INDICATES a tumor."},
+{sec:"Ch.1 Etiology & Staging", q:"Clinical staging is done when?", a:"BEFORE any major treatment (physical exam + imaging + biopsy)."},
+{sec:"Ch.1 Etiology & Staging", q:"Pathologic staging is more accurate because?", a:"Uses surgical findings — doctors see tumor directly."},
+{sec:"Ch.1 Etiology & Staging", q:"Post-therapy staging is done when?", a:"AFTER the first treatment — shows how well cancer responded."},
+{sec:"Ch.1 Etiology & Staging", q:"Restaging is done when?", a:"Cancer COMES BACK (recurs)."},
+{sec:"Ch.1 Etiology & Staging", q:"TNM: N1 means?", a:"Cancer in NEARBY/REGIONAL lymph nodes."},
+{sec:"Ch.1 Etiology & Staging", q:"TNM: M1 means?", a:"Cancer spread to DISTANT organs."},
+{sec:"Ch.1 Etiology & Staging", q:"TNM: N0 means?", a:"No cancer in lymph nodes."},
+{sec:"Ch.1 Etiology & Staging", q:"Tumor grade measures?", a:"Aggressiveness based on degree of DIFFERENTIATION."},
+{sec:"Ch.1 Etiology & Staging", q:"4 differentiation categories (least → most aggressive)?", a:"Well → Moderately well → Poorly → Undifferentiated/Anaplastic."},
+{sec:"Ch.1 Etiology & Staging", q:"Tumor board = ?", a:"Group of medical professionals making decisions about patient care at board meetings."},
 
-  {
-    week: 7,
-    title: "Week 7",
-    topic: "Midterm Review",
-    notes: [
-      "Review important terms from Weeks 1–6.",
-      "Focus on radiation therapy basics, ethics, professionalism, patient care, and safety.",
-      "Practice missed questions often.",
-      "Use flashcards for quick recall."
-    ],
-    flashcards: [
-      {
-        q: "What should you review for midterm?",
-        a: "Weeks 1–6 key terms, safety, patient care, and ethics."
-      }
-    ],
-    quiz: [
-      {
-        q: "What is the best study method for missed topics?",
-        options: [
-          "Skip them",
-          "Only read once",
-          "Practice missed questions again",
-          "Avoid flashcards"
-        ],
-        answer: "Practice missed questions again"
-      }
-    ]
-  },
+// TREATMENT
+{sec:"Ch.1 Treatment", q:"Palliation = ?", a:"NONcurative treatment to relieve pain and suffering."},
+{sec:"Ch.1 Treatment", q:"Goal of radiation therapy?", a:"Deliver maximum dose to kill cancer while SPARING normal tissue."},
+{sec:"Ch.1 Treatment", q:"Therapeutic ratio = ?", a:"Delivering radiation while protecting healthy tissue."},
+{sec:"Ch.1 Treatment", q:"Fine needle aspiration vs. core needle biopsy?", a:"Fine needle = cells only (no architecture). Core needle = better tissue architecture."},
+{sec:"Ch.1 Treatment", q:"Neoadjuvant therapy = ?", a:"Therapy given BEFORE surgery to increase chance of complete removal."},
+{sec:"Ch.1 Treatment", q:"Adjuvant therapy = ?", a:"Radiation used IN CONJUNCTION with chemo and/or surgery."},
+{sec:"Ch.1 Treatment", q:"Exophytic tumor = ?", a:"Grows OUTWARD from the surface."},
+{sec:"Ch.1 Treatment", q:"Dissemination = ?", a:"Tumor SPREAD."},
+{sec:"Ch.1 Treatment", q:"Brachytherapy = ? (nickname)", a:"Short-distance therapy. Radioactive sources placed inside/near tumor."},
+{sec:"Ch.1 Treatment", q:"Brachytherapy sources (4)?", a:"Cesium-137, Iridium-192 (most common), Palladium-103, Iodine-125."},
+{sec:"Ch.1 Treatment", q:"Why is chemo different from radiation and surgery?", a:"Systemic — travels through the ENTIRE body."},
+{sec:"Ch.1 Treatment", q:"Intrathecal route = used for?", a:"Into CSF space — used with LEUKEMIA."},
+{sec:"Ch.1 Treatment", q:"Intracavitary = ?", a:"Inserting device into a patient's CAVITY (e.g., bladder)."},
+{sec:"Ch.1 Treatment", q:"Port-a-cath = ?", a:"Central line for IV chemotherapy delivery."},
+{sec:"Ch.1 Treatment", q:"Alkylating agents examples?", a:"Carboplatin, Cisplatin."},
+{sec:"Ch.1 Treatment", q:"Antimetabolite example?", a:"5-FU."},
+{sec:"Ch.1 Treatment", q:"Hormonal agents examples?", a:"Lupron, Tamoxifen (prostate/breast cancer)."},
+{sec:"Ch.1 Treatment", q:"Adriamycin is associated with what toxicity?", a:"Cardiac toxicity."},
+{sec:"Ch.1 Treatment", q:"Blenomicin is associated with?", a:"Pulmonary toxicity — treatment progresses too early."},
 
-  {
-    week: 8,
-    title: "Week 8",
-    topic: "Detection and Diagnosis",
-    notes: [
-      "Detection means finding possible disease.",
-      "Diagnosis means identifying the disease.",
-      "Imaging and tests help doctors diagnose cancer.",
-      "Radiation therapists do not diagnose patients."
-    ],
-    flashcards: [
-      {
-        q: "What does detection mean?",
-        a: "Finding signs of possible disease."
-      },
-      {
-        q: "What does diagnosis mean?",
-        a: "Identifying the disease."
-      }
-    ],
-    quiz: [
-      {
-        q: "Who diagnoses disease?",
-        options: [
-          "Radiation therapist alone",
-          "The doctor",
-          "The patient",
-          "The receptionist"
-        ],
-        answer: "The doctor"
-      }
-    ]
-  },
+// CLINICAL TRIALS
+{sec:"Ch.1 Clinical Trials", q:"Retrospective study = ?", a:"Studies data from the PAST."},
+{sec:"Ch.1 Clinical Trials", q:"Prospective study = ?", a:"Planned BEFORE treatment begins with eligibility criteria."},
+{sec:"Ch.1 Clinical Trials", q:"Phase I clinical trial purpose?", a:"Determine MAXIMUM TOLERATED DOSE and toxicity."},
+{sec:"Ch.1 Clinical Trials", q:"Phase II clinical trial purpose?", a:"Determine if treatment is EFFECTIVE enough to continue study."},
+{sec:"Ch.1 Clinical Trials", q:"Phase III clinical trial purpose?", a:"COMPARE experimental vs. standard treatment (randomized sample)."},
+{sec:"Ch.1 Clinical Trials", q:"Phase IV clinical trial purpose?", a:"After FDA approval — monitor LONG-TERM survival and side effects."},
+{sec:"Ch.1 Clinical Trials", q:"Phase IV is associated with?", a:"FDA APPROVAL and post-market long-term follow-up."},
 
-  {
-    week: 9,
-    title: "Week 9",
-    topic: "Final Review Placeholder",
-    notes: [
-      "Week 9 content will be added when the Week 9 professor material is uploaded.",
-      "Use this section for final exam review later.",
-      "Practice all prior weeks until more content is added."
-    ],
-    flashcards: [
-      {
-        q: "What should Week 9 be used for right now?",
-        a: "Final review and practice from older weeks."
-      }
-    ],
-    quiz: [
-      {
-        q: "What should you do until Week 9 material is added?",
-        options: [
-          "Stop studying",
-          "Review older weeks",
-          "Delete the app",
-          "Skip the final"
-        ],
-        answer: "Review older weeks"
-      }
-    ]
-  }
+// ONCOLOGY TEAM
+{sec:"Ch.1 Oncology Team", q:"Radiation oncologist role?", a:"Overall responsibility for patient care — the PHYSICIAN. Sees patient ONCE/WEEK during treatment."},
+{sec:"Ch.1 Oncology Team", q:"Dosimetrist role?", a:"DESIGNS the treatment plan using most effective techniques."},
+{sec:"Ch.1 Oncology Team", q:"Medical physicist role?", a:"QA on ALL radiation therapy EQUIPMENT — calibration, safety, testing."},
+{sec:"Ch.1 Oncology Team", q:"Radiation therapist role?", a:"Delivers treatment EVERY DAY. Monitors patient reaction and side effects."},
+{sec:"Ch.1 Oncology Team", q:"Simulation is done using?", a:"CT scanner — in treatment position. Immobilization devices made."},
+{sec:"Ch.1 Oncology Team", q:"Who sees patient every day vs. once a week?", a:"RTT = every day. Radiation oncologist = once a week."},
+
+// ══════════════════════════════════════════
+// CHAPTER 2 — ETHICS & LAW
+// ══════════════════════════════════════════
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"ARRT does what?", a:"Credentialing + certification + produces RULES OF ETHICS. Gives board exam."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"ASRT does what?", a:"Professional society. Journals, education, research grants, ADVOCACY."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Ethics is based on?", a:"VALUES."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"4 sources of values?", a:"Culture, experience, religion, science."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"7 bioethical principles?", a:"Autonomy, beneficence, confidentiality, justice, nonmaleficence, role fidelity, veracity."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Autonomy = ?", a:"Patient's RIGHT to make their own decisions, free of interference."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Beneficence = ?", a:"DOING GOOD — acting in the patient's best interest."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Confidentiality = ?", a:"Patient info is PRIVATE. Can be breached only if patient is in danger."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Justice = ?", a:"FAIRNESS and equal treatment for ALL — regardless of age, gender, status."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Nonmaleficence = ?", a:"DO NO HARM — avoid harmful actions to patients."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Role fidelity = ?", a:"Be FAITHFUL to your role — don't overstep scope of practice."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Veracity = ?", a:"TRUTHFULNESS in healthcare."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"3 ethical theory groups?", a:"Teleology, Deontology, Virtue ethics."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Teleology (consequentialism) focuses on?", a:"CONSEQUENCES of the action — end result matters most."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Utilitarianism belongs to which theory group?", a:"TELEOLOGY."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Deontology (nonconsequentialism) uses?", a:"Formal RULES of right and wrong — duty, regardless of outcome."},
+{sec:"Ch.2 ARRT/ASRT/Ethics", q:"Virtue ethics uses?", a:"Practical WISDOM — character of the person making the decision."},
+
+// PATIENT-PROVIDER MODELS
+{sec:"Ch.2 Models & Grief", q:"Engineering model = ?", a:"Focuses on facts/disease ONLY — ignores patient as a person. Cold."},
+{sec:"Ch.2 Models & Grief", q:"Priestly model = ?", a:"Provider makes ALL decisions for patient. Tells patient what to do."},
+{sec:"Ch.2 Models & Grief", q:"Collegial model = ?", a:"Patient and provider work TOGETHER — cooperation and trust."},
+{sec:"Ch.2 Models & Grief", q:"Contractual model = ?", a:"Based on agreements like INFORMED CONSENT. Patient ultimately decides."},
+{sec:"Ch.2 Models & Grief", q:"Covenant model = ?", a:"Trust based on TRADITION or past experiences."},
+{sec:"Ch.2 Models & Grief", q:"Informed consent = which model?", a:"CONTRACTUAL model."},
+{sec:"Ch.2 Models & Grief", q:"Grief cycle — 7 stages in order?", a:"Shock → Denial → Anger → Bargaining → Depression → Testing → Acceptance."},
+{sec:"Ch.2 Models & Grief", q:"Shock stage = ?", a:"Initial reaction to bad news."},
+{sec:"Ch.2 Models & Grief", q:"Denial stage = ?", a:"Pretending what is, isn't."},
+{sec:"Ch.2 Models & Grief", q:"Testing stage = ?", a:"Searching for realistic resolutions."},
+{sec:"Ch.2 Models & Grief", q:"Acceptance stage = ?", a:"Coping with situation and finding a way forward. LAST stage."},
+{sec:"Ch.2 Models & Grief", q:"Who identified the grief cycle?", a:"Dr. Elisabeth Kübler-Ross."},
+
+// LAW
+{sec:"Ch.2 Law & Doctrines", q:"HIPAA (1996) = ?", a:"Health Insurance Portability and Accountability Act. Protects patient health info."},
+{sec:"Ch.2 Law & Doctrines", q:"Living will = ?", a:"Patient's written direction about healthcare if they can no longer decide."},
+{sec:"Ch.2 Law & Doctrines", q:"Durable power of attorney = ?", a:"Names a PERSON to make healthcare decisions when patient can't."},
+{sec:"Ch.2 Law & Doctrines", q:"Why is informed consent needed?", a:"Makes sure patient UNDERSTANDS what is being done before agreeing."},
+{sec:"Ch.2 Law & Doctrines", q:"Tort law = ?", a:"PERSONAL INJURY law — wrongful act done to a person."},
+{sec:"Ch.2 Law & Doctrines", q:"Assault = ?", a:"THREAT of touching in an injurious way. No actual contact needed."},
+{sec:"Ch.2 Law & Doctrines", q:"Battery = ?", a:"ACTUAL harmful touching without consent."},
+{sec:"Ch.2 Law & Doctrines", q:"False imprisonment = ?", a:"Restraining/confining a patient without their consent."},
+{sec:"Ch.2 Law & Doctrines", q:"Libel = ?", a:"WRITTEN defamation."},
+{sec:"Ch.2 Law & Doctrines", q:"Slander = ?", a:"ORAL/spoken defamation. Slander = Speak."},
+{sec:"Ch.2 Law & Doctrines", q:"Doctrine of Personal Liability = ?", a:"You are liable for YOUR OWN negligent conduct."},
+{sec:"Ch.2 Law & Doctrines", q:"Doctrine of Respondeat Superior = ?", a:"EMPLOYER liable for employee's negligent acts done while following orders."},
+{sec:"Ch.2 Law & Doctrines", q:"Doctrine of Res Ipsa Loquitur = ?", a:"'The thing speaks for itself' — defendant must explain; negligence is obvious."},
+{sec:"Ch.2 Law & Doctrines", q:"Doctrine of Foreseeability = ?", a:"You could reasonably FORESEE your actions would cause injury to others."},
+{sec:"Ch.2 Law & Doctrines", q:"Risk management programs — what is NOT included?", a:"Malpractice insurance (that's separate)."},
+{sec:"Ch.2 Law & Doctrines", q:"Confidentiality exceptions include all EXCEPT?", a:"Automobile accident — NOT an exception (must be reported for public safety reasons, not confidentiality)."},
+
+// ══════════════════════════════════════════
+// CHAPTER 3 — PATIENT ASSESSMENT
+// ══════════════════════════════════════════
+{sec:"Ch.3 Communication", q:"Therapeutic relationship = ?", a:"Relationship between healthcare worker and patient to effect beneficial change."},
+{sec:"Ch.3 Communication", q:"Cognitive content = ?", a:"FACTS and WORDS in the message."},
+{sec:"Ch.3 Communication", q:"Affective content = ?", a:"Feelings, attitudes, and behaviors — verbal or nonverbal."},
+{sec:"Ch.3 Communication", q:"Reflective listening involves responding with?", a:"EMPATHY."},
+{sec:"Ch.3 Communication", q:"Empathy = ?", a:"Identifying with the feelings, thoughts, or experiences of another person."},
+{sec:"Ch.3 Communication", q:"Most common affective responses in cancer patients?", a:"Anxiety and depression."},
+{sec:"Ch.3 Communication", q:"10 verbal responses — list them?", a:"Minimal verbal, Reflecting, Paraphrasing, Probing, Clarifying, Interpreting, Checking out, Informing, Confronting, Summarizing."},
+{sec:"Ch.3 Communication", q:"Paraphrasing = ?", a:"Restating patient's message in YOUR OWN WORDS (content-based)."},
+{sec:"Ch.3 Communication", q:"Confronting = ?", a:"Pointing out a CONTRADICTION between what patient says and what you observe."},
+{sec:"Ch.3 Communication", q:"Informing = ?", a:"Providing FACTUAL information to patient."},
+{sec:"Ch.3 Communication", q:"Probing = ?", a:"Asking questions to get MORE information."},
+{sec:"Ch.3 Communication", q:"Which verbal response is NOT in the 10?", a:"Repeating — NOT one of the 10."},
+{sec:"Ch.3 Communication", q:"When you follow patient status critically — emotional, physical — this is called?", a:"Anxiety monitoring / affective assessment."},
+
+// ASSESSMENT
+{sec:"Ch.3 Assessment", q:"General health assessment is done by?", a:"INTERVIEW — past and present health, self-report."},
+{sec:"Ch.3 Assessment", q:"Cachexia = ?", a:"Loss of muscle with or without loss of fat mass."},
+{sec:"Ch.3 Assessment", q:"Quality of life = ?", a:"Broad-based assessment of combined effect of disease and treatment."},
+{sec:"Ch.3 Assessment", q:"Factors affecting quality of life?", a:"Living arrangements, religion, health status."},
+{sec:"Ch.3 Assessment", q:"Cultural assessment looks at?", a:"Customs, values, and beliefs."},
+{sec:"Ch.3 Assessment", q:"Special cases in assessment include?", a:"Children, LGBT, adolescents, and elderly."},
+{sec:"Ch.3 Assessment", q:"Cultural of safety: 3 goals?", a:"Support safe decision making, reduce risk, encourage staff to request assistance."},
+{sec:"Ch.3 Assessment", q:"Assessment allows providers to do all EXCEPT?", a:"Find a CURE. Assessment determines the problem, selects intervention, evaluates effectiveness."},
+{sec:"Ch.3 Assessment", q:"Cancer rehabilitation = ?", a:"Dynamic process to enable patient to function at maximum level within disease limitations."},
+
+// BLOOD VALUES — TABLE 3.6
+{sec:"Ch.3 Blood Values", q:"HCT normal range — MEN?", a:"38.8–46.4%"},
+{sec:"Ch.3 Blood Values", q:"HCT normal range — WOMEN?", a:"35.4–44.4%"},
+{sec:"Ch.3 Blood Values", q:"HGB normal range — MEN?", a:"13.3–16.2 g/dL"},
+{sec:"Ch.3 Blood Values", q:"HGB normal range — WOMEN?", a:"12.0–15.8 g/dL"},
+{sec:"Ch.3 Blood Values", q:"RBC count — MEN?", a:"4.30–5.60 × 10⁶/mm³"},
+{sec:"Ch.3 Blood Values", q:"RBC count — WOMEN?", a:"4.00–5.20 × 10⁶/mm³"},
+{sec:"Ch.3 Blood Values", q:"Normal platelet range?", a:"165,000–415,000/mm³ (same for both sexes)."},
+{sec:"Ch.3 Blood Values", q:"Severely low platelets = less than?", a:"20,000/mm³"},
+{sec:"Ch.3 Blood Values", q:"Myelosuppression = ?", a:"Reduction in BONE MARROW function."},
+{sec:"Ch.3 Blood Values", q:"Anemia = ?", a:"Decrease in peripheral RED BLOOD CELL count."},
+{sec:"Ch.3 Blood Values", q:"Leukopenia = ?", a:"Decrease in WHITE BLOOD CELL count."},
+{sec:"Ch.3 Blood Values", q:"Thrombocytopenia = ?", a:"Reduction in circulating PLATELETS."},
+{sec:"Ch.3 Blood Values", q:"Pancytopenia = ?", a:"Reduction in ALL circulating blood cells."},
+{sec:"Ch.3 Blood Values", q:"Memory trick for blood count terms?", a:"Thrombo=clot=platelets. Leuko=white=WBC. Anemia=no blood=RBC. Pan=all."},
+
+// TABLE 3.2 SIDE EFFECTS — PROFESSOR SAID "KNOW IT ALL OF THEM"
+{sec:"Ch.3 Table 3.2 Doses", q:"Faint erythema appears at?", a:"1600 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Erythema (skin redness) appears at?", a:"2000–3000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Hair loss (epilation/alopecia) at?", a:"2000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Mouth changes (stomatitis, xerostomia, mucositis, taste) at?", a:"2000–3000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Pharyngitis at?", a:"2000–3000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Esophagitis (difficulty swallowing) at?", a:"2000–3000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Laryngitis at?", a:"4000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Nausea and vomiting at?", a:"1000–2000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Diarrhea/colic at?", a:"2000–5000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Cystitis at?", a:"3000–4000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Dry desquamation at?", a:"3000–4000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Moist desquamation at?", a:"4000–6000 cGy"},
+{sec:"Ch.3 Table 3.2 Doses", q:"Dose order memory trick?", a:"1000=nausea → 1600=faint red → 2000=hair loss → 2000-3000=mouth/throat → 4000=larynx → 4000-6000=moist skin"},
+{sec:"Ch.3 Table 3.2 Doses", q:"NONSPECIFIC side effects (no dose)?", a:"Skin pallor, weight loss, fatigue, sleep disturbance."},
+{sec:"Ch.3 Table 3.2 Doses", q:"Skin pallor is monitored by?", a:"Weekly complete blood counts (hemoglobin, WBC, platelets)."},
+{sec:"Ch.3 Table 3.2 Doses", q:"Neurologic changes → what to do?", a:"IMMEDIATE referral to radiation oncologist."},
+{sec:"Ch.3 Table 3.2 Doses", q:"Neurologic changes include?", a:"Headaches, vision changes, gait/mobility changes, temperament changes, mental status changes."},
+
+// PAIN
+{sec:"Ch.3 Pain & Transfers", q:"Acute pain = ?", a:"New, SHORT-duration pain with well-defined onset."},
+{sec:"Ch.3 Pain & Transfers", q:"Chronic pain = ?", a:"Persistence of pain >3 months with less well-defined onset."},
+{sec:"Ch.3 Pain & Transfers", q:"6 dimensions of pain?", a:"Physiologic, Sensory, Affective, Sociocultural, Behavioral, Cognitive."},
+{sec:"Ch.3 Pain & Transfers", q:"Orthostatic hypotension = ?", a:"Sudden blood pressure DROP when moving from lying/sitting to STANDING."},
+{sec:"Ch.3 Pain & Transfers", q:"Transfer rule?", a:"Always transfer toward patient's STRONGER side."},
+{sec:"Ch.3 Pain & Transfers", q:"4 types of wheelchair transfers?", a:"Standby Assist, Assisted Standing Pivot, Two-Person Lift, Hydraulic Lift."},
+{sec:"Ch.3 Pain & Transfers", q:"Cart/stretcher transfer: wheelchair position?", a:"45-degree angle."},
+{sec:"Ch.3 Pain & Transfers", q:"When moving patient on a stretcher/cart, move them?", a:"TOWARD YOU."},
+{sec:"Ch.3 Pain & Transfers", q:"Palliative care goal?", a:"Treat pain/symptoms — patient still may have treatment options (radiation/chemo/meds)."},
+{sec:"Ch.3 Pain & Transfers", q:"End-of-life care = ?", a:"No more curative treatment — comfort ONLY."},
+{sec:"Ch.3 Pain & Transfers", q:"Hospice care = ?", a:"Comfort and quality of life in FINAL MONTHS — no curative treatment."},
 ];
 
-let currentWeek = null;
-let currentQuizIndex = 0;
-let score = 0;
+let activeSection = "All";
+let filteredCards = [];
+let fcIndex = 0;
+let flipped = false;
 
-function loadWeeks() {
-  const grid = document.getElementById("weekGrid");
-  grid.innerHTML = "";
+let quizSet = [];
+let qi = 0;
+let answers = [];
+let submitted = [];
 
-  orientationWeeks.forEach(week => {
-    const card = document.createElement("div");
-    card.className = "week-card";
-    card.innerHTML = `
-      <h2>${week.title}</h2>
-      <p>${week.topic}</p>
-      <p><strong>Notes • Flashcards • Quiz</strong></p>
-    `;
-    card.onclick = () => openWeek(week.week);
-    grid.appendChild(card);
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function openMidterm() {
+  showPage('midtermPage');
+  showMidtermTab('study');
+  buildSectionSelect();
+}
+
+function showMidtermTab(tab) {
+  document.querySelectorAll('.midtab').forEach(t => t.classList.add('hidden'));
+  document.getElementById(tab).classList.remove('hidden');
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('tab-' + tab);
+  if (btn) btn.classList.add('active');
+  if (tab === 'flashcards') renderCard();
+  if (tab === 'missed') renderMissed();
+}
+
+function buildSectionSelect() {
+  const sel = document.getElementById('sectionSelect');
+  if (!sel || sel.options.length > 0) return;
+  const sections = ["All", ...new Set(ALL_CARDS.map(c => c.sec))];
+  sections.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s;
+    opt.textContent = s;
+    sel.appendChild(opt);
   });
+  setSection("All");
 }
 
-function openWeek(weekNumber) {
-  currentWeek = orientationWeeks.find(w => w.week === weekNumber);
-  currentQuizIndex = 0;
-  score = 0;
-
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("weekPage").classList.remove("hidden");
-
-  document.getElementById("weekTitle").textContent = currentWeek.title;
-  document.getElementById("weekTopic").textContent = currentWeek.topic;
-
-  loadNotes();
-  loadFlashcards();
-  loadQuiz();
-  loadMissed();
-
-  showTab("notes");
+function setSection(sec) {
+  activeSection = sec;
+  filteredCards = ALL_CARDS.filter(c => sec === "All" || c.sec === sec);
+  fcIndex = 0;
+  flipped = false;
+  renderCard();
 }
 
-function goHome() {
-  document.getElementById("weekPage").classList.add("hidden");
-  document.getElementById("home").classList.remove("hidden");
+function renderCard() {
+  if (!filteredCards.length) setSection(activeSection);
+  const card = filteredCards[fcIndex];
+  const box = document.getElementById('flashcard');
+  if (!card) {
+    box.innerHTML = "No cards found.";
+    return;
+  }
+  box.innerHTML = flipped
+    ? `<div><div class="small"><b>Answer</b> · ${card.sec}</div><br><span class="flash-answer">${card.a}</span></div>`
+    : `<div><div class="small"><b>Question</b> · ${card.sec}</div><br><b>${card.q}</b><br><br><span class="small">Tap to flip</span></div>`;
+  document.getElementById('flashCount').textContent = `Card ${fcIndex + 1} of ${filteredCards.length}`;
 }
 
-function showTab(tabName) {
-  ["notes", "flashcards", "quiz", "missed"].forEach(tab => {
-    document.getElementById(tab).classList.add("hidden");
-  });
+function flipCard() { flipped = !flipped; renderCard(); }
+function nextCard() { fcIndex = (fcIndex + 1) % filteredCards.length; flipped = false; renderCard(); }
+function prevCard() { fcIndex = (fcIndex - 1 + filteredCards.length) % filteredCards.length; flipped = false; renderCard(); }
 
-  document.getElementById(tabName).classList.remove("hidden");
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
-function loadNotes() {
-  const notesDiv = document.getElementById("notes");
-  notesDiv.innerHTML = "";
-
-  currentWeek.notes.forEach(note => {
-    const box = document.createElement("div");
-    box.className = "note-box";
-    box.textContent = note;
-    notesDiv.appendChild(box);
-  });
-}
-
-function loadFlashcards() {
-  const flashDiv = document.getElementById("flashcards");
-  flashDiv.innerHTML = "";
-
-  currentWeek.flashcards.forEach(card => {
-    const div = document.createElement("div");
-    div.className = "flashcard";
-    div.innerHTML = `
-      <strong>Q:</strong> ${card.q}
-      <div class="answer hidden"><strong>A:</strong> ${card.a}</div>
-    `;
-
-    div.onclick = () => {
-      div.querySelector(".answer").classList.toggle("hidden");
+function buildQuestions() {
+  return ALL_CARDS.map((card, idx) => {
+    let pool = ALL_CARDS.filter(c => c.sec === card.sec && c.a !== card.a).map(c => c.a);
+    if (pool.length < 3) pool = ALL_CARDS.filter(c => c.a !== card.a).map(c => c.a);
+    const distractors = shuffle([...new Set(pool)]).slice(0, 3);
+    const options = shuffle([card.a, ...distractors]);
+    return {
+      t: card.q,
+      sec: card.sec,
+      o: options,
+      a: options.indexOf(card.a),
+      e: card.a
     };
-
-    flashDiv.appendChild(div);
   });
 }
 
-function loadQuiz() {
-  const quizDiv = document.getElementById("quiz");
-  quizDiv.innerHTML = "";
-  currentQuizIndex = 0;
-  score = 0;
-  showQuestion();
+function startQuiz(mode) {
+  const allQuestions = buildQuestions();
+  quizSet = mode === "exam" ? shuffle(allQuestions).slice(0, 50) : shuffle(allQuestions);
+  qi = 0;
+  answers = [];
+  submitted = [];
+  document.getElementById('quizTitle').textContent = mode === "exam" ? "Mock Midterm — 50 Questions" : `Practice Quiz — ${quizSet.length} Questions`;
+  showMidtermTab('quiz');
+  renderQ();
 }
 
-function showQuestion() {
-  const quizDiv = document.getElementById("quiz");
-
-  if (currentQuizIndex >= currentWeek.quiz.length) {
-    quizDiv.innerHTML = `
-      <div class="quiz-box">
-        <h3>Quiz Complete!</h3>
-        <div class="score">Score: ${score} / ${currentWeek.quiz.length}</div>
-        <button onclick="loadQuiz()">Restart Quiz</button>
-      </div>
-    `;
-    return;
-  }
-
-  const question = currentWeek.quiz[currentQuizIndex];
-
-  quizDiv.innerHTML = `
-    <div class="quiz-box">
-      <h3>Question ${currentQuizIndex + 1}</h3>
-      <p>${question.q}</p>
-      <div id="options"></div>
-    </div>
-  `;
-
-  const optionsDiv = document.getElementById("options");
-
-  question.options.forEach(option => {
-    const opt = document.createElement("div");
-    opt.className = "option";
-    opt.textContent = option;
-    opt.onclick = () => checkAnswer(opt, option, question.answer, question);
-    optionsDiv.appendChild(opt);
+function renderQ() {
+  const q = quizSet[qi];
+  document.getElementById('counter').textContent = `Question ${qi + 1} of ${quizSet.length} · ${q.sec}`;
+  document.getElementById('bar').style.width = ((qi + 1) / quizSet.length * 100) + "%";
+  document.getElementById('question').innerHTML = `<b>${q.t}</b>`;
+  const ops = document.getElementById('options');
+  ops.innerHTML = "";
+  q.o.forEach((op, i) => {
+    const b = document.createElement('button');
+    b.className = 'option';
+    b.textContent = op;
+    if (answers[qi] === i) b.classList.add('selected');
+    if (submitted[qi] && i === q.a) b.classList.add('correct');
+    if (submitted[qi] && answers[qi] === i && i !== q.a) b.classList.add('wrong');
+    b.onclick = () => {
+      if (!submitted[qi]) {
+        answers[qi] = i;
+        renderQ();
+      }
+    };
+    ops.appendChild(b);
   });
-}
-
-function checkAnswer(element, selected, correct, question) {
-  const allOptions = document.querySelectorAll(".option");
-
-  allOptions.forEach(opt => {
-    opt.onclick = null;
-
-    if (opt.textContent === correct) {
-      opt.classList.add("correct");
-    }
-
-    if (opt.textContent === selected && selected !== correct) {
-      opt.classList.add("wrong");
-    }
-  });
-
-  if (selected === correct) {
-    score++;
+  const fb = document.getElementById('feedback');
+  if (submitted[qi]) {
+    fb.classList.remove('hidden');
+    fb.innerHTML = (answers[qi] === q.a ? "✅ Correct. " : "❌ Not quite. ") + `<b>Remember:</b> ${q.e}`;
   } else {
-    saveMissedQuestion(question, selected);
+    fb.classList.add('hidden');
   }
-
-  setTimeout(() => {
-    currentQuizIndex++;
-    showQuestion();
-  }, 1200);
 }
 
-function saveMissedQuestion(question, selected) {
-  const missed = JSON.parse(localStorage.getItem("orientationMissedQuestions")) || [];
-
-  missed.push({
-    week: currentWeek.title,
-    topic: currentWeek.topic,
-    question: question.q,
-    correctAnswer: question.answer,
-    selectedAnswer: selected
-  });
-
-  localStorage.setItem("orientationMissedQuestions", JSON.stringify(missed));
-}
-
-function loadMissed() {
-  const missedDiv = document.getElementById("missed");
-  const missed = JSON.parse(localStorage.getItem("orientationMissedQuestions")) || [];
-
-  if (missed.length === 0) {
-    missedDiv.innerHTML = `
-      <div class="note-box">
-        No missed questions yet. Nice job!
-      </div>
-    `;
+function submitAnswer() {
+  if (answers[qi] === undefined) {
+    alert("Pick an answer first.");
     return;
   }
+  submitted[qi] = true;
+  if (answers[qi] !== quizSet[qi].a) saveMissed(quizSet[qi], answers[qi]);
+  renderQ();
+}
 
-  missedDiv.innerHTML = `
-    <button onclick="clearMissed()">Clear Missed Questions</button>
-  `;
+function nextQuestion() {
+  if (qi < quizSet.length - 1) {
+    qi++;
+    renderQ();
+  } else {
+    finishQuiz();
+  }
+}
 
-  missed.forEach(item => {
-    const box = document.createElement("div");
-    box.className = "quiz-box";
-    box.innerHTML = `
-      <strong>${item.week}</strong>
-      <p>${item.question}</p>
-      <p><strong>Your answer:</strong> ${item.selectedAnswer}</p>
-      <p><strong>Correct answer:</strong> ${item.correctAnswer}</p>
-    `;
-    missedDiv.appendChild(box);
+function prevQuestion() {
+  if (qi > 0) {
+    qi--;
+    renderQ();
+  }
+}
+
+function finishQuiz() {
+  let correct = 0;
+  const weak = {};
+  quizSet.forEach((q, i) => {
+    if (answers[i] === q.a) correct++;
+    else weak[q.sec] = (weak[q.sec] || 0) + 1;
   });
+  const pct = Math.round(correct / quizSet.length * 100);
+  showMidtermTab('results');
+  document.getElementById('scoreBox').innerHTML = `<div class="note-box must"><h3>Your score: ${correct}/${quizSet.length} (${pct}%)</h3><p>${pct >= 85 ? "Strong work 💗 Keep reviewing missed questions." : "Review the weak spots below, then redo Practice Quiz."}</p></div>`;
+  const weakList = Object.entries(weak).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  document.getElementById('reviewBox').innerHTML = `<h3>Weakest Spots</h3><ul>${weakList.map(([s,n]) => `<li><b>${s}</b>: ${n} missed</li>`).join('') || "<li>No weak spots. You crushed it.</li>"}</ul>`;
+}
+
+function saveMissed(q, selectedIndex) {
+  const missed = JSON.parse(localStorage.getItem("orientationMidtermMissed") || "[]");
+  missed.push({
+    sec: q.sec,
+    question: q.t,
+    yourAnswer: q.o[selectedIndex],
+    correctAnswer: q.o[q.a]
+  });
+  localStorage.setItem("orientationMidtermMissed", JSON.stringify(missed));
+}
+
+function renderMissed() {
+  const list = document.getElementById('missedList');
+  const missed = JSON.parse(localStorage.getItem("orientationMidtermMissed") || "[]");
+  if (!missed.length) {
+    list.innerHTML = `<div class="note-box">No missed questions yet. Nice job!</div>`;
+    return;
+  }
+  list.innerHTML = missed.slice().reverse().map(m => `
+    <div class="quiz-box">
+      <div class="small"><b>${m.sec}</b></div>
+      <p><b>${m.question}</b></p>
+      <p><b>Your answer:</b> ${m.yourAnswer}</p>
+      <p><b>Correct answer:</b> ${m.correctAnswer}</p>
+    </div>
+  `).join('');
 }
 
 function clearMissed() {
-  localStorage.removeItem("orientationMissedQuestions");
-  loadMissed();
+  localStorage.removeItem("orientationMidtermMissed");
+  renderMissed();
 }
 
-loadWeeks();
+showPage('homePage');
 </script>
-
 </body>
 </html>
