@@ -136,7 +136,7 @@ select {
 <section id="homePage" class="page">
   <div class="card">
     <h2>💗 Orientation Dashboard</h2>
-    <p>This clean Orientation page includes your <b>Week 7 Midterm Review</b>. Next, we will add Week 8 and Week 9 as you upload/build them.</p>
+    <p>This clean Orientation page includes your <b>Week 7 Midterm Review</b> and <b>Week 8–9 Detection & Diagnosis</b>.</p>
     <div>
       <span class="tag">Study Guide</span>
       <span class="tag">Flashcards</span>
@@ -155,14 +155,11 @@ select {
       <p><b>Open Study Tools →</b></p>
     </div>
 
-    <div class="card week-card locked">
-      <h2>Week 8</h2>
-      <p>Coming next.</p>
-    </div>
-
-    <div class="card week-card locked">
-      <h2>Week 9</h2>
-      <p>Coming next.</p>
+    <div class="card week-card" onclick="openWeek89()">
+      <h2>🌸 Week 8–9</h2>
+      <p>Chapter 5 • Detection & Diagnosis</p>
+      <p>Vitals • Screening • Imaging • Biopsy • TNM</p>
+      <p><b>Open Study Tools →</b></p>
     </div>
   </div>
 </section>
@@ -282,6 +279,212 @@ select {
     <button onclick="showMidtermTab('study')">Back to Study Guide</button>
   </div>
 </section>
+
+<section id="week89Page" class="page hidden">
+  <button class="secondary" onclick="showPage('homePage')">← Back to Orientation Dashboard</button>
+
+  <div class="card">
+    <h2>Week 8–9: Detection & Diagnosis</h2>
+    <p class="small">Built from Chapter 5 Part 1, Chapter 5 Part 2, Chapter 15 Vitals, and your Week 9 review questions.</p>
+    <div class="tabs">
+      <button id="w89-tab-study" onclick="showWeek89Tab('w89-study')">Study Guide</button>
+      <button id="w89-tab-flashcards" onclick="showWeek89Tab('w89-flashcards')">Flashcards</button>
+      <button id="w89-tab-practice" onclick="startWeek89Quiz('practice')">Practice Quiz</button>
+      <button id="w89-tab-exam" onclick="startWeek89Quiz('exam')">Mock Exam</button>
+      <button id="w89-tab-missed" onclick="showWeek89Tab('w89-missed')">Missed Questions</button>
+      <button id="w89-tab-last" onclick="showWeek89Tab('w89-last')">Last-Hour Review</button>
+    </div>
+  </div>
+
+  <div id="w89-study" class="w89tab card">
+    <h2>Study Guide</h2>
+
+    <div class="note-box must">
+      <h3>1. Detection & Diagnosis Basics</h3>
+      <ul>
+        <li><b>Detection</b> means finding possible disease early, often before symptoms appear.</li>
+        <li><b>Diagnosis</b> means identifying the disease or condition.</li>
+        <li><b>Early detection</b> improves survival, gives more treatment options, and can improve quality of life.</li>
+        <li><b>Prevention</b> means strategies that stop cancer from developing.</li>
+        <li><b>Screening</b> means selecting appropriate tests to check asymptomatic people for disease.</li>
+        <li><b>Hard-to-access cancers</b>, like pancreas or ovary, are often found late because symptoms are nonspecific.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>2. Signs, Symptoms, Syndromes</h3>
+      <ul>
+        <li><b>Sign:</b> objective finding observed by examiner, such as rash or lump.</li>
+        <li><b>Symptom:</b> subjective experience reported by patient, such as pain or fatigue.</li>
+        <li><b>Syndrome:</b> group of related signs and symptoms from a common cause.</li>
+        <li><b>Paraneoplastic syndrome:</b> symptoms caused by tumor-produced substances or hormones, occurring away from the tumor.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>3. Medical Record & Patient Interview</h3>
+      <ul>
+        <li>The medical record documents past medical experiences, medical history, test results, progress notes, consent forms, correspondence, and medical images.</li>
+        <li>The medical history gives a snapshot of prior problems and treatments.</li>
+        <li>The patient interview is one of the physician’s most powerful tools.</li>
+        <li><b>Subjective data:</b> patient complaints, feelings, and history.</li>
+        <li><b>Objective data:</b> measurable or observable findings, such as vital signs, labs, imaging, or physical exam findings.</li>
+        <li>Technical jargon can interfere with the interview because the patient may not understand it.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>4. Physical Examination</h3>
+      <ul>
+        <li><b>Inspection:</b> looking.</li>
+        <li><b>Palpation:</b> touching/feeling tissues and organs.</li>
+        <li><b>Percussion:</b> tapping to evaluate underlying structures.</li>
+        <li><b>Auscultation:</b> listening to body sounds, such as heart and lungs.</li>
+        <li><b>Edema:</b> tissue swelling caused by excess fluid accumulation.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>5. Vital Signs</h3>
+      <ul>
+        <li>Vital signs help determine whether a patient is stable for treatment.</li>
+        <li>They provide baseline data and help detect acute reactions or therapy-related changes.</li>
+        <li>Vital signs include temperature, pulse, respirations, blood pressure, pain, and oxygen saturation.</li>
+        <li><b>Homeostasis:</b> body’s ability to maintain stable internal balance.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>6. Temperature, Pulse, Respirations, Blood Pressure</h3>
+      <ul>
+        <li><b>Oral temperature:</b> most common; normal approximately 97.7–99.5°F.</li>
+        <li><b>Rectal temperature:</b> most accurate, often used for unstable patients.</li>
+        <li><b>Febrile:</b> fever. <b>Hypothermia:</b> temperature below normal.</li>
+        <li><b>Radial pulse:</b> most common pulse site. <b>Carotid pulse:</b> emergencies. <b>Apical pulse:</b> infants or cardiac patients.</li>
+        <li>Pulse factors: rate, rhythm, size, and tension.</li>
+        <li>Respiration factors: rate, depth, rhythm, and character.</li>
+        <li>Adult respirations: about 12–20 breaths/min.</li>
+        <li><b>Tachypnea:</b> respiratory rate greater than 20/min. <b>Bradypnea:</b> decreased respiratory rate.</li>
+        <li><b>Dyspnea:</b> difficult breathing. <b>Orthopnea:</b> shortness of breath when lying down. <b>Apnea:</b> absence of breathing.</li>
+        <li><b>Systolic:</b> top number; heart squeezing. <b>Diastolic:</b> bottom number; heart resting.</li>
+        <li>Normal blood pressure is about 120/80 mmHg. Most common site is the brachial artery.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>7. Pain & Oxygen</h3>
+      <ul>
+        <li>Pain is subjective and should be assessed with tools such as a numeric 0–10 scale or faces scale.</li>
+        <li><b>Acute pain:</b> short duration, well-defined onset.</li>
+        <li><b>Chronic pain:</b> persistent pain lasting more than 3 months.</li>
+        <li>Oxygen is classified as a drug and must be prescribed by a physician.</li>
+        <li>Use the lowest effective oxygen dose.</li>
+        <li>Excess oxygen can cause absorptive atelectasis or oxygen toxicity.</li>
+        <li>Nasal cannula is the most common device for low concentrations of oxygen.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>8. Screening & Predictive Values</h3>
+      <ul>
+        <li><b>Prevalence:</b> probability of disease in a population at a point in time.</li>
+        <li><b>Incidence:</b> probability that disease develops in a disease-free patient during an interval.</li>
+        <li><b>Sensitivity:</b> ability of a test to give a true-positive result when disease is present.</li>
+        <li><b>Specificity:</b> ability of a test to give a true-negative result when disease is absent.</li>
+        <li>Mass screening depends on results obtained, cost-effectiveness, and risk to the patient.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>9. Cancer Screening Highlights</h3>
+      <ul>
+        <li><b>Breast:</b> mammography; average-risk women begin regular screening around age 45, with option to start 40–44.</li>
+        <li><b>Sentinel lymph node biopsy:</b> identifies the first draining lymph node from a breast tumor using blue dye or technetium-99m.</li>
+        <li><b>Lung:</b> leading cause of cancer-related deaths; low-dose CT helps detect high-risk patients earlier.</li>
+        <li><b>Prostate:</b> screening uses DRE and PSA; discussion depends on risk and life expectancy.</li>
+        <li><b>Cervical:</b> linked to HPV; screening uses Pap and/or HPV testing; vaccination does not replace screening.</li>
+      </ul>
+    </div>
+
+    <div class="note-box must">
+      <h3>10. Labs, Imaging, Biopsy, Staging</h3>
+      <ul>
+        <li><b>Blood studies</b> look at blood cells; <b>blood chemistry</b> looks at chemicals like glucose, electrolytes, and proteins.</li>
+        <li><b>Microbiologic studies</b> detect organisms that may cause infection.</li>
+        <li><b>Nuclear medicine</b> uses radiopharmaceuticals; gamma rays are detected to create images.</li>
+        <li><b>PET</b> uses radioactive glucose; cancer cells absorb glucose faster than normal tissue.</li>
+        <li><b>CT</b> uses x-ray data to create cross-sectional images and is good for bone and anatomy.</li>
+        <li><b>MRI</b> uses radiofrequency waves and a magnetic field; no ionizing radiation; excellent for soft tissue.</li>
+        <li><b>Ultrasound</b> uses high-frequency sound waves; cannot detect microcalcifications.</li>
+        <li><b>Biopsy</b> gives histologic confirmation and is essential for diagnosis.</li>
+        <li><b>Exfoliative cytology</b> collects cells by scraping or natural sloughing.</li>
+        <li><b>Tumor markers</b> are substances released by tumors and detected in blood or body fluids; PSA is one example.</li>
+        <li><b>TNM:</b> T = primary tumor size/extent, N = regional lymph nodes, M = distant metastasis.</li>
+        <li><b>Histologic grade:</b> how abnormal/aggressive cells look under the microscope.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="w89-last" class="w89tab card hidden">
+    <h2>Last-Hour Review</h2>
+    <table class="table">
+      <tr><th>Topic</th><th>Must Know</th></tr>
+      <tr><td>Detection vs Diagnosis</td><td>Detection finds possible disease early. Diagnosis identifies the disease.</td></tr>
+      <tr><td>Sign vs Symptom</td><td>Sign = objective. Symptom = subjective.</td></tr>
+      <tr><td>Physical Exam</td><td>Inspection, palpation, percussion, auscultation.</td></tr>
+      <tr><td>Pulse</td><td>Rate, rhythm, size, tension. Character belongs with respirations.</td></tr>
+      <tr><td>Respirations</td><td>Rate, depth, rhythm, character. Adult normal: 12–20/min.</td></tr>
+      <tr><td>Blood Pressure</td><td>Systolic = squeeze/top. Diastolic = resting/bottom. Brachial artery is common site.</td></tr>
+      <tr><td>Sensitivity</td><td>True positive when disease is present.</td></tr>
+      <tr><td>Specificity</td><td>True negative when disease is absent.</td></tr>
+      <tr><td>MRI</td><td>No ionizing radiation. Uses magnetic field and radiofrequency waves.</td></tr>
+      <tr><td>PET</td><td>Uses radioactive glucose; highlights high metabolic activity.</td></tr>
+      <tr><td>Biopsy</td><td>Essential for histologic diagnosis.</td></tr>
+      <tr><td>TNM</td><td>T tumor, N nodes, M metastasis.</td></tr>
+    </table>
+  </div>
+
+  <div id="w89-flashcards" class="w89tab card hidden">
+    <h2>Week 8–9 Flashcards</h2>
+    <label><b>Section:</b></label>
+    <select id="w89SectionSelect" onchange="setWeek89Section(this.value)"></select>
+    <div class="flashcard" id="w89Flashcard" onclick="flipWeek89Card()">Tap to start</div>
+    <p id="w89FlashCount" class="small"></p>
+    <div class="nav-row">
+      <button class="secondary" onclick="prevWeek89Card()">← Back</button>
+      <button onclick="flipWeek89Card()">Flip</button>
+      <button class="secondary" onclick="nextWeek89Card()">Next →</button>
+    </div>
+  </div>
+
+  <div id="w89-quiz" class="w89tab card hidden">
+    <h2 id="w89QuizTitle">Quiz</h2>
+    <div class="progress"><div id="w89Bar" class="bar"></div></div>
+    <p id="w89Counter" class="small"></p>
+    <div id="w89Question" class="quiz-box"></div>
+    <div id="w89Options"></div>
+    <div id="w89Feedback" class="feedback hidden"></div>
+    <div class="nav-row">
+      <button class="secondary" onclick="prevWeek89Question()">Previous</button>
+      <button onclick="submitWeek89Answer()">Submit</button>
+      <button class="secondary" onclick="nextWeek89Question()">Next</button>
+    </div>
+  </div>
+
+  <div id="w89-missed" class="w89tab card hidden">
+    <h2>Week 8–9 Missed Questions</h2>
+    <button class="light" onclick="clearWeek89Missed()">Clear Missed Questions</button>
+    <div id="w89MissedList"></div>
+  </div>
+
+  <div id="w89-results" class="w89tab card hidden">
+    <h2>Results</h2>
+    <div id="w89ScoreBox"></div>
+    <div id="w89ReviewBox"></div>
+    <button onclick="showWeek89Tab('w89-study')">Back to Study Guide</button>
+  </div>
+</section>
+
 <div class="footer-space"></div>
 </div>
 
@@ -743,6 +946,364 @@ function renderMissed() {
 function clearMissed() {
   localStorage.removeItem("orientationMidtermMissed");
   renderMissed();
+}
+
+
+const WEEK89_CARDS = [
+{sec:"Detection Basics", q:"What does detection mean?", a:"Finding possible disease early, often before symptoms appear."},
+{sec:"Detection Basics", q:"What does diagnosis mean?", a:"Identification of a disease or condition."},
+{sec:"Detection Basics", q:"Why is early detection important?", a:"It improves survival, gives more treatment options, and may improve quality of life."},
+{sec:"Detection Basics", q:"What is prevention?", a:"Strategies and measures that stop cancer from developing."},
+{sec:"Detection Basics", q:"What is screening?", a:"Selecting appropriate tests and studies to check for disease in asymptomatic people."},
+{sec:"Detection Basics", q:"Why are pancreas and ovary cancers often detected late?", a:"They are hard to access anatomically and often have nonspecific symptoms."},
+{sec:"Detection Basics", q:"What is relative survival rate?", a:"Survival of cancer patients compared with the general population."},
+{sec:"Detection Basics", q:"What database collects cancer statistics mentioned in the slides?", a:"SEER: Surveillance, Epidemiology, and End Results."},
+
+{sec:"Signs & Symptoms", q:"What is a sign?", a:"An objective finding observed by the examiner, such as a rash or lump."},
+{sec:"Signs & Symptoms", q:"What is a symptom?", a:"A subjective experience reported by the patient, such as pain or fatigue."},
+{sec:"Signs & Symptoms", q:"What is a syndrome?", a:"A group of related signs and symptoms from a common cause."},
+{sec:"Signs & Symptoms", q:"What is a paraneoplastic syndrome?", a:"Symptoms caused by substances or hormones produced by a tumor, occurring away from the tumor."},
+{sec:"Signs & Symptoms", q:"Is pain a sign or symptom?", a:"Symptom, because it is reported by the patient."},
+{sec:"Signs & Symptoms", q:"Is a lump found by the examiner a sign or symptom?", a:"Sign, because it is objectively observed."},
+
+{sec:"Medical Record", q:"What is the purpose of the medical history?", a:"It gives a snapshot of prior medical problems and treatments."},
+{sec:"Medical Record", q:"Why is medical history important?", a:"It helps identify risk factors and supports diagnosis and treatment planning."},
+{sec:"Medical Record", q:"What does the medical record include?", a:"Medical history, labs, diagnostic tests, progress notes, consent forms, correspondence, and medical images."},
+{sec:"Medical Record", q:"Do patients own their medical record?", a:"No, but they may review or obtain copies."},
+{sec:"Medical Record", q:"What are demographic data?", a:"General patient profile information such as age, gender, race, and national origin when relevant."},
+{sec:"Medical Record", q:"Why do demographics matter?", a:"They help predict risk, guide screening, and support public health planning."},
+{sec:"Medical Record", q:"What is incidence?", a:"The number or probability of new cases developing during a period of time."},
+{sec:"Medical Record", q:"What is prevalence?", a:"Probability of disease in the population at a point in time."},
+
+{sec:"Interview & Diagnosis", q:"What is subjective data?", a:"Patient-reported complaints, feelings, history, or symptoms."},
+{sec:"Interview & Diagnosis", q:"What is objective data?", a:"Observable or measurable findings such as vitals, lab values, imaging, or exam findings."},
+{sec:"Interview & Diagnosis", q:"What is the patient interview often considered?", a:"One of the physician's most powerful tools."},
+{sec:"Interview & Diagnosis", q:"What can interfere with a patient interview?", a:"Using technical jargon the patient does not understand."},
+{sec:"Interview & Diagnosis", q:"What starts the diagnostic process?", a:"Interview and physical examination."},
+{sec:"Interview & Diagnosis", q:"What supports diagnostic findings?", a:"Medical history, prior records, imaging, and lab tests."},
+
+{sec:"Physical Exam", q:"What are the four classic techniques of physical examination?", a:"Inspection, palpation, percussion, and auscultation."},
+{sec:"Physical Exam", q:"Inspection means what?", a:"Using sight to observe."},
+{sec:"Physical Exam", q:"Palpation means what?", a:"Using touch to feel tissues and organs."},
+{sec:"Physical Exam", q:"Percussion means what?", a:"Tapping the body to evaluate underlying structures."},
+{sec:"Physical Exam", q:"Auscultation means what?", a:"Listening to sounds made by the body, such as heart and lungs."},
+{sec:"Physical Exam", q:"What is edema?", a:"Swelling of tissue caused by accumulation of excess fluid."},
+
+{sec:"Vital Signs", q:"Why are vital signs important?", a:"They help assess overall health and determine whether a patient is stable for treatment."},
+{sec:"Vital Signs", q:"What is homeostasis?", a:"The body's ability to maintain a stable internal environment."},
+{sec:"Vital Signs", q:"What can affect vital signs?", a:"Time of day, physical activity, age, emotional state, disease, and treatment effects."},
+{sec:"Vital Signs", q:"Which vital signs are emphasized in this chapter?", a:"Temperature, pulse, respirations, blood pressure, pain, and oxygen saturation."},
+{sec:"Vital Signs", q:"What is a pulse oximeter?", a:"A noninvasive device that measures oxygen saturation and pulse rate."},
+
+{sec:"Temperature", q:"What does body temperature measure?", a:"Core heat balance between heat produced and heat lost."},
+{sec:"Temperature", q:"Which temperature route is most common?", a:"Oral."},
+{sec:"Temperature", q:"Which temperature route is most accurate?", a:"Rectal."},
+{sec:"Temperature", q:"When is oral temperature not used?", a:"For irrational or unconscious patients."},
+{sec:"Temperature", q:"What does febrile mean?", a:"Having a fever."},
+{sec:"Temperature", q:"What does hypothermia mean?", a:"Body temperature below normal range."},
+{sec:"Temperature", q:"Normal oral body temperature range?", a:"Approximately 97.7–99.5°F."},
+
+{sec:"Pulse", q:"What is pulse?", a:"Expansion and contraction of an artery as blood is pumped by the heart."},
+{sec:"Pulse", q:"Most common pulse site?", a:"Radial pulse at the wrist."},
+{sec:"Pulse", q:"Which pulse site is used in emergencies?", a:"Carotid pulse in the neck."},
+{sec:"Pulse", q:"Which pulse site is used for infants or cardiac patients?", a:"Apical pulse at the chest."},
+{sec:"Pulse", q:"What pulse factors are observed?", a:"Rate, rhythm, size, and tension."},
+{sec:"Pulse", q:"Is character a pulse factor?", a:"No. Character belongs with respiration assessment."},
+
+{sec:"Respirations", q:"What are respirations?", a:"Exchange of oxygen and carbon dioxide during breathing."},
+{sec:"Respirations", q:"What respiratory factors are observed?", a:"Rate, depth, rhythm, and character."},
+{sec:"Respirations", q:"Normal adult respiratory rate?", a:"About 12–20 breaths per minute."},
+{sec:"Respirations", q:"Major muscle of ventilation?", a:"Diaphragm."},
+{sec:"Respirations", q:"What is tachypnea?", a:"Respiratory rate greater than 20 breaths per minute."},
+{sec:"Respirations", q:"What is bradypnea?", a:"Decreased respiratory rate."},
+{sec:"Respirations", q:"What is dyspnea?", a:"Difficulty breathing."},
+{sec:"Respirations", q:"What is orthopnea?", a:"Shortness of breath when lying down, relieved by sitting or standing."},
+{sec:"Respirations", q:"What is apnea?", a:"Absence of breathing."},
+
+{sec:"Blood Pressure", q:"What is blood pressure?", a:"Force of blood against arterial walls as the heart pumps."},
+{sec:"Blood Pressure", q:"What is systolic pressure?", a:"Top number; pressure during heart contraction."},
+{sec:"Blood Pressure", q:"Systolic memory trick?", a:"S = Squeeze."},
+{sec:"Blood Pressure", q:"What is diastolic pressure?", a:"Bottom number; pressure during heart relaxation."},
+{sec:"Blood Pressure", q:"Diastolic memory trick?", a:"D = Dilate/relax."},
+{sec:"Blood Pressure", q:"Normal blood pressure is about what?", a:"Around 120/80 mmHg."},
+{sec:"Blood Pressure", q:"Most common site for blood pressure?", a:"Brachial artery at the antecubital fossa."},
+{sec:"Blood Pressure", q:"What is hypertension?", a:"Blood pressure higher than normal."},
+{sec:"Blood Pressure", q:"What is hypotension?", a:"Blood pressure lower than normal."},
+{sec:"Blood Pressure", q:"Why does hypotension matter?", a:"Organs may not receive enough oxygen-rich blood."},
+
+{sec:"Pain & Oxygen", q:"What is pain assessment?", a:"Subjective measurement of a patient's discomfort level."},
+{sec:"Pain & Oxygen", q:"Common pain scales?", a:"Numeric 0–10 scale and faces scale."},
+{sec:"Pain & Oxygen", q:"What is acute pain?", a:"Short-duration pain with a well-defined onset."},
+{sec:"Pain & Oxygen", q:"What is chronic pain?", a:"Pain that persists for more than 3 months."},
+{sec:"Pain & Oxygen", q:"How is oxygen classified?", a:"As a drug."},
+{sec:"Pain & Oxygen", q:"Who must prescribe oxygen?", a:"A physician."},
+{sec:"Pain & Oxygen", q:"What oxygen dose should be used?", a:"The lowest effective dose needed."},
+{sec:"Pain & Oxygen", q:"Excess oxygen can cause what?", a:"Absorptive atelectasis and oxygen toxicity."},
+{sec:"Pain & Oxygen", q:"Most common low-flow oxygen device?", a:"Nasal cannula."},
+{sec:"Pain & Oxygen", q:"Oxygen can be prescribed by what two measures?", a:"Flow rate in L/min or concentration/FiO₂."},
+
+{sec:"Screening", q:"What is sensitivity?", a:"Ability of a test to identify true positives."},
+{sec:"Screening", q:"What is specificity?", a:"Ability of a test to identify true negatives."},
+{sec:"Screening", q:"High sensitivity positive result means what?", a:"The person probably has the disease."},
+{sec:"Screening", q:"High specificity negative result means what?", a:"The person probably does not have the disease."},
+{sec:"Screening", q:"Mass screening is based on what?", a:"Results obtained, cost-effectiveness, and risk to the patient."},
+{sec:"Screening", q:"Which answer is NOT a basis for mass screening?", a:"Geographic location."},
+{sec:"Screening", q:"Which ACS screening is NOT recommended in the assignment?", a:"CT scanning for brain cancer."},
+
+{sec:"Cancer Screening", q:"Most common cancer in women listed in the lecture?", a:"Breast cancer."},
+{sec:"Cancer Screening", q:"Most common cancer in men listed in the lecture?", a:"Prostate cancer."},
+{sec:"Cancer Screening", q:"Breast screening commonly uses what?", a:"Mammography."},
+{sec:"Cancer Screening", q:"What is sentinel lymph node biopsy?", a:"Finding the first lymph node that drains from a breast tumor."},
+{sec:"Cancer Screening", q:"What materials help identify sentinel lymph nodes?", a:"Blue dye or radioactive technetium-99m."},
+{sec:"Cancer Screening", q:"What is the leading cause of cancer-related death in the U.S.?", a:"Lung cancer."},
+{sec:"Cancer Screening", q:"What imaging helps screen high-risk lung patients?", a:"Low-dose CT."},
+{sec:"Cancer Screening", q:"Common prostate screening tests?", a:"Digital rectal examination and PSA blood test."},
+{sec:"Cancer Screening", q:"What virus is strongly linked to cervical cancer?", a:"Human papillomavirus, HPV."},
+{sec:"Cancer Screening", q:"Does HPV vaccination replace cervical screening?", a:"No. Screening should continue."},
+
+{sec:"Labs & Imaging", q:"Blood studies are concerned with what?", a:"Blood cells."},
+{sec:"Labs & Imaging", q:"Blood chemistry tests examine what?", a:"Chemicals in blood, such as glucose, electrolytes, and proteins."},
+{sec:"Labs & Imaging", q:"Microbiologic studies help detect what?", a:"Specific organisms that may cause infection."},
+{sec:"Labs & Imaging", q:"What lab test detects a drop in WBCs?", a:"Complete blood count."},
+{sec:"Labs & Imaging", q:"What is nuclear medicine imaging?", a:"Imaging that introduces a radiopharmaceutical into the patient."},
+{sec:"Labs & Imaging", q:"What does a radionuclide emit during radioactive decay?", a:"Gamma rays."},
+{sec:"Labs & Imaging", q:"Three nuclear medicine devices in the lecture?", a:"Gamma camera, rectilinear scanner, and PET scanner."},
+{sec:"Labs & Imaging", q:"What does PET use in oncology?", a:"Radioactive glucose."},
+{sec:"Labs & Imaging", q:"Why do cancer cells show on PET?", a:"They absorb glucose faster than normal tissue."},
+
+{sec:"Radiology Imaging", q:"Two types of routine radiographic studies?", a:"Contrast and non-contrast studies."},
+{sec:"Radiology Imaging", q:"What do contrast media help visualize?", a:"Radiolucent anatomy."},
+{sec:"Radiology Imaging", q:"Examples of contrast media?", a:"Barium and iodine."},
+{sec:"Radiology Imaging", q:"What does CT use?", a:"Digitized x-ray data reconstructed into cross-sectional images."},
+{sec:"Radiology Imaging", q:"What is CT good for?", a:"Cross-sectional anatomy, 3D planning, and bone structures."},
+{sec:"Radiology Imaging", q:"What does MRI use?", a:"Radiofrequency waves and a magnetic field."},
+{sec:"Radiology Imaging", q:"Does MRI use ionizing radiation?", a:"No."},
+{sec:"Radiology Imaging", q:"MRI is superior for what?", a:"Soft tissue imaging, brain, and spinal cord."},
+{sec:"Radiology Imaging", q:"MRI limitations?", a:"Expensive, contraindicated with certain metal/pacemakers, and may cause claustrophobia."},
+{sec:"Radiology Imaging", q:"Ultrasound uses what?", a:"High-frequency sound waves."},
+{sec:"Radiology Imaging", q:"Ultrasound cannot detect what in breast imaging?", a:"Microcalcifications."},
+
+{sec:"Biopsy & Cytology", q:"Why is biopsy important?", a:"Histologic confirmation is essential for diagnosis."},
+{sec:"Biopsy & Cytology", q:"Fine needle aspiration collects what?", a:"Cells only, with little tissue architecture."},
+{sec:"Biopsy & Cytology", q:"Core needle biopsy provides what advantage?", a:"Better tissue architecture."},
+{sec:"Biopsy & Cytology", q:"Incisional biopsy removes what?", a:"Part of a tumor."},
+{sec:"Biopsy & Cytology", q:"Excisional biopsy removes what?", a:"The entire tumor."},
+{sec:"Biopsy & Cytology", q:"Clear or negative margin means what?", a:"No disease at the tissue edges."},
+{sec:"Biopsy & Cytology", q:"Positive margin means what?", a:"Cancer extends beyond the biopsy site or to the edge."},
+{sec:"Biopsy & Cytology", q:"What is exfoliative cytology?", a:"Examining cells that slough off naturally or are scraped off."},
+{sec:"Biopsy & Cytology", q:"Exfoliative cytology collects tissue through what?", a:"Scraping cells."},
+{sec:"Biopsy & Cytology", q:"Limitation of exfoliative cytology?", a:"It cannot distinguish invasive from noninvasive cancer."},
+
+{sec:"Tumor Markers & Staging", q:"What are tumor markers?", a:"Substances released by tumors and detected in blood or body fluids."},
+{sec:"Tumor Markers & Staging", q:"Example of a tumor marker for prostate cancer?", a:"PSA."},
+{sec:"Tumor Markers & Staging", q:"When is cancer staging performed?", a:"After histologic diagnosis is confirmed."},
+{sec:"Tumor Markers & Staging", q:"Purpose of staging?", a:"Determine anatomic extent of disease and guide treatment/prognosis."},
+{sec:"Tumor Markers & Staging", q:"TNM: T means what?", a:"Tumor size and local extent of primary tumor."},
+{sec:"Tumor Markers & Staging", q:"TNM: N means what?", a:"Regional lymph node involvement."},
+{sec:"Tumor Markers & Staging", q:"TNM: M means what?", a:"Presence or absence of distant metastasis."},
+{sec:"Tumor Markers & Staging", q:"T1–T4 indicate what?", a:"Increasing tumor size or depth/extent."},
+{sec:"Tumor Markers & Staging", q:"N0–N3 indicate what?", a:"Degree of lymph node involvement."},
+{sec:"Tumor Markers & Staging", q:"M0 and M1 mean what?", a:"M0 = no distant metastasis; M1 = distant metastasis present."},
+{sec:"Tumor Markers & Staging", q:"What is histologic type?", a:"Cell origin, such as squamous cell carcinoma or adenocarcinoma."},
+{sec:"Tumor Markers & Staging", q:"What is histologic grade?", a:"How abnormal or aggressive tumor cells look under the microscope."},
+{sec:"Tumor Markers & Staging", q:"Three major spread patterns?", a:"Direct extension, lymphatic spread, and hematogenous spread."}
+];
+
+let w89ActiveSection = "All";
+let w89FilteredCards = [];
+let w89FcIndex = 0;
+let w89Flipped = false;
+
+let w89QuizSet = [];
+let w89Qi = 0;
+let w89Answers = [];
+let w89Submitted = [];
+
+function openWeek89() {
+  showPage('week89Page');
+  showWeek89Tab('w89-study');
+  buildWeek89SectionSelect();
+}
+
+function showWeek89Tab(tab) {
+  document.querySelectorAll('.w89tab').forEach(t => t.classList.add('hidden'));
+  document.getElementById(tab).classList.remove('hidden');
+  document.querySelectorAll('#week89Page .tabs button').forEach(b => b.classList.remove('active'));
+  const clean = tab.replace('w89-', '');
+  const btn = document.getElementById('w89-tab-' + clean);
+  if (btn) btn.classList.add('active');
+  if (tab === 'w89-flashcards') renderWeek89Card();
+  if (tab === 'w89-missed') renderWeek89Missed();
+}
+
+function buildWeek89SectionSelect() {
+  const sel = document.getElementById('w89SectionSelect');
+  if (!sel || sel.options.length > 0) return;
+  const sections = ["All", ...new Set(WEEK89_CARDS.map(c => c.sec))];
+  sections.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s;
+    opt.textContent = s;
+    sel.appendChild(opt);
+  });
+  setWeek89Section("All");
+}
+
+function setWeek89Section(sec) {
+  w89ActiveSection = sec;
+  w89FilteredCards = WEEK89_CARDS.filter(c => sec === "All" || c.sec === sec);
+  w89FcIndex = 0;
+  w89Flipped = false;
+  renderWeek89Card();
+}
+
+function renderWeek89Card() {
+  if (!w89FilteredCards.length) setWeek89Section(w89ActiveSection);
+  const card = w89FilteredCards[w89FcIndex];
+  const box = document.getElementById('w89Flashcard');
+  if (!card) {
+    box.innerHTML = "No cards found.";
+    return;
+  }
+  box.innerHTML = w89Flipped
+    ? `<div><div class="small"><b>Answer</b> · ${card.sec}</div><br><span class="flash-answer">${card.a}</span></div>`
+    : `<div><div class="small"><b>Question</b> · ${card.sec}</div><br><b>${card.q}</b><br><br><span class="small">Tap to flip</span></div>`;
+  document.getElementById('w89FlashCount').textContent = `Card ${w89FcIndex + 1} of ${w89FilteredCards.length}`;
+}
+
+function flipWeek89Card() { w89Flipped = !w89Flipped; renderWeek89Card(); }
+function nextWeek89Card() { w89FcIndex = (w89FcIndex + 1) % w89FilteredCards.length; w89Flipped = false; renderWeek89Card(); }
+function prevWeek89Card() { w89FcIndex = (w89FcIndex - 1 + w89FilteredCards.length) % w89FilteredCards.length; w89Flipped = false; renderWeek89Card(); }
+
+function buildWeek89Questions() {
+  return WEEK89_CARDS.map(card => {
+    let pool = WEEK89_CARDS.filter(c => c.sec === card.sec && c.a !== card.a).map(c => c.a);
+    if (pool.length < 3) pool = WEEK89_CARDS.filter(c => c.a !== card.a).map(c => c.a);
+    const distractors = shuffle([...new Set(pool)]).slice(0, 3);
+    const options = shuffle([card.a, ...distractors]);
+    return {
+      t: card.q,
+      sec: card.sec,
+      o: options,
+      a: options.indexOf(card.a),
+      e: card.a
+    };
+  });
+}
+
+function startWeek89Quiz(mode) {
+  const allQuestions = buildWeek89Questions();
+  w89QuizSet = mode === "exam" ? shuffle(allQuestions).slice(0, 75) : shuffle(allQuestions);
+  w89Qi = 0;
+  w89Answers = [];
+  w89Submitted = [];
+  document.getElementById('w89QuizTitle').textContent = mode === "exam" ? "Week 8–9 Mock Exam — 75 Questions" : `Week 8–9 Practice Quiz — ${w89QuizSet.length} Questions`;
+  showWeek89Tab('w89-quiz');
+  renderWeek89Q();
+}
+
+function renderWeek89Q() {
+  const q = w89QuizSet[w89Qi];
+  document.getElementById('w89Counter').textContent = `Question ${w89Qi + 1} of ${w89QuizSet.length} · ${q.sec}`;
+  document.getElementById('w89Bar').style.width = ((w89Qi + 1) / w89QuizSet.length * 100) + "%";
+  document.getElementById('w89Question').innerHTML = `<b>${q.t}</b>`;
+  const ops = document.getElementById('w89Options');
+  ops.innerHTML = "";
+  q.o.forEach((op, i) => {
+    const b = document.createElement('button');
+    b.className = 'option';
+    b.textContent = op;
+    if (w89Answers[w89Qi] === i) b.classList.add('selected');
+    if (w89Submitted[w89Qi] && i === q.a) b.classList.add('correct');
+    if (w89Submitted[w89Qi] && w89Answers[w89Qi] === i && i !== q.a) b.classList.add('wrong');
+    b.onclick = () => {
+      if (!w89Submitted[w89Qi]) {
+        w89Answers[w89Qi] = i;
+        renderWeek89Q();
+      }
+    };
+    ops.appendChild(b);
+  });
+  const fb = document.getElementById('w89Feedback');
+  if (w89Submitted[w89Qi]) {
+    fb.classList.remove('hidden');
+    fb.innerHTML = (w89Answers[w89Qi] === q.a ? "✅ Correct. " : "❌ Not quite. ") + `<b>Remember:</b> ${q.e}`;
+  } else {
+    fb.classList.add('hidden');
+  }
+}
+
+function submitWeek89Answer() {
+  if (w89Answers[w89Qi] === undefined) {
+    alert("Pick an answer first.");
+    return;
+  }
+  w89Submitted[w89Qi] = true;
+  if (w89Answers[w89Qi] !== w89QuizSet[w89Qi].a) saveWeek89Missed(w89QuizSet[w89Qi], w89Answers[w89Qi]);
+  renderWeek89Q();
+}
+
+function nextWeek89Question() {
+  if (w89Qi < w89QuizSet.length - 1) {
+    w89Qi++;
+    renderWeek89Q();
+  } else {
+    finishWeek89Quiz();
+  }
+}
+
+function prevWeek89Question() {
+  if (w89Qi > 0) {
+    w89Qi--;
+    renderWeek89Q();
+  }
+}
+
+function finishWeek89Quiz() {
+  let correct = 0;
+  const weak = {};
+  w89QuizSet.forEach((q, i) => {
+    if (w89Answers[i] === q.a) correct++;
+    else weak[q.sec] = (weak[q.sec] || 0) + 1;
+  });
+  const pct = Math.round(correct / w89QuizSet.length * 100);
+  showWeek89Tab('w89-results');
+  document.getElementById('w89ScoreBox').innerHTML = `<div class="note-box must"><h3>Your score: ${correct}/${w89QuizSet.length} (${pct}%)</h3><p>${pct >= 85 ? "Strong work 💗 Keep reviewing missed questions." : "Review the weak spots below, then redo Practice Quiz."}</p></div>`;
+  const weakList = Object.entries(weak).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  document.getElementById('w89ReviewBox').innerHTML = `<h3>Weakest Spots</h3><ul>${weakList.map(([s,n]) => `<li><b>${s}</b>: ${n} missed</li>`).join('') || "<li>No weak spots. You crushed it.</li>"}</ul>`;
+}
+
+function saveWeek89Missed(q, selectedIndex) {
+  const missed = JSON.parse(localStorage.getItem("orientationWeek89Missed") || "[]");
+  missed.push({
+    sec: q.sec,
+    question: q.t,
+    yourAnswer: q.o[selectedIndex],
+    correctAnswer: q.o[q.a]
+  });
+  localStorage.setItem("orientationWeek89Missed", JSON.stringify(missed));
+}
+
+function renderWeek89Missed() {
+  const list = document.getElementById('w89MissedList');
+  const missed = JSON.parse(localStorage.getItem("orientationWeek89Missed") || "[]");
+  if (!missed.length) {
+    list.innerHTML = `<div class="note-box">No missed questions yet. Nice job!</div>`;
+    return;
+  }
+  list.innerHTML = missed.slice().reverse().map(m => `
+    <div class="quiz-box">
+      <div class="small"><b>${m.sec}</b></div>
+      <p><b>${m.question}</b></p>
+      <p><b>Your answer:</b> ${m.yourAnswer}</p>
+      <p><b>Correct answer:</b> ${m.correctAnswer}</p>
+    </div>
+  `).join('');
+}
+
+function clearWeek89Missed() {
+  localStorage.removeItem("orientationWeek89Missed");
+  renderWeek89Missed();
 }
 
 showPage('homePage');
