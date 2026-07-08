@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professor Live Review Quiz | Orientation</title>
+  <style>
+    :root{
+      --pink:#eb96b7;
+      --pink2:#eea6c2;
+      --pink3:#f1b6cd;
+      --pink4:#f4c5d7;
+      --pink5:#f6d0df;
+      --cream:#fff7fb;
+      --text:#2f2f3a;
+      --muted:#6b6675;
+      --card:#ffffff;
+      --good:#2e8b57;
+      --bad:#c94f6d;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:linear-gradient(135deg,var(--cream),#fff);
+      color:var(--text);
+      min-height:100vh;
+    }
+    header{
+      background:linear-gradient(135deg,var(--pink),var(--pink5));
+      padding:28px 18px;
+      text-align:center;
+      border-bottom-left-radius:28px;
+      border-bottom-right-radius:28px;
+      box-shadow:0 8px 25px rgba(235,150,183,.25);
+    }
+    header h1{margin:0;font-size:28px}
+    header p{margin:8px 0 0;color:#4b4050;font-size:15px}
+    main{max-width:900px;margin:24px auto;padding:0 16px}
+    .card{
+      background:var(--card);
+      border:1px solid #f3d6e2;
+      border-radius:22px;
+      padding:22px;
+      box-shadow:0 8px 24px rgba(0,0,0,.06);
+      margin-bottom:18px;
+    }
+    .toprow{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .badge{
+      background:var(--pink5);
+      color:#633448;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:14px;
+    }
+    .progress{
+      height:12px;
+      background:#f7e6ee;
+      border-radius:999px;
+      overflow:hidden;
+      margin:16px 0;
+    }
+    .bar{height:100%;width:0%;background:var(--pink);transition:.3s}
+    h2{font-size:22px;line-height:1.35;margin:10px 0 16px}
+    .option{
+      display:block;
+      width:100%;
+      text-align:left;
+      border:2px solid #f1d3df;
+      background:#fff;
+      border-radius:16px;
+      padding:14px 15px;
+      margin:10px 0;
+      font-size:16px;
+      cursor:pointer;
+    }
+    .option:hover{background:#fff4f8}
+    .option.selected{border-color:var(--pink);background:#fff0f6}
+    .option.correct{border-color:var(--good);background:#eefaf3}
+    .option.wrong{border-color:var(--bad);background:#fff0f3}
+    .feedback{
+      display:none;
+      margin-top:16px;
+      padding:14px;
+      border-radius:16px;
+      background:#fff4f8;
+      border:1px solid #f2c9da;
+    }
+    .feedback.good{border-color:#b9e3c8;background:#effaf3}
+    .feedback.bad{border-color:#f1b4c2;background:#fff1f4}
+    .buttons{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    button.action, a.action{
+      border:0;
+      background:var(--pink);
+      color:white;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-block;
+    }
+    button.secondary, a.secondary{
+      background:#fff;
+      color:#6a3349;
+      border:2px solid var(--pink3);
+    }
+    button:disabled{opacity:.45;cursor:not-allowed}
+    .summary h2{margin-top:0}
+    .summary ul{line-height:1.8}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌸 Professor Live Review Quiz</h1>
+    <p>Orientation to Radiation Therapy · Week 8 + 9 · Chapter 5</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="toprow">
+        <span class="badge" id="counter">Question 1 of 43</span>
+        <span class="badge" id="score">Score: 0</span>
+      </div>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <h2 id="question"></h2>
+      <div id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="buttons">
+        <button class="action secondary" id="prevBtn">Previous</button>
+        <button class="action" id="submitBtn">Submit</button>
+        <button class="action secondary" id="nextBtn">Next</button>
+        <a class="action secondary" href="orientation.html">Back to Orientation</a>
+      </div>
+    </div>
+    <div class="card summary" id="summary" style="display:none"></div>
+  </main>
+
+  <script>
+    const questions = [
+      {q:"What is the difference between a sign and a symptom?",o:["A sign is subjective; a symptom is objective.","A sign is objective and observed by the examiner; a symptom is subjective and reported by the patient.","Both are subjective findings.","Both are objective findings."],a:1,e:"A sign is something the examiner can observe. A symptom is something the patient reports."},
+      {q:"Why is obtaining a patient's medical history important?",o:["To determine insurance coverage.","To identify genetic risks, lifestyle factors, previous illnesses, and symptoms that help determine a diagnosis.","Only to record allergies.","Only to document medications."],a:1,e:"Medical history helps identify risk factors and supports diagnosis."},
+      {q:"Listening to body sounds with a stethoscope is called:",o:["Inspection","Palpation","Percussion","Auscultation"],a:3,e:"Auscultation means listening to heart, lung, and other body sounds."},
+      {q:"What is edema?",o:["Loss of muscle mass","Swelling caused by excessive fluid accumulation in tissues","Bruising","Inflammation of bone"],a:1,e:"Edema is swelling caused by excess fluid in the tissues."},
+      {q:"What is the normal oral body temperature?",o:["95.0–96.5°F","97.7–99.5°F","100.5–102°F","96.0–97.0°F"],a:1,e:"Normal oral temperature is 97.7–99.5°F."},
+      {q:"What is the normal adult pulse rate?",o:["40–60 bpm","60–100 bpm","100–120 bpm","120–140 bpm"],a:1,e:"Normal adult pulse is 60–100 beats per minute."},
+      {q:"What is the normal adult respiratory rate?",o:["8–10 breaths/min","10–12 breaths/min","12–20 breaths/min","20–30 breaths/min"],a:2,e:"Normal adult respirations are 12–20 breaths per minute."},
+      {q:"What is considered a normal blood pressure?",o:["90/60","100/70","120/80","140/90"],a:2,e:"The professor emphasized using 120/80."},
+      {q:"Which of the following is NOT used to assess the impact of cancer in the general population?",o:["Sensitivity","Incidence","Survival estimate","Mortality rate"],a:0,e:"Sensitivity is a screening test characteristic, not a population measure."},
+      {q:"Sensitivity refers to:",o:["Ability to identify true positives","Ability to identify true negatives","Death rate","Disease prevalence"],a:0,e:"Sensitivity measures how well a test detects people who have the disease."},
+      {q:"What is the leading type of cancer in women?",o:["Lung","Breast","Colon","Cervical"],a:1,e:"Breast cancer is the most common cancer in women."},
+      {q:"What is the leading type of cancer in men?",o:["Lung","Colon","Prostate","Bladder"],a:2,e:"Prostate cancer is the most common cancer in men."},
+      {q:"PSA stands for:",o:["Patient Screening Assessment","Prostate-Specific Antigen","Primary Screening Assessment","Prostate Screening Analysis"],a:1,e:"PSA means Prostate-Specific Antigen."},
+      {q:"PSA is used to screen for:",o:["Breast cancer","Colon cancer","Prostate cancer","Lung cancer"],a:2,e:"PSA is a blood test used in prostate cancer screening."},
+      {q:"Which of the following may NOT be a lab study, according to the lecture review?",o:["Blood chemistry","CBC","Microbiologic study","Fecal study"],a:3,e:"Your professor specifically questioned fecal study as not being a lab study."},
+      {q:"Which imaging study uses a radionuclide injected into the body?",o:["MRI","Ultrasound","Nuclear medicine scan","CT"],a:2,e:"Nuclear medicine imaging uses injected radionuclides."},
+      {q:"What is a paraneoplastic syndrome?",o:["Pain directly caused by the tumor","Symptoms caused by hormones or substances from a tumor occurring away from the tumor","Tumor recurrence","Tumor metastasis"],a:1,e:"Symptoms occur away from the primary tumor."},
+      {q:"What is the leading cause of cancer-related deaths in the United States?",o:["Breast cancer","Prostate cancer","Colon cancer","Lung cancer"],a:3,e:"Lung cancer causes the most cancer-related deaths."},
+      {q:"Feeling for lumps or tenderness is called:",o:["Inspection","Palpation","Percussion","Auscultation"],a:1,e:"Palpation uses touch."},
+      {q:"Tapping on the chest during an examination is called:",o:["Inspection","Percussion","Palpation","Auscultation"],a:1,e:"Percussion evaluates underlying structures by tapping."},
+      {q:"Most cervical cancers are associated with:",o:["EBV","HPV","HIV","HSV"],a:1,e:"HPV is linked to most cervical cancers."},
+      {q:"Prevalence refers to:",o:["New cases over time","Probability of disease in an entire population at a given time","Death rate","Treatment success"],a:1,e:"Prevalence measures existing disease in a population at a specific time."},
+      {q:"BRCA1 and BRCA2 mutations are most commonly associated with:",o:["Lung cancer","Breast cancer","Colon cancer","Skin cancer"],a:1,e:"BRCA mutations are strongly associated with breast cancer risk."},
+      {q:"Which lifestyle factors are commonly included in a patient's history?",o:["Smoking, alcohol, diet, exercise, occupational exposure","Hair color","Favorite foods","Blood type only"],a:0,e:"Lifestyle factors help identify cancer risks."},
+      {q:"What happens during a sentinel lymph node biopsy?",o:["Chemotherapy is injected","Radioactive tracer or dye is injected to identify the first draining lymph node","Blood is removed","Bone marrow is sampled"],a:1,e:"The tracer identifies the sentinel lymph node, the first node draining the tumor."},
+      {q:"If there is no uptake in the sentinel lymph node, what is generally NOT needed?",o:["Radiation","Chemotherapy","Lymph node dissection","Surgery"],a:2,e:"No uptake means additional lymph node removal may not be needed."},
+      {q:"The most common screening test for breast cancer is:",o:["MRI","Mammogram","Ultrasound","PET scan"],a:1,e:"Mammography is the standard screening test."},
+      {q:"The standard screening test for cervical cancer is:",o:["PSA","Pap smear","MRI","CT"],a:1,e:"Pap smear detects cervical abnormalities."},
+      {q:"Routine colon cancer screening is commonly performed using:",o:["PET scan","CT","Colonoscopy","MRI"],a:2,e:"Colonoscopy is the standard screening exam."},
+      {q:"For average-risk adults, colonoscopy is generally repeated every:",o:["2 years","5 years","10 years","15 years"],a:2,e:"The professor emphasized every 10 years."},
+      {q:"What screening test is used for prostate cancer?",o:["Pap smear","PSA blood test","Mammogram","Colonoscopy"],a:1,e:"PSA is the blood test used for prostate cancer screening."},
+      {q:"Heavy smokers may qualify for which screening exam?",o:["PET scan","MRI","Low-dose CT","Ultrasound"],a:2,e:"Low-dose CT is used for eligible heavy smokers."},
+      {q:"Apnea means:",o:["Rapid breathing","Difficulty breathing","Stops breathing","Painful breathing"],a:2,e:"Apnea means breathing stops."},
+      {q:"A patient who can only sleep sitting upright because they become short of breath when lying down has:",o:["Apnea","Orthopnea","Dyspnea","Bradypnea"],a:1,e:"Orthopnea is difficulty breathing when lying flat."},
+      {q:"Can oxygen flow be increased simply because a patient requests it?",o:["Yes","No"],a:1,e:"Oxygen changes require a physician's order."},
+      {q:"Normal temperature, pulse, respirations, and blood pressure indicate:",o:["Edema","Homeostasis","Hypoxia","Hypertension"],a:1,e:"Stable vital signs indicate homeostasis."},
+      {q:"High blood pressure is called:",o:["Hypotension","Hypertension","Homeostasis","Apnea"],a:1,e:"Hypertension means high blood pressure."},
+      {q:"Low blood pressure is called:",o:["Hypertension","Hypotension","Bradycardia","Tachycardia"],a:1,e:"Hypotension means low blood pressure."},
+      {q:"The most common oxygen delivery device is:",o:["Ventilator","Nasal cannula","Simple mask","Nonrebreather mask"],a:1,e:"Nasal cannula is the most commonly used oxygen device."},
+      {q:"Oxygen toxicity occurs when:",o:["The patient receives too little oxygen","The patient receives too much oxygen","Blood pressure drops","Pulse increases"],a:1,e:"Oxygen toxicity means too much oxygen."},
+      {q:"Oxygen should generally be administered at:",o:["The highest possible dose","The lowest effective dose","100% concentration","50 L/min"],a:1,e:"Use the lowest effective oxygen dose."},
+      {q:"Oxygen is classified as a:",o:["Vitamin","Drug","Hormone","Supplement"],a:1,e:"Oxygen is classified as a drug."},
+      {q:"Which condition increases the risk of stroke and heart attack?",o:["Hypotension","Hypertension","Homeostasis","Apnea"],a:1,e:"High blood pressure increases cardiovascular risk."},
+      {q:"Systolic blood pressure measures:",o:["Heart relaxation","Heart contraction","Respiratory effort","Oxygen saturation"],a:1,e:"Systolic pressure is during heart contraction."},
+      {q:"Diastolic blood pressure measures:",o:["Heart contraction","Heart relaxation","Pulse strength","Blood oxygen"],a:1,e:"Diastolic pressure is during heart relaxation."}
+    ];
+
+    let current = 0;
+    let selected = null;
+    let answers = Array(questions.length).fill(null);
+    let checked = Array(questions.length).fill(false);
+
+    const qEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const feedbackEl = document.getElementById("feedback");
+    const counterEl = document.getElementById("counter");
+    const scoreEl = document.getElementById("score");
+    const barEl = document.getElementById("bar");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const summaryEl = document.getElementById("summary");
+
+    function score(){
+      return answers.reduce((total, ans, i) => total + (ans === questions[i].a ? 1 : 0), 0);
+    }
+
+    function render(){
+      const item = questions[current];
+      selected = answers[current];
+      qEl.textContent = item.q;
+      counterEl.textContent = `Question ${current + 1} of ${questions.length}`;
+      scoreEl.textContent = `Score: ${score()}`;
+      barEl.style.width = `${((current + 1) / questions.length) * 100}%`;
+      optionsEl.innerHTML = "";
+      feedbackEl.style.display = "none";
+      feedbackEl.className = "feedback";
+      item.o.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        if(selected === idx) btn.classList.add("selected");
+        if(checked[current]){
+          if(idx === item.a) btn.classList.add("correct");
+          if(selected === idx && selected !== item.a) btn.classList.add("wrong");
+          btn.disabled = true;
+        }
+        btn.onclick = () => {
+          if(checked[current]) return;
+          selected = idx;
+          answers[current] = idx;
+          document.querySelectorAll(".option").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+        };
+        optionsEl.appendChild(btn);
+      });
+      if(checked[current]){
+        showFeedback();
+      }
+      prevBtn.disabled = current === 0;
+      nextBtn.textContent = current === questions.length - 1 ? "Finish" : "Next";
+      submitBtn.disabled = checked[current];
+    }
+
+    function showFeedback(){
+      const item = questions[current];
+      const correct = answers[current] === item.a;
+      feedbackEl.style.display = "block";
+      feedbackEl.className = "feedback " + (correct ? "good" : "bad");
+      feedbackEl.innerHTML = `<strong>${correct ? "Correct 🌸" : "Not quite 🌷"}</strong><br>${item.e}`;
+    }
+
+    submitBtn.onclick = () => {
+      if(answers[current] === null){
+        feedbackEl.style.display = "block";
+        feedbackEl.className = "feedback bad";
+        feedbackEl.textContent = "Pick an answer first.";
+        return;
+      }
+      checked[current] = true;
+      render();
+    };
+
+    prevBtn.onclick = () => {
+      if(current > 0){ current--; render(); }
+    };
+
+    nextBtn.onclick = () => {
+      if(current < questions.length - 1){
+        current++;
+        render();
+      } else {
+        const missed = questions
+          .map((q, i) => ({...q, i}))
+          .filter((q, i) => answers[i] !== questions[i].a);
+        summaryEl.style.display = "block";
+        summaryEl.innerHTML = `
+          <h2>Final Score: ${score()} / ${questions.length}</h2>
+          <p><strong>Strong move:</strong> review the missed topics once, then retake this quiz.</p>
+          <h3>Missed Questions</h3>
+          ${missed.length === 0 ? "<p>Perfect score! 🎉</p>" : "<ul>" + missed.map(m => `<li>${m.q}<br><strong>Correct:</strong> ${m.o[m.a]}</li>`).join("") + "</ul>"}
+          <div class="buttons"><button class="action" onclick="location.reload()">Restart Quiz</button></div>
+        `;
+        summaryEl.scrollIntoView({behavior:"smooth"});
+      }
+    };
+
+    render();
+  </script>
+</body>
+</html>
