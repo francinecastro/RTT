@@ -1,35 +1,372 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Intro to Clinicals | RT Study</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction to Clinicals | RT Study App 2.0</title>
+<style>
+:root{
+  --p1:#eb96b7; --p2:#eea6c2; --p3:#f1b6cd; --p4:#f4c5d7; --p5:#f6d0df;
+  --ink:#3f3f3f; --muted:#735f69; --white:#fff; --bg:#fff8fb;
+  --good:#2f7d4b; --bad:#b5425a; --lav:#eee8fa; --line:#efd5e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(135deg,var(--p5),#fff,var(--lav));border-bottom:4px solid var(--p1);padding:24px 18px}
+.header-wrap,.container{max-width:1100px;margin:auto}
+h1{margin:0;color:#9b4f7a;font-size:clamp(28px,5vw,44px)}
+.subtitle{color:var(--muted);font-weight:700;margin-top:6px}
+.container{padding:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;margin:16px 0;box-shadow:0 8px 24px rgba(130,70,100,.08)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px}
+.week-card{cursor:pointer;transition:.18s}
+.week-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(130,70,100,.14)}
+.week-card h2{color:#9b4f7a;margin:0 0 8px}
+.tag,.pill{display:inline-block;background:var(--p5);border:1px solid var(--p3);border-radius:999px;padding:6px 10px;margin:3px;font-size:.82rem;font-weight:800}
+button,.btn{border:0;border-radius:13px;padding:11px 15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.primary{background:linear-gradient(135deg,var(--p1),var(--p3));color:#fff}
+.secondary{background:#f1edf0;color:#684f5c}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.tabs button.active{background:var(--p1);color:#fff}
+.hidden{display:none!important}
+.back{margin-bottom:12px}
+.section h2{color:#9b4f7a}
+.must{background:#fff4f8;border-left:6px solid var(--p1)}
+.remember{background:#f7f3ff;border-left:6px solid #b7a2df}
+.warning{background:#fff7eb;border-left:6px solid #e4ad54}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+th{background:var(--p5)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.flow span{background:#fff;border:2px solid var(--p3);border-radius:14px;padding:10px;font-weight:800}
+.arrow{border:0!important;background:transparent!important;color:#9b4f7a}
+.flash-wrap{text-align:center}
+.flashcard{min-height:220px;display:flex;align-items:center;justify-content:center;padding:28px;border:2px solid var(--p3);border-radius:22px;background:linear-gradient(135deg,#fff,var(--p5));font-size:1.35rem;font-weight:800;cursor:pointer}
+.flash-answer{color:#754b68}
+.nav-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
+.quiz-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.progress{height:10px;background:#f0dfe6;border-radius:999px;overflow:hidden;margin:12px 0}
+.progress div{height:100%;background:var(--p1);width:0}
+.option{display:block;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:13px;margin:9px 0;font-size:1rem}
+.option.selected{background:#fff0f6;border-color:var(--p1)}
+.option.correct{background:#eaf8ee;border-color:var(--good)}
+.option.wrong{background:#fff0f2;border-color:var(--bad)}
+.feedback{padding:12px;border-radius:13px;margin-top:12px;font-weight:700}
+.good{background:#eaf8ee;color:#1f683b}
+.bad{background:#fff0f2;color:#913247}
+.resource-list a{color:#9b4f7a;font-weight:800;word-break:break-word}
+.small{font-size:.9rem;color:var(--muted)}
+.score{font-size:2.8rem;color:#9b4f7a;font-weight:900}
+@media(max-width:650px){.container{padding:12px}.card{padding:16px}.flashcard{font-size:1.15rem;min-height:190px}table{font-size:.86rem}}
+</style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← Home</a>
+<header>
+  <div class="header-wrap">
+    <h1>Fran RT</h1>
+    <div class="subtitle">Introduction to Clinical Radiation Therapy & Operations · RT Study App 2.0</div>
+  </div>
+</header>
 
-  <section class="hero">
-    <h1>📖 Intro to Clinicals</h1>
-    <p>Week 1 LINAC Mega Quiz is active. Week 2 is ready to build next.</p>
-  </section>
+<main class="container">
+<section id="home">
+  <div class="card">
+    <h2>Introduction to Clinicals Dashboard 🌸</h2>
+    <p>Study guides, flashcards, quizzes, and last-hour reviews for your Introduction to Clinicals class.</p>
+    <span class="tag">Simple English</span><span class="tag">Professor-first</span><span class="tag">Missed Questions</span>
+  </div>
 
-  <section class="card">
-    <h2>Week 1 — LINAC / Treatment Delivery Equipment</h2>
-    <div class="row">
-      <a class="btn" href="linac-quiz.html">📝 Mega Practice Quiz</a>
-      <a class="btn secondary" href="linac-quiz.html">🖼 Diagram Lab</a>
-      <a class="btn light disabled" href="#">📖 Study Guide Coming Soon</a>
-      <a class="btn light disabled" href="#">⭐ Flashcards Coming Soon</a>
+  <div class="grid">
+    <div class="card week-card" onclick="location.href='linac-quiz.html'">
+      <h2>Week 1</h2>
+      <p><b>LINAC Mega Quiz</b></p>
+      <p>Components, beam production, safety, and diagrams.</p>
+      <p><b>Open Week 1 →</b></p>
     </div>
-  </section>
+    <div class="card week-card" onclick="openWeek(2)">
+      <h2>Week 2</h2>
+      <p><b>Chapter 7 — Treatment Delivery Equipment</b></p>
+      <p>kV units, cobalt-60, LINAC, MLC, imaging, couches, and safety.</p>
+      <p><b>Open Week 2 →</b></p>
+    </div>
+    <div class="card week-card" onclick="openWeek(3)">
+      <h2>Week 3</h2>
+      <p><b>Chapter 8 — Treatment Procedures</b></p>
+      <p>Prescription, setup, isocenter, IGRT, SGRT, and treatment fields.</p>
+      <p><b>Open Week 3 →</b></p>
+    </div>
+  </div>
+</section>
 
-  <section class="card" style="margin-top:14px">
-    <h2>Week 2</h2>
-    <p>Coming soon.</p>
-    <a class="btn disabled" href="#">Locked</a>
-  </section>
-</div>
+<section id="weekPage" class="hidden">
+  <button class="secondary back" onclick="goHome()">← Back to Introduction Dashboard</button>
+  <div class="card">
+    <h2 id="weekTitle"></h2>
+    <p id="weekTopic"></p>
+    <div class="tabs">
+      <button onclick="showTab('study')" id="tab-study">Study Guide</button>
+      <button onclick="showTab('flash')" id="tab-flash">Flashcards</button>
+      <button onclick="startQuiz(false)" id="tab-practice">Practice Quiz</button>
+      <button onclick="startQuiz(true)" id="tab-exam">Exam Mode</button>
+      <button onclick="showTab('missed')" id="tab-missed">Missed Questions</button>
+      <button onclick="showTab('last')" id="tab-last">Last-Hour Review</button>
+      <button onclick="showTab('resources')" id="tab-resources">Resources</button>
+    </div>
+  </div>
+
+  <div id="study" class="section card"></div>
+
+  <div id="flash" class="section card hidden">
+    <h2>Flashcards</h2>
+    <div class="flash-wrap">
+      <div id="flashcard" class="flashcard" onclick="flipCard()"></div>
+      <p class="small">Tap the card to flip.</p>
+      <div class="nav-row">
+        <button class="secondary" onclick="moveCard(-1)">← Previous</button>
+        <span id="flashCount" class="pill"></span>
+        <button class="primary" onclick="moveCard(1)">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz" class="section card hidden">
+    <div class="quiz-meta"><span id="quizCount" class="pill"></span><span id="quizScore" class="pill"></span></div>
+    <div class="progress"><div id="quizBar"></div></div>
+    <h2 id="quizQuestion"></h2>
+    <div id="quizOptions"></div>
+    <div id="quizFeedback"></div>
+    <div class="nav-row">
+      <button class="secondary" onclick="previousQuestion()">← Previous</button>
+      <button id="submitBtn" class="primary" onclick="submitAnswer()">Submit Answer</button>
+      <button id="nextBtn" class="primary hidden" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <div id="results" class="section card hidden"></div>
+  <div id="missed" class="section card hidden"></div>
+  <div id="last" class="section card hidden"></div>
+  <div id="resources" class="section card hidden"></div>
+</section>
+</main>
+
+<script>
+const DATA = {
+2:{
+ title:"Week 2 — Treatment Delivery Equipment",
+ topic:"Chapter 7 · Machines, beam production, collimation, imaging, and safety",
+ study:`
+ <h2>Week 2 Study Guide</h2>
+ <div class="must card"><h3>Core Goal</h3><p>Choose the correct machine and beam so the tumor receives the dose while normal tissue is protected.</p></div>
+ <h3>1. Low-Energy X-Ray Units</h3>
+ <table><tr><th>Unit</th><th>Energy</th><th>Main Use</th><th>Key Point</th></tr>
+ <tr><td>Contact</td><td>About 10–50 kV</td><td>Very shallow lesions</td><td>Dose is highest at skin.</td></tr>
+ <tr><td>Superficial</td><td>About 40–150 kV</td><td>Shallow skin lesions</td><td>Little or no skin sparing.</td></tr>
+ <tr><td>Orthovoltage</td><td>About 100–500 kV</td><td>Skin and tumors about 2–3 cm deep</td><td>More penetrating than superficial.</td></tr></table>
+ <h3>2. Cobalt-60</h3><ul><li>Artificial radioactive isotope.</li><li>Emits 1.17 and 1.33 MeV gamma rays.</li><li>Average energy: about 1.25 MeV.</li><li>Half-life: about 5.26 years.</li><li>Because it decays, treatment time must be adjusted.</li></ul>
+ <h3>3. LINAC Beam Production</h3>
+ <div class="flow"><span>Electron gun</span><span class="arrow">→</span><span>Electrons enter accelerator structure</span><span class="arrow">→</span><span>Microwaves speed electrons up</span><span class="arrow">→</span><span>Bending magnet</span><span class="arrow">→</span><span>Treatment head</span></div>
+ <ul><li><b>Photon mode:</b> electrons strike a target and create x-rays.</li><li><b>Electron mode:</b> target moves out; scattering foil spreads electrons.</li><li><b>Flattening filter:</b> makes a conventional photon beam more uniform.</li><li><b>Scattering foil:</b> spreads the electron beam.</li></ul>
+ <h3>4. Beam Shaping</h3><ul><li><b>Primary collimator:</b> first beam restriction.</li><li><b>Secondary collimators/jaws:</b> make square or rectangular fields.</li><li><b>MLC:</b> tungsten leaves shape irregular fields.</li><li><b>Cerrobend:</b> custom shielding alloy, used more often before modern MLCs.</li><li><b>MLC leakage:</b> small radiation transmission through closed leaves.</li></ul>
+ <h3>5. Setup and Imaging</h3><ul><li><b>Light field:</b> shows field location before beam-on.</li><li><b>ODI:</b> shows source-to-surface distance.</li><li><b>EPID:</b> uses megavoltage beam; lower contrast.</li><li><b>kV imaging:</b> better contrast for positioning.</li><li><b>Indexing:</b> attaches devices to the same couch location each day.</li><li><b>6-DOF couch:</b> corrects translations and rotations; used with advanced LINAC treatment.</li></ul>
+ <div class="remember card"><h3>Easy Memory</h3><p><b>Jaws = boxes.</b> MLC = custom shape. <b>Target = photons.</b> Scattering foil = electrons.</p></div>`,
+ flash:[
+ ["What does a LINAC do?","It accelerates electrons in a straight line."],
+ ["Which machine treats a lesion about 2 cm deep?","Orthovoltage."],
+ ["What is the average energy of cobalt-60?","About 1.25 MeV."],
+ ["Why is cobalt treatment time adjusted?","Cobalt-60 decays continuously."],
+ ["What does the electron gun do?","It produces electrons."],
+ ["Where do electrons gain speed?","Inside the accelerator structure, where they interact with microwaves."],
+ ["What creates photons in the LINAC head?","Electrons striking the target."],
+ ["What spreads the electron beam?","The scattering foil."],
+ ["What shapes square or rectangular fields?","Secondary collimators, also called jaws."],
+ ["What shapes irregular fields?","The multileaf collimator, or MLC."],
+ ["What does ODI measure?","Source-to-surface distance."],
+ ["EPID versus kV imaging?","EPID uses MV and has lower contrast; kV gives better positioning images."],
+ ["What is indexing?","Attaching setup devices to the same couch location for reproducibility."],
+ ["Where is a 6-DOF couch used?","With modern LINAC systems, especially IGRT, SRS, and SBRT."]
+ ],
+ quiz:[
+ {q:"Which unit is most appropriate for a skin lesion about 2 cm thick?",o:["Contact unit","Orthovoltage unit","25 MV LINAC","MRI scanner"],a:1,e:"Orthovoltage can treat lesions about 2–3 cm deep."},
+ {q:"Cobalt-60 has an average gamma energy of approximately:",o:["0.25 MeV","1.25 MeV","6 MeV","25 MeV"],a:1,e:"Its two gamma energies average about 1.25 MeV."},
+ {q:"What component produces electrons?",o:["Electron gun","Waveguide","Target","MLC"],a:0,e:"The electron gun creates and injects electrons."},
+ {q:"Where are electrons accelerated?",o:["Inside the treatment couch","Inside the accelerator structure","Inside the MLC","Inside the target"],a:1,e:"Microwaves accelerate electrons inside the accelerator structure."},
+ {q:"In photon mode, accelerated electrons strike the:",o:["Scattering foil","Target","Couch","EPID"],a:1,e:"The target converts electron energy into x-rays."},
+ {q:"Which component spreads an electron beam?",o:["Target","Flattening filter","Scattering foil","Primary collimator"],a:2,e:"The scattering foil spreads electrons across the field."},
+ {q:"Secondary collimator jaws make fields that are mainly:",o:["Circular only","Square or rectangular","Always irregular","Three-dimensional"],a:1,e:"Jaws form square and rectangular fields."},
+ {q:"What shapes an irregular treatment field?",o:["MLC","ODI","Electron gun","Waveguide"],a:0,e:"The MLC uses moving tungsten leaves to shape irregular fields."},
+ {q:"What does the ODI show?",o:["Tumor stage","Source-to-surface distance","Daily dose","Beam energy"],a:1,e:"ODI means Optical Distance Indicator."},
+ {q:"Which imaging system usually has better bony contrast for positioning?",o:["kV imaging","EPID MV imaging","Light field","ODI"],a:0,e:"kV images generally provide better contrast."},
+ {q:"Why is indexing used?",o:["To increase beam energy","To reproduce the same device position","To create radiation","To measure half-life"],a:1,e:"Indexing helps reproduce setup every day."},
+ {q:"A 6-degree-of-freedom couch is associated with:",o:["Superficial units only","Modern LINAC and IGRT systems","Contact therapy only","Cobalt decay calculation"],a:1,e:"Advanced couches correct both shifts and rotations."}
+ ],
+ last:`<h2>Week 2 Last-Hour Review</h2><ul><li>Contact/superficial = skin.</li><li>Orthovoltage = about 2–3 cm deep.</li><li>Cobalt-60 = 1.25 MeV average, 5.26-year half-life.</li><li>Electron gun makes electrons.</li><li>Accelerator structure speeds electrons using microwaves.</li><li>Target makes photons.</li><li>Scattering foil spreads electrons.</li><li>Jaws make squares/rectangles.</li><li>MLC makes irregular shapes.</li><li>ODI = SSD.</li><li>kV images have better contrast than MV EPID images.</li><li>Indexing = same device position every day.</li></ul>`,
+ resources:`<h2>Week 2 Sources</h2><p>Professor and course materials were used first, followed by Chapter 7 of Washington & Leaver.</p>`
+},
+3:{
+ title:"Week 3 — Treatment Procedures",
+ topic:"Chapter 8 · Treatment preparation, prescription, setup, image verification, and delivery",
+ study:`
+ <h2>Week 3 Study Guide</h2>
+ <div class="must card"><h3>Goal of Radiation Therapy</h3><p>Deliver a <b>tumoricidal dose</b> to the target while sparing normal surrounding tissue.</p></div>
+ <h3>1. Radiation Oncology Team</h3>
+ <table><tr><th>Member</th><th>Main Role</th></tr><tr><td>Radiation oncologist</td><td>Prescribes and directs treatment.</td></tr><tr><td>Radiation therapist</td><td>Simulates, positions, images, treats, observes, and documents daily.</td></tr><tr><td>Medical dosimetrist</td><td>Creates the treatment plan.</td></tr><tr><td>Medical physicist</td><td>Checks calculations, equipment, plan quality, and safety.</td></tr></table>
+ <h3>2. Before Treatment Begins</h3>
+ <div class="flow"><span>Informed consent</span><span class="arrow">→</span><span>Radiation prescription</span><span class="arrow">→</span><span>Simulation</span><span class="arrow">→</span><span>Treatment plan</span><span class="arrow">→</span><span>QA</span></div>
+ <h3>3. Radiation Prescription — Must Know</h3><ul><li>Anatomic site.</li><li>Method of delivery: photons, electrons, or isotope.</li><li>Total dose.</li><li>Daily dose/fractionation.</li><li>Protraction: total treatment time or number of fractions.</li><li>Treatment technique, such as 3D, IMRT, or VMAT.</li><li>Must be signed by the radiation oncologist before treatment.</li></ul>
+ <h3>4. Record and Verify</h3><ul><li>Examples: <b>Mosaiq</b> and <b>ARIA</b>.</li><li>Contains diagnosis, stage, consent, prescription, schedule, treatment plan, images, MU, daily dose, elapsed days, and cumulative dose.</li><li>Helps prevent wrong-patient, wrong-site, and wrong-parameter errors.</li></ul>
+ <h3>5. Daily Treatment Process</h3>
+ <div class="flow"><span>Review chart</span><span class="arrow">→</span><span>Prepare room</span><span class="arrow">→</span><span>Identify patient with 2 identifiers</span><span class="arrow">→</span><span>Position and immobilize</span><span class="arrow">→</span><span>Align lasers</span><span class="arrow">→</span><span>Image and correct</span><span class="arrow">→</span><span>Treat</span><span class="arrow">→</span><span>Document</span></div>
+ <h3>6. Isocenter and Lasers</h3><ul><li><b>Isocenter:</b> point where gantry, collimator, and couch axes intersect.</li><li>Room lasers are fixed and meet at machine isocenter.</li><li>Therapists use three setup marks to triangulate the patient.</li><li>Setup marks may be tattoos, semipermanent marks, or palpable bony landmarks.</li></ul>
+ <h3>7. Portal Imaging and IGRT</h3><table><tr><th>Method</th><th>Main Purpose</th></tr><tr><td>Portal image</td><td>Can verify field shape and isocenter.</td></tr><tr><td>IGRT</td><td>Verifies isocenter and patient anatomy before treatment.</td></tr><tr><td>Orthogonal pair</td><td>Two images taken 90° apart.</td></tr><tr><td>CBCT</td><td>Creates 3D volumetric images using a kV x-ray tube on the gantry.</td></tr><tr><td>SGRT</td><td>Uses optical surface imaging for real-time patient surface monitoring.</td></tr></table>
+ <h3>8. SGRT</h3><ul><li>Can reduce or eliminate skin marks.</li><li>Provides a real-time 3D surface image.</li><li>Useful for breath hold and gating.</li><li>Patient skin surface must remain visible.</li></ul>
+ <h3>9. Treatment Field Arrangements</h3><ul><li><b>Single field:</b> one beam direction.</li><li><b>Parallel opposed:</b> two opposite beams.</li><li><b>Three-field:</b> often anterior plus two laterals.</li><li><b>Four-field box:</b> anterior, posterior, right lateral, left lateral.</li><li><b>Oblique fields:</b> angled beams used to avoid critical structures.</li><li><b>Arc/VMAT:</b> gantry rotates while radiation is delivered.</li></ul>
+ <div class="remember card"><h3>Easy Memory</h3><p><b>Consent + Prescription + Plan = no treatment without all three.</b><br>Isocenter = the machine's bullseye. IGRT = look inside. SGRT = watch the outside surface.</p></div>`,
+ flash:[
+ ["What is the goal of radiation therapy?","Deliver a tumoricidal dose to the target while sparing normal tissue."],
+ ["Who prescribes radiation treatment?","The radiation oncologist."],
+ ["Who creates the treatment plan?","The medical dosimetrist, with physicist and physician review."],
+ ["Who sees and treats the patient daily?","The radiation therapist."],
+ ["What three items are required before treatment?","Informed consent, signed prescription, and approved treatment plan."],
+ ["What must a prescription include?","Site, modality, total dose, daily dose/fractionation, protraction, and technique."],
+ ["Examples of radiation record-and-verify systems?","Mosaiq and ARIA."],
+ ["How many identifiers are commonly used?","Two, such as name and date of birth or MRN."],
+ ["What is isocenter?","The point where the gantry, collimator, and couch rotation axes intersect."],
+ ["Where do room lasers intersect?","At machine isocenter."],
+ ["What is an orthogonal image pair?","Two images taken 90 degrees apart."],
+ ["What does CBCT provide?","Three-dimensional volumetric anatomy."],
+ ["What does SGRT use?","Optical surface imaging."],
+ ["Main SGRT advantage?","Real-time surface monitoring, useful for setup and breath hold."],
+ ["Portal image versus IGRT?","Portal images may verify field shape and isocenter; IGRT mainly verifies isocenter and anatomy."],
+ ["What is a four-field box?","Anterior, posterior, right lateral, and left lateral fields."]
+ ],
+ quiz:[
+ {q:"What is the main goal of radiation therapy?",o:["Deliver the same dose to the whole body","Deliver a tumoricidal dose while sparing normal tissue","Avoid all imaging","Use the highest energy for every patient"],a:1,e:"The goal is tumor control with normal tissue protection."},
+ {q:"Who must approve and sign the radiation prescription before treatment?",o:["Dietitian","Radiation oncologist","Front desk employee","Patient transporter"],a:1,e:"Radiation is delivered only under a radiation oncologist's order."},
+ {q:"Which item is NOT a key prescription component?",o:["Anatomic site","Total dose","Daily fraction dose","Patient's favorite color"],a:3,e:"The prescription includes clinical treatment details, not personal preferences."},
+ {q:"Which systems are examples of radiation-specific record and verify software?",o:["Mosaiq and ARIA","Word and Excel","PACS and MRI","Epic and Gmail"],a:0,e:"Mosaiq and ARIA are common oncology information systems."},
+ {q:"Before bringing the patient into the room, the therapist should first:",o:["Turn on the beam","Review the treatment record","Remove all immobilization devices","Skip imaging requirements"],a:1,e:"The chart is checked for prescription, plan, imaging, and setup instructions."},
+ {q:"Patient identity should usually be confirmed using:",o:["One room number","Two identifiers","The treatment site only","The patient's clothing"],a:1,e:"Two identifiers help prevent wrong-patient treatment."},
+ {q:"Isocenter is the intersection of the axes of rotation of the:",o:["Gantry, couch, and collimator","ODI, EPID, and MLC","CT, MRI, and PET","Target, foil, and filter"],a:0,e:"Those three mechanical axes meet at isocenter."},
+ {q:"Room lasers are designed to intersect at:",o:["The waiting room","Machine isocenter","The control console","The door interlock"],a:1,e:"Fixed room lasers represent machine isocenter."},
+ {q:"An orthogonal pair consists of:",o:["Two images 90 degrees apart","Two images taken at the same angle","One CT and one MRI","Four treatment fields"],a:0,e:"Orthogonal means perpendicular."},
+ {q:"Which imaging method produces 3D volumetric information?",o:["Light field","CBCT","ODI","Skin tattoo"],a:1,e:"CBCT reconstructs many kV projections into a 3D image."},
+ {q:"SGRT works by using:",o:["Radioactive seeds","Optical surface imaging","A portal film only","A blood test"],a:1,e:"SGRT monitors the patient's external surface using cameras and light."},
+ {q:"Which statement about SGRT is true?",o:["The skin surface must be visible","It cannot be used for breath hold","It only measures cumulative dose","It replaces the prescription"],a:0,e:"The cameras must see the patient's surface."},
+ {q:"A four-field box includes:",o:["AP, PA, right lateral, and left lateral","Only AP and PA","Four anterior fields","Only oblique fields"],a:0,e:"A box arrangement surrounds the target from four main directions."},
+ {q:"Which field arrangement uses two beams from opposite directions?",o:["Single field","Parallel opposed","Arc only","Tangential pair only"],a:1,e:"Parallel-opposed fields enter from opposite sides."}
+ ],
+ last:`<h2>Week 3 Last-Hour Review</h2><ul><li>Goal: tumoricidal dose to target, spare normal tissue.</li><li>Before treatment: consent + signed prescription + approved plan.</li><li>Prescription: site, modality, total dose, daily dose, protraction, technique.</li><li>Mosaiq/ARIA = radiation record and verify.</li><li>Use two patient identifiers.</li><li>Review chart before patient enters room.</li><li>Isocenter = gantry + couch + collimator axes meet.</li><li>Lasers meet at machine isocenter.</li><li>Orthogonal pair = 90° apart.</li><li>CBCT = 3D volumetric imaging.</li><li>IGRT checks internal anatomy/isocenter.</li><li>SGRT monitors external surface in real time.</li><li>Four-field box = AP, PA, right lateral, left lateral.</li></ul>`,
+ resources:`<h2>Week 3 Resources</h2><div class="resource-list"><p><a target="_blank" href="https://www.youtube.com/watch?v=HZQ8puGlsIw">YouTube Video 1</a></p><p><a target="_blank" href="https://www.youtube.com/watch?v=9TwzunV5JBE">YouTube Video 2</a></p><p><a target="_blank" href="https://cccancer.com/treatment/external-treatment-options/">External Treatment Options</a></p><p><a target="_blank" href="https://vimeo.com/59002540?fl=pl&fe=vl">Vimeo Video</a></p><p>Primary course source: Professor Chapter 8 PowerPoint. Textbook used for clarification.</p></div>`
+}
+};
+
+let currentWeek=2, currentTab="study", flashIndex=0, flashFlipped=false;
+let quizQuestions=[], quizIndex=0, selected=null, answered=false, correct=0, examMode=false;
+let missedStore=JSON.parse(localStorage.getItem("introClinicalsMissed")||"{}");
+
+function openWeek(w){
+ currentWeek=w;
+ document.getElementById("home").classList.add("hidden");
+ document.getElementById("weekPage").classList.remove("hidden");
+ document.getElementById("weekTitle").textContent=DATA[w].title;
+ document.getElementById("weekTopic").textContent=DATA[w].topic;
+ document.getElementById("study").innerHTML=DATA[w].study;
+ document.getElementById("last").innerHTML=DATA[w].last;
+ document.getElementById("resources").innerHTML=DATA[w].resources;
+ flashIndex=0; flashFlipped=false; renderFlash();
+ renderMissed();
+ showTab("study");
+ window.scrollTo(0,0);
+}
+function goHome(){
+ document.getElementById("weekPage").classList.add("hidden");
+ document.getElementById("home").classList.remove("hidden");
+ window.scrollTo(0,0);
+}
+function hideSections(){
+ ["study","flash","quiz","results","missed","last","resources"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+ document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+}
+function showTab(id){
+ hideSections(); currentTab=id;
+ document.getElementById(id).classList.remove("hidden");
+ const btn=document.getElementById("tab-"+id); if(btn) btn.classList.add("active");
+ if(id==="flash") renderFlash();
+ if(id==="missed") renderMissed();
+}
+function renderFlash(){
+ const cards=DATA[currentWeek].flash;
+ const card=cards[flashIndex];
+ document.getElementById("flashcard").innerHTML=flashFlipped?`<span class="flash-answer">${card[1]}</span>`:card[0];
+ document.getElementById("flashCount").textContent=`${flashIndex+1} / ${cards.length}`;
+}
+function flipCard(){flashFlipped=!flashFlipped;renderFlash()}
+function moveCard(d){const n=DATA[currentWeek].flash.length;flashIndex=(flashIndex+d+n)%n;flashFlipped=false;renderFlash()}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function startQuiz(exam){
+ examMode=exam; quizQuestions=exam?shuffle(DATA[currentWeek].quiz):[...DATA[currentWeek].quiz];
+ quizIndex=0; selected=null; answered=false; correct=0;
+ hideSections(); document.getElementById("quiz").classList.remove("hidden");
+ document.getElementById(exam?"tab-exam":"tab-practice").classList.add("active");
+ renderQuestion();
+}
+function renderQuestion(){
+ const q=quizQuestions[quizIndex];
+ document.getElementById("quizCount").textContent=`Question ${quizIndex+1} of ${quizQuestions.length}`;
+ document.getElementById("quizScore").textContent=`Score: ${correct}`;
+ document.getElementById("quizBar").style.width=`${(quizIndex/quizQuestions.length)*100}%`;
+ document.getElementById("quizQuestion").textContent=q.q;
+ const box=document.getElementById("quizOptions");box.innerHTML="";
+ q.o.forEach((opt,i)=>{
+  const b=document.createElement("button");b.className="option";b.textContent=`${String.fromCharCode(65+i)}. ${opt}`;
+  b.onclick=()=>selectOption(i);box.appendChild(b);
+ });
+ document.getElementById("quizFeedback").innerHTML="";
+ document.getElementById("submitBtn").classList.remove("hidden");
+ document.getElementById("nextBtn").classList.add("hidden");
+ selected=null;answered=false;
+}
+function selectOption(i){
+ if(answered)return;selected=i;
+ document.querySelectorAll(".option").forEach((b,j)=>b.classList.toggle("selected",j===i));
+}
+function submitAnswer(){
+ if(selected===null){alert("Choose an answer first.");return}
+ answered=true;const q=quizQuestions[quizIndex], buttons=document.querySelectorAll(".option");
+ buttons[q.a].classList.add("correct");
+ const fb=document.getElementById("quizFeedback");
+ if(selected===q.a){correct++;fb.className="feedback good";fb.textContent="Correct! "+q.e}
+ else{
+  buttons[selected].classList.add("wrong");fb.className="feedback bad";fb.textContent="Not quite. "+q.e;
+  const key="week"+currentWeek;missedStore[key]=missedStore[key]||[];
+  if(!missedStore[key].some(x=>x.q===q.q)) missedStore[key].push(q);
+  localStorage.setItem("introClinicalsMissed",JSON.stringify(missedStore));
+ }
+ document.getElementById("quizScore").textContent=`Score: ${correct}`;
+ document.getElementById("submitBtn").classList.add("hidden");
+ document.getElementById("nextBtn").classList.remove("hidden");
+}
+function nextQuestion(){
+ if(!answered)return;
+ if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuestion()}else showResults();
+}
+function previousQuestion(){
+ if(quizIndex>0){quizIndex--;renderQuestion()}
+}
+function showResults(){
+ hideSections();const pct=Math.round(correct/quizQuestions.length*100);
+ const r=document.getElementById("results");r.classList.remove("hidden");
+ r.innerHTML=`<h2>Quiz Complete 🌸</h2><div class="score">${pct}%</div><p>You answered <b>${correct}</b> of <b>${quizQuestions.length}</b> correctly.</p><p>${pct>=85?"Strong work. Review missed questions once more.":pct>=70?"Good start. Review your missed questions and try again.":"Go back to the study guide, then repeat Practice Mode."}</p><button class="primary" onclick="startQuiz(${examMode})">Try Again</button> <button class="secondary" onclick="showTab('missed')">Review Missed Questions</button>`;
+ document.getElementById("quizBar").style.width="100%";
+ renderMissed();
+}
+function renderMissed(){
+ const key="week"+currentWeek, list=missedStore[key]||[];
+ const box=document.getElementById("missed");
+ if(!list.length){box.innerHTML="<h2>Missed Questions</h2><p>No missed questions saved for this week yet. Beautiful. 🌸</p>";return}
+ box.innerHTML="<h2>Missed Questions</h2>"+list.map((q,i)=>`<div class="card"><b>${i+1}. ${q.q}</b><p><b>Correct answer:</b> ${q.o[q.a]}</p><p>${q.e}</p></div>`).join("")+`<button class="secondary" onclick="clearMissed()">Clear Week ${currentWeek} Missed Questions</button>`;
+}
+function clearMissed(){delete missedStore["week"+currentWeek];localStorage.setItem("introClinicalsMissed",JSON.stringify(missedStore));renderMissed()}
+</script>
 </body>
 </html>
